@@ -1,16 +1,27 @@
-const userModel =require("../models/users")
-const createNewUser = (req,res)=>{
-    const user = req.body;
-    
-    const newUser = new userModel(user);
-    newUser.save().then(()=>{
-        console.log("Khaled");
-        res.status(201).json("True")
-    }).catch((err)=>{
-        res.status(404).json(err.message)
+const userModel = require("../models/users");
+const createNewUser = (req, res) => {
+  const user = req.body;
+
+  const newUser = new userModel(user);
+  newUser
+    .save()
+    .then(() => {
+     
+      res.status(201).json({
+          message : "User Created Successfully",
+          success : true,
+      });
     })
-    console.log(user);
-}
+    .catch((err) => {
+      res.status(404).json(res.status(201).json({
+          message : err.message,
+          success : false,
+      }));
+    });
+  console.log(user);
+};
+const sendFriendRequest = (req, res) => {
 
+};
 
-module.exports = {createNewUser}
+module.exports = { createNewUser, sendFriendRequest };
