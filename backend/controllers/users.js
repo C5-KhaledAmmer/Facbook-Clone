@@ -1,4 +1,6 @@
 const userModel = require("../models/users");
+const bcrypt = require("bcrypt")
+const jwt = require("jsonwebtoken")
 const createNewUser = (req, res) => {
   const user = req.body;
 
@@ -6,22 +8,56 @@ const createNewUser = (req, res) => {
   newUser
     .save()
     .then(() => {
-     
       res.status(201).json({
           message : "User Created Successfully",
           success : true,
       });
     })
     .catch((err) => {
-      res.status(404).json(res.status(201).json({
-          message : err.message,
+      res.status(500).json({
+          message : "Server Error",
           success : false,
-      }));
+      });
     });
-  console.log(user);
+
 };
 const sendFriendRequest = (req, res) => {
 
 };
+const login = (req,res)=>{
+  const {email,password} = req.body;
+  userModel.findOne({email:email}).then(async (user)=>{
+    if(user){
 
-module.exports = { createNewUser, sendFriendRequest };
+      bcrypt.compare(password,user.password,async(err, isMatch) =>{
+      if(isMatch){
+        const {firstName,lastName,country} = user;
+        const payload = {firstName,lastName,country}
+        const token = await jwt.sign(payload,process.env.SECRET)
+        res.status(200).json({
+          message : "Login Successful",
+          success : true,
+          token: token
+      });
+       }else{
+        res.status(404).json({
+          message : "Wrong password",
+          success : false,
+      }); 
+       }        
+      })
+    }else{
+      res.status(404).json({
+        message : "Email does not exist",
+        success : false,
+    });
+    }
+  }).catch((err) => {
+    res.status(500).json({
+        message : "Server Error",
+        success : false,
+    });
+  });
+}
+
+module.exports = { createNewUser, sendFriendRequest ,login};
