@@ -92,5 +92,22 @@ const sendFriendRequest = (req, res) => {
       });
     });
 };
+const getAllUsers = (req, res) => {
+  userModel
+    .find({})
+    .select("_id userName country")
+    .then((users) => {
+          res.status(201).json({
+            success: true,
+            message: `All the users `,
+            users:users
+          });
+    }).catch((err)=>{
+      res.status(500).json({
+        success: false,
+        message: `Server Error`,
+      });
+    })
+};
 
-module.exports = { register, sendFriendRequest, login };
+module.exports = { register, sendFriendRequest, login, getAllUsers };

@@ -1,9 +1,12 @@
 const express = require("express")
 const authentication = require("../middleware/authentication")
 
-const {sendFriendRequest,login, register} = require("../controllers/users")
+const {sendFriendRequest,login, register,getAllUsers} = require("../controllers/users")
 
 const userRouter = express.Router();
+
+//* Get Request 
+userRouter.get("/",authentication,getAllUsers)
 
 //* Post Request
 userRouter.post("/",register)
