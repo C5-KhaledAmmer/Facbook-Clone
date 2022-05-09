@@ -31,8 +31,11 @@ const login = (req,res)=>{
 
       bcrypt.compare(password,user.password,async(err, isMatch) =>{
       if(isMatch){
-        const {firstName,lastName,country} = user;
-        const payload = {firstName,lastName,country}
+        const payload = {
+          userId : user._id,
+          country : user.country,
+          firstName : user.firstName
+        }
         const token = await jwt.sign(payload,process.env.SECRET)
         res.status(200).json({
           message : "Login Successful",
