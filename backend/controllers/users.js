@@ -97,17 +97,51 @@ const getAllUsers = (req, res) => {
     .find({})
     .select("_id userName country")
     .then((users) => {
-          res.status(201).json({
-            success: true,
-            message: `All the users `,
-            users:users
-          });
-    }).catch((err)=>{
+      res.status(201).json({
+        success: true,
+        message: `All the users `,
+        users: users,
+      });
+    })
+    .catch((err) => {
       res.status(500).json({
         success: false,
         message: `Server Error`,
       });
-    })
+    });
 };
 
-module.exports = { register, sendFriendRequest, login, getAllUsers };
+const getUserByUserName = (req, res) => {
+  const userName = req.params.name;
+
+  userModel
+    .find({ userName: userName })
+    .select("_id userName")
+    .then((users) => {
+      if (users) {
+        res.status(200).json({
+          success: true,
+          message: `All the users `,
+          users: users,
+        });
+      } else {
+        res.status(404).json({
+          success: false,
+          message: `Not Found `,
+        });
+      }
+    })
+    .catch((err) => {
+      res.status(500).json({
+        success: false,
+        message: `Server Error`,
+      });
+    });
+};
+module.exports = {
+  register,
+  sendFriendRequest,
+  login,
+  getAllUsers,
+  getUserByUserName,
+};
