@@ -1,6 +1,6 @@
 const express = require("express")
 const authentication = require("../middleware/authentication")
-const {createNewPost,getAllPosts} = require("../controllers/posts")
+const {createNewPost,getAllPosts,updatePost} = require("../controllers/posts")
 
 
 const postRouter = express.Router()
@@ -12,5 +12,10 @@ postRouter.get("/:user_id",authentication,getAllPosts)
 //* Post Request
 postRouter.post("/",authentication,createNewPost)
 
+//* put Request
+postRouter.put("/update",authentication,updatePost)
+
+//* delete Request
+// postRouter.delete("/",authentication,deletePost)
 
 module.exports = postRouter
