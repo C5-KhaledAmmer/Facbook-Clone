@@ -138,21 +138,24 @@ const getUserByUserName = (req, res) => {
       });
     });
 };
-const  acceptFriendRequest = (req,res)=>{
-  const {receiver,sender} = req.body;
-  userModel.updateOne({_id : receiver},{$push:{friends:sender}}).then((result) => {
-    res.status(201).json({
-      success: true,
-      message: `request accepted `,
+const acceptFriendRequest = (req, res) => {
+  const { receiver, sender, requestId } = req.body;
+  userModel
+    .updateOne({ _id: receiver }, { $push: { friends: sender } })
+    .then((result) => {
+      friendRequest.deleteOne({ _id: requestId }).then().catch();
+      res.status(201).json({
+        success: true,
+        message: `request accepted `,
+      });
+    })
+    .catch((err) => {
+      res.status(500).json({
+        success: false,
+        message: `Server Error`,
+      });
     });
-  })
-  .catch((err) => {
-    res.status(500).json({
-      success: false,
-      message: `Server Error`,
-    });
-  });
-}
+};
 module.exports = {
   register,
   sendFriendRequest,

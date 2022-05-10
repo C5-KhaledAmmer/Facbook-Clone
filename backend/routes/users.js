@@ -15,6 +15,6 @@ userRouter.post("/login",login)
 userRouter.post("/friend/request",authentication,sendFriendRequest)
 
 //* put Request 
-userRouter.put("/users/friend/add",authentication,acceptFriendRequest)
+userRouter.put("/friend/add",authentication,acceptFriendRequest)
 
 module.exports = userRouter
