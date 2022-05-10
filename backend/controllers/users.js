@@ -63,36 +63,7 @@ const login = (req, res) => {
       });
     });
 };
-const sendFriendRequest = (req, res) => {
-  const { receiver, sender } = req.body;
-  const friendReq = new friendRequest({ receiver, sender });
-  friendReq
-    .save()
-    .then((result) => {
-      userModel
-        .updateOne({ _id: receiver }, { $push: { friendRequests: friendReq } })
-        .then(() => {
-          res.status(201).json({
-            success: true,
-            message: `Request Sended`,
-          });
-        })
-        .catch((err) => {
-          res.status(500).json({
-            success: false,
-            message: `Server Error`,
-            err: err.message,
-          });
-        });
-    })
-    .catch((err) => {
-      res.status(500).json({
-        success: false,
-        message: `Server Error`,
-        err: err.message,
-      });
-    });
-};
+
 const getAllUsers = (req, res) => {
   userModel
     .find({})
@@ -138,6 +109,36 @@ const getUserByUserName = (req, res) => {
       });
     });
 };
+const sendFriendRequest = (req, res) => {
+  const { receiver, sender } = req.body;
+  const friendReq = new friendRequest({ receiver, sender });
+  friendReq
+    .save()
+    .then((result) => {
+      userModel
+        .updateOne({ _id: receiver }, { $push: { friendRequests: friendReq } })
+        .then(() => {
+          res.status(201).json({
+            success: true,
+            message: `Request Sended`,
+          });
+        })
+        .catch((err) => {
+          res.status(500).json({
+            success: false,
+            message: `Server Error`,
+            err: err.message,
+          });
+        });
+    })
+    .catch((err) => {
+      res.status(500).json({
+        success: false,
+        message: `Server Error`,
+        err: err.message,
+      });
+    });
+};
 const acceptFriendRequest = (req, res) => {
   const { receiver, sender, requestId } = req.body;
   userModel
@@ -156,6 +157,26 @@ const acceptFriendRequest = (req, res) => {
       });
     });
 };
+const deleteFriendRequest = (req, res) => {
+  const { receiver, sender, requestId } = req.body;
+
+  userModel
+    .updateOne({ _id: receiver }, { $pull: { friendRequests: requestId } })
+    .then((result) => {
+      friendRequest.deleteOne({ _id: requestId }).then().catch();
+      res.status(409).json({
+        success: true,
+        message: `request deleted `,
+      });
+    })
+    .catch((err) => {
+      res.status(500).json({
+        success: false,
+        message: `Server Error`,
+      });
+    });
+};
+
 module.exports = {
   register,
   sendFriendRequest,
@@ -163,4 +184,5 @@ module.exports = {
   getAllUsers,
   getUserByUserName,
   acceptFriendRequest,
+  deleteFriendRequest,
 };
