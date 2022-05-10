@@ -5,6 +5,7 @@ const jwt = require("jsonwebtoken");
 
 const register = (req, res) => {
   const user = req.body;
+  user.lowerCaseUserName = user.userName.toLowerCase().replaceAll(" ", "");
   const newUser = new userModel(user);
   newUser
     .save()
@@ -16,7 +17,7 @@ const register = (req, res) => {
     })
     .catch((err) => {
       res.status(500).json({
-        message: "Server Error",
+        message: `Server Error ${err.message}`,
         success: false,
       });
     });
@@ -112,10 +113,9 @@ const getAllUsers = (req, res) => {
 };
 
 const getUserByUserName = (req, res) => {
-  const userName = req.params.name;
-
+  const userName = req.params.name.toLowerCase().replaceAll(" ", "");
   userModel
-    .find({ userName: userName })
+    .find({ lowerCaseUserName: { $regex: new RegExp(userName) } })
     .select("_id userName")
     .then((users) => {
       if (users) {
