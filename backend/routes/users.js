@@ -1,7 +1,7 @@
 const express = require("express")
 const authentication = require("../middleware/authentication")
 
-const {sendFriendRequest,login, register,getAllUsers ,getUserByUserName,acceptFriendRequest,deleteFriendRequest} = require("../controllers/users")
+const {sendFriendRequest,login, register,getAllUsers ,getUserByUserName,acceptFriendRequest,deleteFriendRequest,deleteFriend} = require("../controllers/users")
 
 const userRouter = express.Router();
 
@@ -18,6 +18,7 @@ userRouter.post("/friend/request",authentication,sendFriendRequest)
 userRouter.put("/friend/add",authentication,acceptFriendRequest)
 
 //* delete Request
-userRouter.delete("/friend/delete",authentication,deleteFriendRequest)
+userRouter.delete("/friend/request/delete",authentication,deleteFriendRequest)
+userRouter.delete("/friend/delete",authentication,deleteFriend)
 
 module.exports = userRouter

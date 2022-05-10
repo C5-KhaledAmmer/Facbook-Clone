@@ -158,7 +158,7 @@ const acceptFriendRequest = (req, res) => {
     });
 };
 const deleteFriendRequest = (req, res) => {
-  const { receiver, sender, requestId } = req.body;
+  const { receiver,requestId } = req.body;
 
   userModel
     .updateOne({ _id: receiver }, { $pull: { friendRequests: requestId } })
@@ -167,6 +167,23 @@ const deleteFriendRequest = (req, res) => {
       res.status(409).json({
         success: true,
         message: `request deleted `,
+      });
+    })
+    .catch((err) => {
+      res.status(500).json({
+        success: false,
+        message: `Server Error`,
+      });
+    });
+};
+const deleteFriend = (req, res) => {
+  const { user,friend } = req.body;
+  userModel
+    .updateOne({ _id:user }, { $pull: { friends: friend } })
+    .then((result) => {
+      res.status(409).json({
+        success: true,
+        message: `Friend deleted `,
       });
     })
     .catch((err) => {
@@ -185,4 +202,5 @@ module.exports = {
   getUserByUserName,
   acceptFriendRequest,
   deleteFriendRequest,
+  deleteFriend
 };
