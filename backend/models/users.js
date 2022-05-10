@@ -10,6 +10,7 @@ const userSchema = new mongoose.Schema({
   password: { type: String, required: true },
   country: { type: String },
   phoneNumber :{type : String},
+  posts:[{type: mongoose.Schema.Types.ObjectId, ref: "Post"}],
   friends: [{type: mongoose.Schema.Types.ObjectId, ref: "User"}],
   friendRequests: [{type: mongoose.Schema.Types.ObjectId, ref: "FriendRequest"}]
 });

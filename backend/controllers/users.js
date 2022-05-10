@@ -1,7 +1,5 @@
 const userModel = require("../models/users");
 const friendRequest = require("../models/friendRequest");
-const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
 
 const register = (req, res) => {
   const user = req.body;
