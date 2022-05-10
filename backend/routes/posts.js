@@ -6,8 +6,11 @@ const {
   updatePost,
   deletePost,
 } = require("../controllers/posts");
-const {createNewComment,updateComment} = require("../controllers/postReactions");
-  
+const {
+  createNewComment,
+  updateComment,
+  deleteComment,
+} = require("../controllers/postReactions");
 
 const postRouter = express.Router();
 
@@ -23,5 +26,5 @@ postRouter.put("/comments/:commentId", authentication, updateComment);
 
 //* delete Request
 postRouter.delete("/delete", authentication, deletePost);
-
+postRouter.delete("/comment/delete", authentication, deleteComment);
 module.exports = postRouter;

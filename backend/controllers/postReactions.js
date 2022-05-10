@@ -24,24 +24,42 @@ const createNewComment = async (req, res) => {
   }
 };
 const updateComment = async (req, res) => {
-    try {
-      const commentId = req.params.commentId;
-      const {comment} = req.body;
-      
-      await commentModel.updateOne(
-        { _id: commentId },
-        { $set: { comment:comment}}
-      );
-      res.status(200).json({
-        message: "Comment Updated",
-        success: true,
-      });
-    } catch (err) {
-      res.status(500).json({
-        message: "Server Error",
-        success: false,
-      });
-    }
-  };
+  try {
+    const commentId = req.params.commentId;
+    const { comment } = req.body;
 
-module.exports = { createNewComment ,updateComment};
+    await commentModel.updateOne(
+      { _id: commentId },
+      { $set: { comment: comment } }
+    );
+    res.status(200).json({
+      message: "Comment Updated",
+      success: true,
+    });
+  } catch (err) {
+    res.status(500).json({
+      message: "Server Error",
+      success: false,
+    });
+  }
+};
+const deleteComment = async (req, res) => {
+  try {
+    const { commentId, postId } = req.body;
+    await commentModel.deleteOne({ _id: commentId });
+    await postModel.updateOne(
+      { _id: postId },
+      { $pull: { comments: commentId } }
+    );
+    res.status(200).json({
+      message: "Comment Deleted",
+      success: true,
+    });
+  } catch (err) {
+    res.status(500).json({
+      message: "Server Error",
+      success: false,
+    });
+  }
+};
+module.exports = { createNewComment, updateComment, deleteComment };
