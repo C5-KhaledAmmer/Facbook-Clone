@@ -70,7 +70,7 @@ const sendFriendRequest = (req, res) => {
     .save()
     .then((result) => {
       userModel
-        .updateOne({ _id: receiver }, { $push: { friendRequests: sender } })
+        .updateOne({ _id: receiver }, { $push: { friendRequests: friendReq } })
         .then(() => {
           res.status(201).json({
             success: true,
@@ -138,10 +138,26 @@ const getUserByUserName = (req, res) => {
       });
     });
 };
+const  acceptFriendRequest = (req,res)=>{
+  const {receiver,sender} = req.body;
+  userModel.updateOne({_id : receiver},{$push:{friends:sender}}).then((result) => {
+    res.status(201).json({
+      success: true,
+      message: `request accepted `,
+    });
+  })
+  .catch((err) => {
+    res.status(500).json({
+      success: false,
+      message: `Server Error`,
+    });
+  });
+}
 module.exports = {
   register,
   sendFriendRequest,
   login,
   getAllUsers,
   getUserByUserName,
+  acceptFriendRequest,
 };
