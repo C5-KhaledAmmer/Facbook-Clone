@@ -2,8 +2,8 @@ const jwt = require("jsonwebtoken")
 
 const authentication = (req,res,next)=>{
     if(!req.headers.authorization){
-        res.status(404).json({
-            message:"something",
+        res.status(403).json({
+            message:"Forbidden",
             success : false
         })
     }else{

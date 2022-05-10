@@ -69,7 +69,7 @@ const getAllUsers = (req, res) => {
     .find({})
     .select("_id userName country")
     .then((users) => {
-      res.status(201).json({
+      res.status(200).json({
         success: true,
         message: `All the users `,
         users: users,
@@ -118,7 +118,7 @@ const sendFriendRequest = (req, res) => {
       userModel
         .updateOne({ _id: receiver }, { $push: { friendRequests: friendReq } })
         .then(() => {
-          res.status(201).json({
+          res.status(200).json({
             success: true,
             message: `Request Sended`,
           });
@@ -145,7 +145,7 @@ const acceptFriendRequest = (req, res) => {
     .updateOne({ _id: receiver }, { $push: { friends: sender } })
     .then((result) => {
       friendRequest.deleteOne({ _id: requestId }).then().catch();
-      res.status(201).json({
+      res.status(200).json({
         success: true,
         message: `request accepted `,
       });
@@ -164,7 +164,7 @@ const deleteFriendRequest = (req, res) => {
     .updateOne({ _id: receiver }, { $pull: { friendRequests: requestId } })
     .then((result) => {
       friendRequest.deleteOne({ _id: requestId }).then().catch();
-      res.status(409).json({
+      res.status(200).json({
         success: true,
         message: `request deleted `,
       });
@@ -181,7 +181,7 @@ const deleteFriend = (req, res) => {
   userModel
     .updateOne({ _id:user }, { $pull: { friends: friend } })
     .then((result) => {
-      res.status(409).json({
+      res.status(200).json({
         success: true,
         message: `Friend deleted `,
       });
