@@ -1,12 +1,13 @@
 const express = require("express")
 const authentication = require("../middleware/authentication")
 
-const {sendFriendRequest,register,getAllUsers ,getUserByUserName,acceptFriendRequest,deleteFriendRequest,deleteFriend} = require("../controllers/users")
+const {sendFriendRequest,register,getAllUsers ,getUserByUserName,acceptFriendRequest,deleteFriendRequest,deleteFriend,getUserById} = require("../controllers/users")
 
 const userRouter = express.Router();
 
 //* Get Request 
 userRouter.get("/",authentication,getAllUsers)
+userRouter.get("/:userId",authentication,getUserById)
 userRouter.get("/search_1/:name",authentication,getUserByUserName)
 
 //* Post Request

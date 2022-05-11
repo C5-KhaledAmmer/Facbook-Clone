@@ -9,9 +9,9 @@ export class Info {
     this.userId = LocalStorage.getItem({ key: "userId" });
     this.isLogin = LocalStorage.getItem({ key: "isLogin" });
 
-    if (this.token) {
-      navigate("/homepage");
-    }
+    // if (this.token) {
+    //   navigate("/homepage");
+    // }
   }
 }
 

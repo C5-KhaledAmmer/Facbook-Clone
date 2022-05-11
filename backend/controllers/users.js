@@ -42,7 +42,10 @@ const getAllUsers = (req, res) => {
 const getUserById = async (req, res) => {
   try {
     const userId = req.params.userId;
-    const user = await userModel.findOne({ _id: userId });
+    const user = await userModel
+      .findOne({ _id: userId })
+      .select("userName friendRequests friends posts")
+      .populate({path:"friendRequests"});
     res.status(200).json({
       message: "User is available",
       success: true,
@@ -172,6 +175,7 @@ module.exports = {
   sendFriendRequest,
   getAllUsers,
   getUserByUserName,
+  getUserById,
   acceptFriendRequest,
   deleteFriendRequest,
   deleteFriend,
