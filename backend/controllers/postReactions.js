@@ -1,5 +1,4 @@
 const postModel = require("../models/posts");
-const userModel = require("../models/users");
 const commentModel = require("../models/comment");
 const likeModel = require("../models/like");
 
@@ -62,4 +61,24 @@ const deleteComment = async (req, res) => {
     });
   }
 };
-module.exports = { createNewComment, updateComment, deleteComment };
+const createNewLike = async (req, res) => {
+  try {
+    const postId = req.params.postId;
+    const { likeType, fan } = req.body;
+    const newLike = await new likeModel({ likeType, fan }).save();
+    await postModel.updateOne(
+      { _id: postId },
+      { $push: { likes: newLike } }
+    );
+    res.status(201).json({
+      message: "Like Added",
+      success: true,
+    });
+  } catch (err) {
+    res.status(500).json({
+      message: "Server Error",
+      success: false,
+    });
+  }
+};
+module.exports = { createNewComment, updateComment, deleteComment,createNewLike };

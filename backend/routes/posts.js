@@ -10,6 +10,7 @@ const {
   createNewComment,
   updateComment,
   deleteComment,
+  createNewLike
 } = require("../controllers/postReactions");
 
 const postRouter = express.Router();
@@ -20,6 +21,7 @@ postRouter.get("/:user_id", authentication, getAllPosts);
 //* Post Request
 postRouter.post("/", authentication, createNewPost);
 postRouter.post("/:postId/comment", authentication, createNewComment);
+postRouter.post("/:postId/like", authentication, createNewLike);
 //* put Request
 postRouter.put("/update", authentication, updatePost);
 postRouter.put("/comments/:commentId", authentication, updateComment);
