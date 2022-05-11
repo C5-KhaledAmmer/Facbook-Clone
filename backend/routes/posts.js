@@ -10,7 +10,8 @@ const {
   createNewComment,
   updateComment,
   deleteComment,
-  createNewLike
+  createNewLike,
+  deleteLike
 } = require("../controllers/postReactions");
 
 const postRouter = express.Router();
@@ -29,4 +30,5 @@ postRouter.put("/comments/:commentId", authentication, updateComment);
 //* delete Request
 postRouter.delete("/delete", authentication, deletePost);
 postRouter.delete("/comment/delete", authentication, deleteComment);
+postRouter.delete("/like/delete", authentication, deleteLike);
 module.exports = postRouter;

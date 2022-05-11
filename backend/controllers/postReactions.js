@@ -66,10 +66,7 @@ const createNewLike = async (req, res) => {
     const postId = req.params.postId;
     const { likeType, fan } = req.body;
     const newLike = await new likeModel({ likeType, fan }).save();
-    await postModel.updateOne(
-      { _id: postId },
-      { $push: { likes: newLike } }
-    );
+    await postModel.updateOne({ _id: postId }, { $push: { likes: newLike } });
     res.status(201).json({
       message: "Like Added",
       success: true,
@@ -81,4 +78,26 @@ const createNewLike = async (req, res) => {
     });
   }
 };
-module.exports = { createNewComment, updateComment, deleteComment,createNewLike };
+const deleteLike = async (req, res) => {
+  try {
+    const { likeId, postId } = req.body;
+    await likeModel.deleteOne({ _id: likeId });
+    await postModel.updateOne({ _id: postId }, { $pull: { likes: likeId } });
+    res.status(200).json({
+      message: "Like Deleted",
+      success: true,
+    });
+  } catch (err) {
+    res.status(500).json({
+      message: "Server Error",
+      success: false,
+    });
+  }
+};
+module.exports = {
+  createNewComment,
+  updateComment,
+  deleteComment,
+  createNewLike,
+  deleteLike,
+};
