@@ -1,11 +1,14 @@
-
+import { Routes, Route, Link, useNavigate } from "react-router-dom";
+import { Login  } from './components/Login';
+import { Register  } from './components/Register';
 import './App.css';
 
 function App() {
   return (
-    <div className="App">
-      <h1>Hello world</h1>
-    </div>
+    <Routes>
+      <Route path="/login" element={<Login />} />
+      <Route path="/" element={<Register />} />
+   </Routes>
   );
 }
 
