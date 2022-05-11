@@ -24,27 +24,52 @@ export class UserController {
       return error.response.data.message;
     }
   }
-  static async sendFriendRequest({receiver,sender}) {
-  
+  static async sendFriendRequest({ receiver, sender }) {
     try {
-      const response = await axios.post(`${Info.hostUrl}/users/friend/request`, {sender,receiver},{
-        headers: { authorization: `Bearer ${Info.token}` },
-      });
-      
+      const response = await axios.post(
+        `${Info.hostUrl}/users/friend/request`,
+        { sender, receiver },
+        {
+          headers: { authorization: `Bearer ${Info.token}` },
+        }
+      );
+
       return response.data.message;
     } catch (error) {
       return error.response.data.message;
     }
   }
-  static async acceptFriendRequest ({receiver,sender,requestId}){
+  static async acceptFriendRequest({ receiver, sender, requestId }) {
     try {
-        const response = await axios.put(`${Info.hostUrl}/users/friend/add`, {sender,receiver,requestId},{
+      const response = await axios.put(
+        `${Info.hostUrl}/users/friend/add`,
+        { sender, receiver, requestId },
+        {
           headers: { authorization: `Bearer ${Info.token}` },
-        });
-        
-        return response.data.message;
-      } catch (error) {
-        return error.response.data.message;
-      }
+        }
+      );
+
+      return response.data.message;
+    } catch (error) {
+      return error.response.data.message;
+    }
+  }
+  static async deleteFriendRequest({ receiver, requestId }) {
+    try {
+      const response = await axios.delete(
+        `${Info.hostUrl}/users/friend/request/delete`,
+        {
+          headers: { authorization: `Bearer ${Info.token}` },
+          data: {
+            receiver,
+            requestId,
+          },
+        }
+      );
+
+      return response.data.message;
+    } catch (error) {
+      return error.response.data.message;
+    }
   }
 }

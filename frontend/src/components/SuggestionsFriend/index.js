@@ -30,7 +30,13 @@ export const SuggestionsFriend = () => {
               await UserController.acceptFriendRequest({receiver,sender,requestId})
             })()
           }}>Accept</button>
-          <button>Remove</button>
+          <button onClick={()=>{
+            (async()=>{
+              const receiver = friendRequest.receiver;
+              const requestId= friendRequest._id
+              await UserController.deleteFriendRequest({receiver,requestId})
+            })()
+          }}>Remove</button>
           </div>;
         })}
       </div>
