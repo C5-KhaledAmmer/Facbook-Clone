@@ -25,15 +25,26 @@ export class UserController {
     }
   }
   static async sendFriendRequest({receiver,sender}) {
-      console.log(receiver,sender);
+  
     try {
       const response = await axios.post(`${Info.hostUrl}/users/friend/request`, {sender,receiver},{
         headers: { authorization: `Bearer ${Info.token}` },
       });
-      console.log(response);
+      
       return response.data.message;
     } catch (error) {
       return error.response.data.message;
     }
+  }
+  static async acceptFriendRequest ({receiver,sender,requestId}){
+    try {
+        const response = await axios.put(`${Info.hostUrl}/users/friend/add`, {sender,receiver,requestId},{
+          headers: { authorization: `Bearer ${Info.token}` },
+        });
+        
+        return response.data.message;
+      } catch (error) {
+        return error.response.data.message;
+      }
   }
 }

@@ -16,8 +16,22 @@ export const SuggestionsFriend = () => {
     <div style={{"display":"flex"}}>
       <div style={{"flex":"1"}}>
         friendRequests
-        {requests.map((user) => {
-          return <p key={user._id}>{user.sender}</p>;
+        <hr/>
+        <hr/>
+        {requests.map((friendRequest) => {
+          return  <div key={friendRequest._id}>
+          {friendRequest.sender.userName}
+          <hr/>
+          <button onClick={()=>{
+            (async()=>{
+              const receiver = friendRequest.receiver;
+              const sender = friendRequest.sender;
+              const requestId= friendRequest._id
+              await UserController.acceptFriendRequest({receiver,sender,requestId})
+            })()
+          }}>Accept</button>
+          <button>Remove</button>
+          </div>;
         })}
       </div>
       <div style={{"flex":"1"}}>
@@ -33,7 +47,7 @@ export const SuggestionsFriend = () => {
                 await UserController.sendFriendRequest({receiver,sender})
               })()
             }}>Add Friend</button>
-            <button>Remove</button>
+            
             </div>;
         })}
       </div>

@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt")
+const deepPopulate =require('mongoose-deep-populate')(mongoose)
 
 
 const userSchema = new mongoose.Schema({
@@ -14,8 +15,11 @@ const userSchema = new mongoose.Schema({
   friends: [{type: mongoose.Schema.Types.ObjectId, ref: "User"}],
   friendRequests: [{type: mongoose.Schema.Types.ObjectId, ref: "FriendRequest"}]
 });
+
 userSchema.pre("save", async function () {
   this.email = this.email.toLowerCase();
   this.password = await bcrypt.hash(this.password, 10);
 });
+userSchema.plugin(deepPopulate);
+
 module.exports = mongoose.model("User", userSchema);

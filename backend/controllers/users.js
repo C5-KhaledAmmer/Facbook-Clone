@@ -44,8 +44,14 @@ const getUserById = async (req, res) => {
     const userId = req.params.userId;
     const user = await userModel
       .findOne({ _id: userId })
+      .deepPopulate(["friendRequests.sender"],{
+        populate: {
+          "friendRequests.sender": {
+            select: "userName",
+          },
+        }
+      })
       .select("userName friendRequests friends posts")
-      .populate({path:"friendRequests"});
     res.status(200).json({
       message: "User is available",
       success: true,
@@ -119,8 +125,9 @@ const acceptFriendRequest = (req, res) => {
   const { receiver, sender, requestId } = req.body;
   userModel
     .updateOne({ _id: receiver }, { $push: { friends: sender } })
-    .then((result) => {
+    .then(async(result) => {
       friendRequest.deleteOne({ _id: requestId }).then().catch();
+      await userModel.updateOne({ _id: sender }, { $push: { friends: receiver } })
       res.status(200).json({
         success: true,
         message: `request accepted `,
