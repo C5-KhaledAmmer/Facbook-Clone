@@ -38,7 +38,23 @@ const getAllUsers = (req, res) => {
       });
     });
 };
-
+const getUserById = async (req, res) => {
+  try {
+    const userId = req.params.userId;
+    const user = await userModel.findOne({ _id: userId });
+    res.status(200).json({
+      message: "User is available",
+      success: true,
+      user: user,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: "Sever Error ",
+      success: true,
+      user: user,
+    });
+  }
+};
 const getUserByUserName = (req, res) => {
   const userName = req.params.name.toLowerCase().replaceAll(" ", "");
   userModel
@@ -114,7 +130,7 @@ const acceptFriendRequest = (req, res) => {
     });
 };
 const deleteFriendRequest = (req, res) => {
-  const { receiver,requestId } = req.body;
+  const { receiver, requestId } = req.body;
 
   userModel
     .updateOne({ _id: receiver }, { $pull: { friendRequests: requestId } })
@@ -133,9 +149,9 @@ const deleteFriendRequest = (req, res) => {
     });
 };
 const deleteFriend = (req, res) => {
-  const { user,friend } = req.body;
+  const { user, friend } = req.body;
   userModel
-    .updateOne({ _id:user }, { $pull: { friends: friend } })
+    .updateOne({ _id: user }, { $pull: { friends: friend } })
     .then((result) => {
       res.status(200).json({
         success: true,
@@ -157,5 +173,5 @@ module.exports = {
   getUserByUserName,
   acceptFriendRequest,
   deleteFriendRequest,
-  deleteFriend
+  deleteFriend,
 };

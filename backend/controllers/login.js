@@ -5,13 +5,16 @@ const jwt = require("jsonwebtoken");
 
 
 const login = (req, res) => {
-    const { email, password } = req.body;
+    const{ email, password } = req.body;
     userModel
       .findOne({ email: email })
       .then(async (user) => {
+        console.log(user.password);
         if (user) {
           bcrypt.compare(password, user.password, async (err, isMatch) => {
             if (isMatch) {
+              
+              console.log(user);
               const payload = {
                 userId: user._id,
                 country: user.country,
@@ -22,6 +25,7 @@ const login = (req, res) => {
                 message: "Login Successful",
                 success: true,
                 token: token,
+                userId : user._id
               });
             } else {
               res.status(404).json({
