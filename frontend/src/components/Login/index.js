@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import axios from "axios";
 import "./style.css";
-import { Info, LocalStorage } from "../..";
+import { Info, LocalStorage } from "../../controllers/info";
+import { useNavigate } from "react-router-dom";
+import { Registration } from "../../controllers/registration";
+
+
 export const Login = () => {
   const createInput = ({ placeholder, setState, type = "text" }) => {
     return (
@@ -17,29 +21,11 @@ export const Login = () => {
       </div>
     );
   };
-  const login = () => {
-    const user = {
-      email,
-      password,
-    };
-    axios
-      .post("http://localhost:5000/login", user)
-      .then((res) => {
-        setResponse(res.data.message);
-        LocalStorage.setItem({ key: "token", value: res.data.token });
-        LocalStorage.setItem({ key: "userId", value: res.data.userId });
-        Info.token = res.data.token;
-        Info.userId = res.data.userId;
-        Info.isLogin = true;
-      })
-      .catch((err) => {
-        setResponse(err.response.data.message);
-      });
-  };
+  
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [response, setResponse] = useState("");
-
+  const navigate = useNavigate();
   return (
     <div id="login-form">
       <div id="login-form-inner">
@@ -53,7 +39,9 @@ export const Login = () => {
           type: "password",
           setState: setPassword,
         })}
-        <button onClick={login}>Login</button>
+        <button onClick={()=>{
+          Registration.login({navigate,email,password})
+        }}>Login</button>
         <div id="login-response-div">{response}</div>
       </div>
     </div>
