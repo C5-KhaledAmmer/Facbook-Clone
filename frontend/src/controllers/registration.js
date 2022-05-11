@@ -2,8 +2,7 @@ import axios from "axios";
 import { Info, LocalStorage } from "./info";
 
 export class Registration {
-
-  static login({navigate,email,password}) {
+  static login({ navigate, email, password }) {
     const user = {
       email,
       password,
@@ -22,5 +21,28 @@ export class Registration {
         return err.response.data.message;
       });
   }
-  
+  static async register({
+    firstName,
+    lastName,
+    age,
+    country,
+    birthDate = Date.now(),
+    email,
+    password,
+  }) {
+    try {
+      const user = {
+        userName: firstName + lastName,
+        birthDate: birthDate,
+        age,
+        country,
+        email,
+        password,
+      };
+      const response = await axios.post(`${Info.hostUrl}/users`, user);
+      return response.data.message;
+    } catch (error) {
+      return error.response.data.message;
+    }
+  }
 }

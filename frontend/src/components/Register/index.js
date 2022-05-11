@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import "./style.css";
+import { Registration } from "../../controllers/registration";
 export const Register = () => {
   const createInput = ({ placeholder, setState, type = "text" }) => {
     return (
@@ -16,24 +17,8 @@ export const Register = () => {
       </div>
     );
   };
-  const register = () => {
-    const user = {
-      userName: firstName + lastName,
-      birthDate: Date.now(),
-      age,
-      country,
-      email,
-      password,
-    };
-    axios
-      .post("http://localhost:5000/users", user)
-      .then((res) => {
-        setResponse(res.data.message);
-      })
-      .catch((err) => {
-        setResponse(err.response.data.message);
-      });
-  };
+
+  // TODO: --> Birth Date section
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [age, setAge] = useState(0);
@@ -71,7 +56,22 @@ export const Register = () => {
           type: "password",
           setState: setPassword,
         })}
-        <button onClick={register}>Register</button>
+        <button
+          onClick={async () => {
+            setResponse(
+              await Registration.register({
+                age,
+                country,
+                email,
+                firstName,
+                lastName,
+                password,
+              })
+            );
+          }}
+        >
+          Register
+        </button>
         <div id="register-response-div">{response}</div>
       </div>
     </div>
