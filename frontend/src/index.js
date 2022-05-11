@@ -12,13 +12,13 @@ root.render(
   </React.StrictMode>
 );
 
-export class info {
+export class Info {
   static token = null;
-  static user = null;
+  static userId = null;
   static isLogin = false;
 }
 
-export class localStorage {
+export class LocalStorage {
   static getItem({ key }) {
     return JSON.parse(window.localStorage.getItem`(${key}`);
   }
