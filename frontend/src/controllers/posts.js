@@ -58,7 +58,6 @@ export class PostController {
   }
   static async createNewComment({ comment,postId }) {
     const commenter = Info.userId;
-    console.log(postId);
     try {
       const response = await axios.post(
         `${Info.hostUrl}/posts/${postId}/comment`,
@@ -67,7 +66,22 @@ export class PostController {
           headers: { authorization: `Bearer ${Info.token}` },
         }
       );
-      console.log(response);
+  
+      return response.data.post;
+    } catch (error) {
+      return error;
+    }
+  }
+  static async deleteComment({commentId,postId }) {
+    try {
+      const response = await axios.delete(
+        `${Info.hostUrl}/posts/comment/delete`,
+        {
+          headers: { authorization: `Bearer ${Info.token}` },
+          data:{commentId,postId}
+        }
+      );
+  
       return response.data.post;
     } catch (error) {
       return error;

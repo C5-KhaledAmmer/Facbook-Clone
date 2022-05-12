@@ -113,13 +113,29 @@ export const Homepage = () => {
               >
                 AddComment
               </button>
+              
               <br />
               <br />
               Post Comments
               {post.comments.length !== 0 ? (
                 post.comments.map((comment) => {
                   console.log(comment);
-                  return <p key={comment}>{comment}</p>;
+                  return <p key={comment}>{comment}
+                  <button
+                onClick={async () => {
+                  const result = await PostController.deleteComment({
+                    commentId:comment,
+                    postId:post._id
+                  });
+                  if (result === "Comment Deleted") {
+                    post.comments.splice(post.comments.indexOf(comment));
+                    setPosts([...posts]);
+                  }
+                }}
+              >
+                DeleteComment
+              </button>
+                  </p>;
                 })
               ) : (
                 <></>
