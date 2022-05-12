@@ -3,7 +3,7 @@ import { Info } from "./info";
 export class PostController {
   static async createNewPost({ content }) {
     const author = Info.userId;
-
+   
     try {
       const response = await axios.post(
         `${Info.hostUrl}/posts`,
@@ -12,9 +12,10 @@ export class PostController {
           headers: { authorization: `Bearer ${Info.token}` },
         }
       );
+     
       return response.data.post;
     } catch (error) {
-      return error.response.data.message;
+      return error;
     }
   }
   static async getAllPosts() {
@@ -53,6 +54,23 @@ export class PostController {
       return response.data.message;
     } catch (error) {
       return error.response.data.message;
+    }
+  }
+  static async createNewComment({ comment,postId }) {
+    const commenter = Info.userId;
+    console.log(postId);
+    try {
+      const response = await axios.post(
+        `${Info.hostUrl}/posts/${postId}/comment`,
+        { commenter, comment },
+        {
+          headers: { authorization: `Bearer ${Info.token}` },
+        }
+      );
+      console.log(response);
+      return response.data.post;
+    } catch (error) {
+      return error;
     }
   }
 }

@@ -4,10 +4,12 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { PostController } from "../../controllers/posts";
 
+
 export const Homepage = () => {
   const [postContent, setPostContent] = useState("");
   const [posts, setPosts] = useState([]);
   const [updatePost, setUpdatePost] = useState("[]");
+  const [newComment, setNewComment] = useState("");
   useEffect(() => {}, []);
   const navigate = useNavigate();
   return (
@@ -29,24 +31,27 @@ export const Homepage = () => {
       <br />
       <button
         onClick={async () => {
-          console.log("ASdasdasdasd");
+          const newPost = await PostController.createNewPost({
+              content: postContent,
+            })
 
           setPosts([
-            ...posts,
-            await PostController.createNewPost({ content: postContent }),
+            newPost,...posts
           ]);
         }}
       >
         Create New Post
       </button>
-      <button
+       <button
         onClick={async () => {
           setPosts([...posts, ...(await PostController.getAllPosts())]);
         }}
       >
         get All Posts
       </button>
-
+      {/* {posts.length !== 0 ?posts.map((e)=>{
+        return  <p>{e.content}</p>
+      }):<></>} */}
       {posts.length !== 0 ? (
         posts.map((post, index) => {
           return (
@@ -72,7 +77,6 @@ export const Homepage = () => {
               >
                 UpdatePost
               </button>
-
               <button
                 onClick={async () => {
                   const result = await PostController.deletePost({
@@ -86,14 +90,46 @@ export const Homepage = () => {
               >
                 DeletePost
               </button>
+              <br />
+              <br />
+              Add Comment{" "}
+              <input
+                style={{ margin: "6px" }}
+                onChange={(e) => {
+                  setNewComment(e.target.value);
+                }}
+              />
+              <button
+                onClick={async () => {
+                  const result = await PostController.createNewComment({
+                    comment: newComment,
+                    postId:post._id
+                  });
+                  if (result === "Comment Added") {
+                    post.comments.push(newComment);
+                    setPosts([...posts]);
+                  }
+                }}
+              >
+                AddComment
+              </button>
+              <br />
+              <br />
+              Post Comments
+              {post.comments.length !== 0 ? (
+                post.comments.map((comment) => {
+                  console.log(comment);
+                  return <p key={comment}>{comment}</p>;
+                })
+              ) : (
+                <></>
+              )}
             </p>
           );
         })
       ) : (
         <></>
-      )}
-
-
+       )} 
     </div>
   );
 };

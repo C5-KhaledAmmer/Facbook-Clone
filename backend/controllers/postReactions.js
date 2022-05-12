@@ -11,13 +11,15 @@ const createNewComment = async (req, res) => {
       { _id: postId },
       { $push: { comments: newComment } }
     );
+    
     res.status(201).json({
       message: "Comment Added",
       success: true,
     });
   } catch (err) {
+    console.log(err);
     res.status(500).json({
-      message: "Server Error",
+      message: err.message,
       success: false,
     });
   }
