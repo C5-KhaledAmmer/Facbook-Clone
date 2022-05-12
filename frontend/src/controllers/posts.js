@@ -3,7 +3,7 @@ import { Info } from "./info";
 export class PostController {
   static async createNewPost({ content }) {
     const author = Info.userId;
-   
+
     try {
       const response = await axios.post(
         `${Info.hostUrl}/posts`,
@@ -12,7 +12,7 @@ export class PostController {
           headers: { authorization: `Bearer ${Info.token}` },
         }
       );
-     
+
       return response.data.post;
     } catch (error) {
       return error;
@@ -31,32 +31,37 @@ export class PostController {
     }
   }
 
-  static async updatePost({content,postId}) {
-    
-
+  static async updatePost({ content, postId }) {
     try {
-      const response = await axios.put(`${Info.hostUrl}/posts/update?postId=${postId}&&content=${content}`,{},{
-        headers: { authorization: `Bearer ${Info.token}` },
-      });
+      const response = await axios.put(
+        `${Info.hostUrl}/posts/update?postId=${postId}&&content=${content}`,
+        {},
+        {
+          headers: { authorization: `Bearer ${Info.token}` },
+        }
+      );
       return response.data.message;
     } catch (error) {
       return error.response.data.message;
     }
   }
 
-  static async deletePost({postId}) {
+  static async deletePost({ postId }) {
     const userId = Info.userId;
 
     try {
-      const response = await axios.delete(`${Info.hostUrl}/posts/delete?postId=${postId}&&userId=${userId}`,{
-        headers: { authorization: `Bearer ${Info.token}` },
-      });
+      const response = await axios.delete(
+        `${Info.hostUrl}/posts/delete?postId=${postId}&&userId=${userId}`,
+        {
+          headers: { authorization: `Bearer ${Info.token}` },
+        }
+      );
       return response.data.message;
     } catch (error) {
       return error.response.data.message;
     }
   }
-  static async createNewComment({ comment,postId }) {
+  static async createNewComment({ comment, postId }) {
     const commenter = Info.userId;
     try {
       const response = await axios.post(
@@ -66,23 +71,66 @@ export class PostController {
           headers: { authorization: `Bearer ${Info.token}` },
         }
       );
-  
-      return response.data.post;
+
+      return response.data.message;
     } catch (error) {
       return error;
     }
   }
-  static async deleteComment({commentId,postId }) {
+  static async deleteComment({ commentId, postId }) {
     try {
       const response = await axios.delete(
         `${Info.hostUrl}/posts/comment/delete`,
         {
           headers: { authorization: `Bearer ${Info.token}` },
-          data:{commentId,postId}
+          data: { commentId, postId },
         }
       );
-  
-      return response.data.post;
+
+      return response.data.message;
+    } catch (error) {
+      return error;
+    }
+  }
+  static async updateComment({ commentId, comment }) {
+    try {
+      const response = await axios.delete(
+        `${Info.hostUrl}/posts/comments/${commentId}`,
+        { comment },
+        {
+          headers: { authorization: `Bearer ${Info.token}` },
+        }
+      );
+
+      return response.data.message;
+    } catch (error) {
+      return error;
+    }
+  }
+  static async createNewLike({ likeType }) {
+    const fan = Info.userId;
+    try {
+      const response = await axios.post(
+        `${Info.hostUrl}/posts/${postId}/like`,
+        { fan, likeType },
+        {
+          headers: { authorization: `Bearer ${Info.token}` },
+        }
+      );
+
+      return response.data.message;
+    } catch (error) {
+      return error;
+    }
+  }
+  static async deleteLike({ likeId, postId }) {
+    try {
+      const response = await axios.delete(`${Info.hostUrl}/posts/like/delete`, {
+        headers: { authorization: `Bearer ${Info.token}` },
+        data: { likeId, postId },
+      });
+
+      return response.data.message;
     } catch (error) {
       return error;
     }
