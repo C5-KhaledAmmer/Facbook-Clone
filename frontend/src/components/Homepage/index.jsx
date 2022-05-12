@@ -72,12 +72,28 @@ export const Homepage = () => {
               >
                 UpdatePost
               </button>
+
+              <button
+                onClick={async () => {
+                  const result = await PostController.deletePost({
+                    postId: post._id,
+                  });
+                  if (result === "Post Updated") {
+                    posts[index].content = updatePost;
+                    setPosts([...posts]);
+                  }
+                }}
+              >
+                DeletePost
+              </button>
             </p>
           );
         })
       ) : (
         <></>
       )}
+
+
     </div>
   );
 };
