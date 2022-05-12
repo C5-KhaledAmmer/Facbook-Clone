@@ -107,7 +107,7 @@ export class PostController {
       return error;
     }
   }
-  static async createNewLike({ likeType }) {
+  static async createNewLike({ likeType,postId }) {
     const fan = Info.userId;
     try {
       const response = await axios.post(
