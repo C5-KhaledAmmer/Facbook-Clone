@@ -7,6 +7,8 @@ export const SuggestionsFriend = () => {
   const [users, setUsers] = useState([]);
   const [requests, setRequests] = useState([]);
   const [userFriends, setUserFriends] = useState([]);
+  const [searchUsers, setSearchUsers] = useState([]);
+  const [searchName, setSearchName] = useState("");
   useEffect(() => {
     (async () => {
       setUsers(await UserController.getAllUsers());
@@ -110,6 +112,28 @@ export const SuggestionsFriend = () => {
             </div>
           );
         })}
+      </div>
+
+      <div style={{ flex: "1" }}>
+        Search for user
+        <br />
+        <input
+          onChange={(e) => {
+            setSearchName(e.target.value);
+          }}
+        />
+        <button
+          onClick={async () => {
+            setSearchUsers(
+              await UserController.getUserByUserName({ name: searchName })
+            );
+          }}
+        >
+          search
+        </button>
+        {searchUsers.length !== 0 ? searchUsers.map(user=>{
+          return <p key={user._id}>{user.userName}</p>
+        }):<></>}
       </div>
     </div>
   );

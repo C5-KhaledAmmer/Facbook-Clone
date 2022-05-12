@@ -24,6 +24,19 @@ export class UserController {
       return error.response.data.message;
     }
   }
+
+  static async getUserByUserName ({name}){
+    try {
+      const response = await axios.get(`${Info.hostUrl}/users/search_1/${name}`, {
+        headers: { authorization: `Bearer ${Info.token}` },
+      });
+      console.log(response.data);
+      return response.data.users;
+    } catch (error) {
+      return error.response.data.message;
+    }
+  }
+
   static async sendFriendRequest({ receiver, sender }) {
     try {
       const response = await axios.post(
@@ -72,7 +85,6 @@ export class UserController {
       return error.response.data.message;
     }
   }
-
   static async deleteFriend({ userId, friendId }) {
     try {
       const response = await axios.delete(
