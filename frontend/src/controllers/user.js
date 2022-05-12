@@ -25,12 +25,15 @@ export class UserController {
     }
   }
 
-  static async getUserByUserName ({name}){
+  static async getUserByUserName({ name }) {
     try {
-      const response = await axios.get(`${Info.hostUrl}/users/search_1/${name}`, {
-        headers: { authorization: `Bearer ${Info.token}` },
-      });
-      console.log(response.data);
+      const response = await axios.get(
+        `${Info.hostUrl}/users/search_1/${name}`,
+        {
+          headers: { authorization: `Bearer ${Info.token}` },
+        }
+      );
+
       return response.data.users;
     } catch (error) {
       return error.response.data.message;

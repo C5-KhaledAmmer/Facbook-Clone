@@ -13,6 +13,7 @@ const createNewPost = (req, res) => {
           res.status(201).json({
             message: "Post Created Successfully",
             success: true,
+            post:{content:post.content,id:post._id}
           });
         })
         .catch((err) => {
