@@ -29,4 +29,17 @@ export class PostController {
       return error.response.data.message;
     }
   }
+
+  static async updatePost({content,postId}) {
+    const userId = Info.userId;
+
+    try {
+      const response = await axios.put(`${Info.hostUrl}/posts/update?postId=${postId}&&content=${content}`,{},{
+        headers: { authorization: `Bearer ${Info.token}` },
+      });
+      return response.data.message;
+    } catch (error) {
+      return error.response.data.message;
+    }
+  }
 }
