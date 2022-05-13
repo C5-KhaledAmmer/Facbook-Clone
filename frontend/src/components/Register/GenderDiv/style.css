@@ -1,0 +1,22 @@
+#gender-div {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+}
+#radio-div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 0.1px solid rgba(0, 0, 0, 0.425);
+  padding: var(--input-padding);
+  border-radius: 5px;
+  width: 100%;
+}
+#radio-div h5 {
+  flex: 5;
+  text-align: start;
+}
+#radio-div input {
+  flex: 1;
+  text-align: end;
+}

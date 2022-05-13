@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import axios from "axios";
 import "./style.css";
 import { Registration } from "../../controllers/registration";
+import { Gender } from "./GenderDiv";
+import { ErrorsDiv } from "./ErrorsDiv";
 export const Register = () => {
   const createInput = ({ placeholder, setState, type = "text" }) => {
     return (
@@ -30,22 +32,22 @@ export const Register = () => {
   return (
     <div id="signup-form">
       <div id="signup-form-inner">
-        {createInput({
-          placeholder: "First Name",
-          type: "text",
-          setState: setFirstName,
-        })}
-        {createInput({
-          placeholder: "Last Name",
-          type: "text",
-          setState: setLastName,
-        })}
-        {createInput({ placeholder: "Age", type: "number", setState: setAge })}
-        {createInput({
-          placeholder: "Country",
-          type: "text",
-          setState: setCountry,
-        })}
+        <h1>Sign Up</h1>
+        <h4> it's quick and easy.</h4>
+        <hr/>
+        <div id ="register-username-div">
+          {createInput({
+            placeholder: "First Name",
+            type: "text",
+            setState: setFirstName,
+          })}
+          {createInput({
+            placeholder: "Last Name",
+            type: "text",
+            setState: setLastName,
+          })}
+        </div>
+
         {createInput({
           placeholder: "Email",
           type: "text",
@@ -56,6 +58,11 @@ export const Register = () => {
           type: "password",
           setState: setPassword,
         })}
+        <Gender/>
+        <ErrorsDiv  />
+        <div id="register-response-div">{response}</div>
+        
+        <div id ="signup-button-div">
         <button
           onClick={async () => {
             setResponse(
@@ -70,9 +77,11 @@ export const Register = () => {
             );
           }}
         >
-          Register
+          Sign Up
         </button>
-        <div id="register-response-div">{response}</div>
+        </div>
+        
+        
       </div>
     </div>
   );

@@ -1,0 +1,14 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+:root{
+    --first-color: rgba(255, 166, 0, 0.811);
+    --second-color: white;
+    --third-color:black;
+    --forth-color: rgba(45, 43, 42, 0.185);
+    --input-padding:10px;
+    --border-radius: 10px;
+    --button-padding:5px;
+  }
