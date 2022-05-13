@@ -37,7 +37,7 @@ export const Register = () => {
     );
   };
 
-  const login = async () => {
+  const signUp = async () => {
     const inputForm = {
       UserName: `${firstName} ${lastName}`,
       Email: email,
@@ -48,6 +48,7 @@ export const Register = () => {
       isLoginForm: false,
       inputForm: inputForm,
     });
+    console.log(errors);
     if (errors.length === 0) {
       const serverError = await Registration.register({
         firstName,
@@ -58,7 +59,7 @@ export const Register = () => {
       });
       serverError === "Email already taken"
         ? setErrors([...errors, "Email already taken"])
-        : setErrors("SignUp Completed Successfully");
+        : setErrors(["SignUp Completed Successfully"]);
     } else {
       setErrors(errors);
     }
@@ -99,7 +100,7 @@ export const Register = () => {
         <Gender />
         <ErrorsDiv errors={errors} />
         <div id="signup-button-div">
-          <button onClick={login}>Sign Up</button>
+          <button onClick={signUp}>Sign Up</button>
         </div>
       </div>
     </div>

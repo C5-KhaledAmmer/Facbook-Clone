@@ -2,24 +2,25 @@ import axios from "axios";
 import { Info, LocalStorage } from "./info";
 
 export class Registration {
-  static login({ navigate, email, password }) {
+  static async login({ email, password }) {
     const user = {
       email,
       password,
     };
-    axios
-      .post(`${Info.hostUrl}/login`, user)
-      .then((res) => {
-        LocalStorage.setItem({ key: "token", value: res.data.token });
-        LocalStorage.setItem({ key: "userId", value: res.data.userId });
-        Info.token = res.data.token;
-        Info.userId = res.data.userId;
-        Info.isLogin = true;
-        navigate("/homepage");
-      })
-      .catch((err) => {
-        return err.response.data.message;
-      });
+
+    try {
+      const response = await axios.post(`${Info.hostUrl}/login`, user);
+
+      LocalStorage.setItem({ key: "token", value: response.data.token });
+      LocalStorage.setItem({ key: "userId", value: response.data.userId });
+      Info.token = response.data.token;
+      Info.userId = response.data.userId;
+      Info.isLogin = true;
+
+      return response.data.message;
+    } catch (error) {
+      return error.response.data.message;
+    }
   }
   static async register({
     firstName,
@@ -159,7 +160,6 @@ export class Registration {
       }
 
       if (key === "Password") {
-       
         if (value !== "") {
           removeError("Invalid password");
         }

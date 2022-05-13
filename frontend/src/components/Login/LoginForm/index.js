@@ -1,0 +1,89 @@
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { Info } from "../../../controllers/info";
+import { Registration } from "../../../controllers/registration";
+import { ErrorsDiv } from "../../Register/ErrorsDiv";
+
+export const LoginForm = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  let [errors, setErrors] = useState("");
+  const navigate = useNavigate();
+
+  const createInput = ({ placeholder, setState, type = "text", key = "" }) => {
+    return (
+      <div>
+        <input
+          type={type}
+          placeholder={placeholder}
+          onChange={(e) => {
+            setErrors(
+              Registration.removeErrors({
+                isLoginForm: false,
+                key: key,
+                value: e.target.value,
+                errors,
+              })
+            );
+            setState(e.target.value);
+          }}
+          className="input"
+        />
+      </div>
+    );
+  };
+  const login = async () => {
+    const inputForm = {
+      Email: email,
+      Password: password,
+    };
+
+    errors = Registration.checkFormErrors({
+      isLoginForm: true,
+      inputForm: inputForm,
+    });
+
+    if (errors.length === 0) {
+      const serverError = await Registration.login({
+        email,
+        password,
+      });
+
+      serverError !== "Login Successful"
+        ? setErrors([...errors, serverError])
+        : navigate("/homepage");
+    } else {
+      setErrors(errors);
+    }
+  };
+
+  return (
+    <div id="login-form-email-password-div">
+      {createInput({
+        placeholder: "Email",
+        type: "text",
+        key: "Email",
+        setState: setEmail,
+      })}
+      {createInput({
+        placeholder: "Password",
+        type: "password",
+        key: "Password",
+        setState: setPassword,
+      })}
+      <ErrorsDiv errors={errors} />
+      <div>
+        <button onClick={login}>Login</button>
+      </div>
+      <hr />
+      <button
+        id="create-new-account-button"
+        onClick={() => {
+          //   navigate(`../`)
+        }}
+      >
+        Create New Account
+      </button>
+    </div>
+  );
+};

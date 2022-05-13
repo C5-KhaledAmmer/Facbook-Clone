@@ -1,0 +1,38 @@
+#login-form {
+  padding-top: 74px;
+  padding-bottom: 112px;
+  background-color: var(--forth-color);
+  min-height: 100vh;
+}
+
+#login-form-inner {
+  align-items: center;
+  width: 100%;
+  min-height: 500px;
+  border: 0px solid black;
+  border-radius: var(--border-radius);
+  background-color: var(--second-color);
+  text-align: center;
+}
+
+#login-form-inner2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: var(--input-padding);
+  margin-left: 10%;
+  margin-right: 10%;
+  min-height: 500px;
+}
+#login-form-inner2 div {
+  flex: 1;
+  height: 100%;
+}
+#login-form-email-password-div {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  height: 100%;
+  padding: var(--input-padding);
+  border: 1px solid black;
+}
