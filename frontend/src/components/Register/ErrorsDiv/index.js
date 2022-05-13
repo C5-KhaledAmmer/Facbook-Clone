@@ -1,7 +1,14 @@
+import "./style.css"
+export const ErrorsDiv = ({errors})=>{
 
-export const ErrorsDiv = ()=>{
-
-    return (
-        <div></div>
-    )
+    return errors.length !== 0?(
+        <div id="register-response-div">
+            
+           <ul>
+               {errors.map(error =>{
+                  return  <li key={error}>{error}</li>
+               })}
+           </ul>
+      </div>
+    ):<></>
 }

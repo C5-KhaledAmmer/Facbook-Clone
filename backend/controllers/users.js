@@ -16,7 +16,7 @@ const register = (req, res) => {
     .catch((err) => {
       console.log(err.message);
       res.status(500).json({
-        message: `Server Error ${err.message}`,
+        message: `Email already taken`,
         success: false,
       });
     });
