@@ -1,15 +1,22 @@
 #login-form-email-password-div {
     display: flex;
     flex-direction: column;
-
     gap: 10px;
     height: 100%;
     padding: var(--input-padding);
     border: 0.2px solid rgba(0, 0, 0, 0.333);
     border-radius:var(--border-radius);
     background-color: var(--first-color);
+    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.579);
    
   }
+
+  #login-form-email-password-div input{
+        background-color: var(--input-br-color);
+  }
+  #login-form-email-password-div li{
+  text-align: start;
+}
 
   #login-button{
     width: 100%;
