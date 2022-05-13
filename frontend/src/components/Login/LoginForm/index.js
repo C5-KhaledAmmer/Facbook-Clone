@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Info } from "../../../controllers/info";
+import "./style.css"
 import { Registration } from "../../../controllers/registration";
 import { ErrorsDiv } from "../../Register/ErrorsDiv";
 
@@ -73,17 +73,19 @@ export const LoginForm = () => {
       })}
       <ErrorsDiv errors={errors} />
       <div>
-        <button onClick={login}>Login</button>
+        <button id="login-button" onClick={login}>Login</button>
       </div>
       <hr />
+      <div id="create-new-account-button">
       <button
-        id="create-new-account-button"
         onClick={() => {
           //   navigate(`../`)
         }}
       >
         Create New Account
       </button>
+      </div>
+     
     </div>
   );
 };

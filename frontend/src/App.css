@@ -4,10 +4,10 @@
     box-sizing: border-box;
 }
 :root{
-    --first-color: rgba(255, 166, 0, 0.811);
-    --second-color: white;
+    --first-color: white;
+    --second-color: #1877F2;
     --third-color:black;
-    --forth-color: rgba(45, 43, 42, 0.185);
+    --forth-color: #F0F2F5;
     --input-padding:10px;
     --border-radius: 5px;
     --button-padding:5px;

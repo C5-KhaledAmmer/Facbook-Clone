@@ -1,0 +1,35 @@
+#login-form-email-password-div {
+    display: flex;
+    flex-direction: column;
+
+    gap: 10px;
+    height: 100%;
+    padding: var(--input-padding);
+    border: 0.2px solid rgba(0, 0, 0, 0.333);
+    border-radius:var(--border-radius);
+    background-color: var(--first-color);
+   
+  }
+
+  #login-button{
+    width: 100%;
+    padding: var(--input-padding);
+    border: 0.2px solid rgba(0, 0, 0, 0.333);
+    border-radius:var(--border-radius);
+    background-color: var(--second-color);
+    color: var(--first-color);
+    
+  }
+  #create-new-account-button{
+    width: 100%;
+  }
+
+
+  #create-new-account-button button{
+    width: 50%;
+    padding: var(--input-padding);
+    border: 0.2px solid rgba(0, 0, 0, 0.333);
+    border-radius:var(--border-radius);
+    background-color: #36A420;
+    color: var(--first-color);
+  }
