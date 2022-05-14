@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { PostController } from "../../controllers/posts";
+import { Info } from "../../controllers/info";
+import { Navbar } from "../Navbar";
 
 
 export const Homepage = () => {
@@ -13,8 +15,10 @@ export const Homepage = () => {
   useEffect(() => {}, []);
   const navigate = useNavigate();
   return (
-    <div>
+    <div >
+       {Info.isUserLogin ? <Navbar/>:<></>}
       <button
+      style={{"margin":"20px",}}
         onClick={() => {
           navigate("/s");
         }}

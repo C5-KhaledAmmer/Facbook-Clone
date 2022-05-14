@@ -1,0 +1,21 @@
+#navbar-buttons-div{
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    gap: 5px;
+}
+#navbar-buttons-div button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    width: 40px;
+    border: 0;
+    background-color: rgba(141, 138, 134, 0.234);
+    border-radius: 50%;
+    cursor: pointer;
+  }
+  #navbar-buttons-div img {
+    display: flex;
+    max-height: 20px;
+  }

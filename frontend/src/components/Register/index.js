@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import "./style.css";
 import { Registration } from "../../controllers/registration";
 import { Gender } from "./GenderDiv";
 import { ErrorsDiv } from "./ErrorsDiv";
 import "./style.css"
+import { registrationCox } from "../WelcomePage";
 export const Register = () => {
   // TODO: --> Birth Date section
   const [firstName, setFirstName] = useState("");
@@ -13,7 +14,7 @@ export const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   let [errors, setErrors] = useState([]);
-
+  const {setIsSignUp} = useContext(registrationCox)
   const createInput = ({ placeholder, setState, type = "text", key = "" }) => {
     return (
       <div>
@@ -67,6 +68,10 @@ export const Register = () => {
   return (
     <div id="signup-form">
       <div id="signup-form-inner">
+        <div id="signup--exit-button">
+        <button onClick={()=>{setIsSignUp(false)}}>X</button>
+        </div>
+       
         <h1>Sign Up</h1>
         <h4> it's quick and easy.</h4>
         <hr />

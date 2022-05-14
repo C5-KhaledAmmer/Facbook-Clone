@@ -1,14 +1,16 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./style.css"
 import { Registration } from "../../../controllers/registration";
 import { ErrorsDiv } from "../../Register/ErrorsDiv";
+import { registrationCox } from "../../WelcomePage";
 
 export const LoginForm = () => {
-  const [email, setEmail] = useState("");
+  let [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   let [errors, setErrors] = useState("");
   const navigate = useNavigate();
+  const {setIsSignUp} = useContext(registrationCox) 
 
   const createInput = ({ placeholder, setState, type = "text", key = "" }) => {
     return (
@@ -27,23 +29,25 @@ export const LoginForm = () => {
             );
             setState(e.target.value);
           }}
-          className="input"
+          className="input1"
         />
       </div>
     );
   };
   const login = async () => {
+    
     const inputForm = {
       Email: email,
       Password: password,
     };
-
+    
     errors = Registration.checkFormErrors({
       isLoginForm: true,
       inputForm: inputForm,
     });
 
     if (errors.length === 0) {
+      email = email.toLowerCase().trim();
       const serverError = await Registration.login({
         email,
         password,
@@ -79,7 +83,8 @@ export const LoginForm = () => {
       <div id="create-new-account-button">
       <button
         onClick={() => {
-          //   navigate(`../`)
+    
+            setIsSignUp(true)
         }}
       >
         Create New Account

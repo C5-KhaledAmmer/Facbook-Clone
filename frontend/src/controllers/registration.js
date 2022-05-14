@@ -16,9 +16,12 @@ export class Registration {
       Info.token = response.data.token;
       Info.userId = response.data.userId;
       Info.isLogin = true;
-
+      
+      Info.userName = response.data.userInfo.userName;
+      Info.userFriends = response.data.userInfo.friends;
       return response.data.message;
     } catch (error) {
+   
       return error.response.data.message;
     }
   }

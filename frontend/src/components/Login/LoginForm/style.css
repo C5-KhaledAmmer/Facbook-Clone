@@ -11,9 +11,19 @@
    
   }
 
-  #login-form-email-password-div input{
-        background-color: var(--input-br-color);
+  .input1{
+    width: 100%;
+    padding: var(--input-padding);
+    border-radius: var(--border-radius);
+    border: 0.1px solid rgba(0, 0, 0, 0.425);
+    background-color: var(--input-br-color);
   }
+ 
+  .input1:focus{
+   outline:0.5px solid var(--second-color);
+    
+  }
+ 
   #login-form-email-password-div li{
   text-align: start;
 }

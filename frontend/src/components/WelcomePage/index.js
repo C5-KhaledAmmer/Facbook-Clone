@@ -1,13 +1,17 @@
 import React, { useState } from "react";
 import { Login } from "../Login";
 import { Register } from "../Register";
+import { createContext } from "react";
+export const registrationCox= createContext()
 
 export const WelcomePage = () => {
   const [isSignUp, setIsSignUp] = useState(false);
   return (
     <div>
-      <Login setIsSignUp={setIsSignUp} />
-      {isSignUp ? <Register setIsSignUp={setIsSignUp} /> : <></>}
+      <registrationCox.Provider value={{setIsSignUp,isSignUp}}>
+      {isSignUp? <Register  /> : <></>}
+      <Login  />
+      </registrationCox.Provider>
     </div>
   );
 };

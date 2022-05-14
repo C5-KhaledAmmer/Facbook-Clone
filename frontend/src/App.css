@@ -9,7 +9,11 @@
     --third-color:black;
     --forth-color: #F0F2F5;
     --input-br-color: #E8F0FE;
-    --input-padding:15px;
+    --input-padding:12px;
     --border-radius: 5px;
     --button-padding:5px;
   }
+
+html {
+    background-color: rgba(181, 176, 168, 0.481);
+}

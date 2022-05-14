@@ -2,7 +2,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: var(--forth-color);
+  background-color: transparent;
+  z-index: 100;
+  position: fixed;
+  width: 100%;
   min-height: 100vh;
 }
 
@@ -10,7 +13,6 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-
   align-items: stretch;
   width: 50%;
   max-width: 500px;
@@ -18,7 +20,8 @@
   padding: 10px;
   border: 0px solid black;
   border-radius: var(--border-radius);
-  background-color: var(--second-color);
+  background-color: var(--first-color);
+  box-shadow: 0px 0px 2px black;
   max-width: 500px;
 }
 
@@ -38,7 +41,25 @@
   border-radius: var(--border-radius);
   border: 0.1px solid rgba(0, 0, 0, 0.425);
 }
-#signup-form-inner button {
+
+#signup--exit-button{
+position: relative;
+width: 100%;
+}
+#signup--exit-button button{
+  width: fit-content;
+  position: absolute;
+  right:0;
+  padding: var(--input-padding);
+  border: 0;
+  font-weight: bold;
+  font-size: 20px;
+  background-color: transparent;
+  color: red;
+  /* max-width: 50%; */
+}
+
+#signup-button-div button {
   width: 100%;
   padding: var(--input-padding);
   border-radius: var(--border-radius);
