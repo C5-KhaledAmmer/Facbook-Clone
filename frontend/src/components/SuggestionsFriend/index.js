@@ -32,7 +32,7 @@ export const SuggestionsFriend = () => {
       </div>
     );
   };
-  const sendFriendRequest1 = async (user) => {
+  const sendFriendRequest = async (user) => {
     const receiver = user._id;
     const sender = Info.userId;
     await UserController.sendFriendRequest({
@@ -40,80 +40,56 @@ export const SuggestionsFriend = () => {
       sender,
     });
   };
+  const acceptFriendRequest = async (friendRequest) => {
+    const receiver = friendRequest.receiver;
+    const sender = friendRequest.sender;
+    const requestId = friendRequest._id;
+    await UserController.acceptFriendRequest({
+      receiver,
+      sender,
+      requestId,
+    });
+  };
+  const deleteFriendRequest = async (friendRequest) => {
+    const receiver = friendRequest.receiver;
+    const requestId = friendRequest._id;
+    await UserController.deleteFriendRequest({
+      receiver,
+      requestId,
+    });
+  };
   return (
     <div style={{ display: "flex" }}>
       <div style={{ flex: "1" }}>
+        <div style={{ flex: "1" }}>
+          <h3>Friend Requests</h3>
+          {requests.map((friendRequest) => {
+            return friendCard({
+              onClick: [
+                () => {
+                  acceptFriendRequest(friendRequest);
+                },
+                () => {
+                  deleteFriendRequest();
+                },
+              ],
+              bntText:["Accept","Remove"],
+              user:friendRequest.sender
+            })
+          })}
+        </div>
         <h3>Friend Suggestions</h3>
         {users.map((user) => {
           return friendCard({
             onClick: [
               () => {
-                sendFriendRequest1(user);
+                sendFriendRequest(user);
               },
               () => {},
             ],
             bntText: ["Add Friend", "Remove"],
             user,
           });
-          /* 
-          <div style={{ flex: "1" }}>
-        friendRequests
-        <hr />
-        <hr />
-        {requests.map((friendRequest) => {
-          return (
-            <div key={friendRequest._id}>
-              {friendRequest.sender.userName}
-              <hr />
-              <button
-                onClick={() => {
-                  (async () => {
-                    const receiver = friendRequest.receiver;
-                    const sender = friendRequest.sender;
-                    const requestId = friendRequest._id;
-                    await UserController.acceptFriendRequest({
-                      receiver,
-                      sender,
-                      requestId,
-                    });
-                  })();
-                }}
-              >
-                Accept
-              </button>
-              <button
-                onClick={() => {
-                  (async () => {
-                    const receiver = friendRequest.receiver;
-                    const requestId = friendRequest._id;
-                    await UserController.deleteFriendRequest({
-                      receiver,
-                      requestId,
-                    });
-                  })();
-                }}
-              >
-                Remove
-              </button>
-            </div>
-          );
-        })}
-      </div>
-          */
-
-          //   )(
-          //   // <div key={user._id}>
-          //   //   {user.userName}
-          //   //   <hr />
-          //   //   <button
-          //   //     onClick={() => {
-          //   //       sendFriendRequest(user);
-          //   //     }}
-          //   //   >
-          //   //     Add Friend
-          //   //   </button>
-          //   // </div>
-          // );
         })}
       </div>
 
