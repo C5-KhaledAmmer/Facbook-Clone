@@ -20,7 +20,7 @@ export const Homepage = () => {
       <Navbar />
       <div style={{ display: "flex" }}>
       <PostsArea />
-        {/* <SuggestionsFriend /> */}
+        <SuggestionsFriend />
         
       </div>
     </div>

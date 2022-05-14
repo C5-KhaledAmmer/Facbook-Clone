@@ -1,0 +1,25 @@
+#friend-card {
+  width: 35vw;
+  background-color: var(--first-color);
+  padding: var(--input-padding);
+}
+
+.friend-card-buttons {
+  width: 100%;
+  display: flex;
+  margin-top: 15px;
+}
+.friend-card-buttons button{
+   flex: 1;
+   margin-right: 2px;
+   background-color: var(--forth-color);
+   border: 0.5px solid rgba(0, 0, 0, 0.299);
+   color: var(--third-color);
+   border-radius: var(--border-radius);
+   padding: var(--button-padding);
+  }
+  .friend-card-buttons button:hover{
+   background-color: var(--second-color);
+   color: var(--first-color);
+   }
+

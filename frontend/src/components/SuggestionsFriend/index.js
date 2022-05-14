@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Info } from "../../controllers/info";
+import "./style.css";
 
 const { UserController } = require("../../controllers/user");
 
@@ -20,9 +21,42 @@ export const SuggestionsFriend = () => {
       }
     })();
   }, []);
+  const friendCard = ({ bntText, onClick, user }) => {
+    return (
+      <div key={user._id} id="friend-card">
+        <div>{user.userName}</div>
+        <div className="friend-card-buttons">
+          <button onClick={onClick[0]}>{bntText[0]}</button>
+          <button onClick={onClick[1]}>{bntText[1]}</button>
+        </div>
+      </div>
+    );
+  };
+  const sendFriendRequest1 = async (user) => {
+    const receiver = user._id;
+    const sender = Info.userId;
+    await UserController.sendFriendRequest({
+      receiver,
+      sender,
+    });
+  };
   return (
     <div style={{ display: "flex" }}>
       <div style={{ flex: "1" }}>
+        <h3>Friend Suggestions</h3>
+        {users.map((user) => {
+          return friendCard({
+            onClick: [
+              () => {
+                sendFriendRequest1(user);
+              },
+              () => {},
+            ],
+            bntText: ["Add Friend", "Remove"],
+            user,
+          });
+          /* 
+          <div style={{ flex: "1" }}>
         friendRequests
         <hr />
         <hr />
@@ -65,56 +99,25 @@ export const SuggestionsFriend = () => {
           );
         })}
       </div>
-      <div style={{ flex: "1" }}>
-        Add Frind
-        {users.map((user) => {
-          return (
-            <div key={user._id}>
-              {user.userName}
-              <hr />
-              <button
-                onClick={() => {
-                  (async () => {
-                    const receiver = user._id;
-                    const sender = Info.userId;
-                    await UserController.sendFriendRequest({
-                      receiver,
-                      sender,
-                    });
-                  })();
-                }}
-              >
-                Add Friend
-              </button>
-            </div>
-          );
-        })}
-      </div>
-      <div style={{ flex: "1" }}>
-        Friends
-        {userFriends.map((friend, index) => {
-          return (
-            <div key={friend._id}>
-              {friend.userName}
-              <hr />
-              <button
-                onClick={() => {
-                  (async () => {
-                    await UserController.deleteFriend({
-                      userId: Info.userId,
-                      friendId: friend._id,
-                    });
-                  })();
-                }}
-              >
-                delete
-              </button>
-            </div>
-          );
+          */
+
+          //   )(
+          //   // <div key={user._id}>
+          //   //   {user.userName}
+          //   //   <hr />
+          //   //   <button
+          //   //     onClick={() => {
+          //   //       sendFriendRequest(user);
+          //   //     }}
+          //   //   >
+          //   //     Add Friend
+          //   //   </button>
+          //   // </div>
+          // );
         })}
       </div>
 
-      <div style={{ flex: "1" }}>
+      {/* <div style={{ flex: "1" }}>
         Search for user
         <br />
         <input
@@ -134,7 +137,7 @@ export const SuggestionsFriend = () => {
         {searchUsers.length !== 0 ? searchUsers.map(user=>{
           return <p key={user._id}>{user.userName}</p>
         }):<></>}
-      </div>
+      </div> */}
     </div>
   );
 };
