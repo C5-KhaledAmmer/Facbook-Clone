@@ -5,6 +5,7 @@ import { SuggestionsFriend } from "./components/Homepage/SuggestionsFriend";
 import "./App.css";
 import { Info } from "./controllers/info";
 import { useEffect } from "react";
+import { SearchResult } from "./components/SearchResult";
 
 function App() {
   const navigate = useNavigate();
@@ -19,7 +20,7 @@ function App() {
     <Routes>
       <Route path={`/homepage/:token/:user_id`} element={<Homepage />} />
       <Route path="/" element={<WelcomePage />} />
-      <Route path="/s" element={<SuggestionsFriend />} />
+      <Route path="/searchResult/:user_id/:userName" element={<SearchResult/>}/>
     </Routes>
   );
 }

@@ -30,10 +30,13 @@ export const Navbar = () => {
         <div
         key={"search"}
         id="search-card"
-        className="request-img-div"
+        
       >
+        <button className="request-img-div" style={{"borderBottom":"0px"}}>
         <img src={Img.imagesUrl.searchIcon} />
         <small>Search More</small>
+        </button>
+        
       </div>
         )
     }
@@ -41,10 +44,11 @@ export const Navbar = () => {
       <div
         key={user._id + user.userName}
         id="search-card"
-        className="request-img-div"
       >
+         <button  className="request-img-div">
         <img src={user.profilePicture} />
         <small>{user.userName}</small>
+        </button>
       </div>
     );
   };
