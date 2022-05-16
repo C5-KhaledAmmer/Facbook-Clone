@@ -1,53 +1,56 @@
 import { useReducer, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Img, Info } from "../../controllers/info";
 import { NavbarButtons } from "./NavbarButtons";
 import "./style.css";
 export const Navbar = () => {
   let [searchResults, setSearchResults] = useState(false);
+  const [searchName,setSearchName] = useState("")
+  const navigate = useNavigate();
+
   const search = (userName) => {
-    if(userName.length === 0){
-      setSearchResults(false)
-    }else{
+    if (userName.length === 0) {
+      setSearchResults(false);
+    } else {
       searchResults = [];
       userName = userName.toLowerCase().replaceAll(" ", "");
       Info.user.friends.forEach((friend) => {
-        const friendUserName = friend.userName.toLowerCase().replaceAll(" ", "");
+        const friendUserName = friend.userName
+          .toLowerCase()
+          .replaceAll(" ", "");
         if (friendUserName.includes(userName)) {
           searchResults.push(friend);
         }
       });
-  
+
       //* to search outside user friends
       searchResults.push("Search more");
       setSearchResults(searchResults);
     }
-   
-    
+    setSearchName(userName)
   };
   const createSearchCard = (user) => {
-    if (user === "Search more"){
+    if (user === "Search more") {
       return (
-        <div
-        key={"search"}
-        id="search-card"
-        
-      >
-        <button className="request-img-div" style={{"borderBottom":"0px"}}>
-        <img src={Img.imagesUrl.searchIcon} />
-        <small>Search More</small>
-        </button>
-        
-      </div>
-        )
+        <div key={"search"} id="search-card">
+          <button
+            className="request-img-div"
+            style={{ borderBottom: "0px" }}
+            onClick={() => {
+              navigate(`/searchResult/${Info.user.userId}/${searchName}`);
+            }}
+          >
+            <img src={Img.imagesUrl.searchIcon} />
+            <small>Search More</small>
+          </button>
+        </div>
+      );
     }
     return (
-      <div
-        key={user._id + user.userName}
-        id="search-card"
-      >
-         <button  className="request-img-div">
-        <img src={user.profilePicture} />
-        <small>{user.userName}</small>
+      <div key={user._id + user.userName} id="search-card">
+        <button className="request-img-div">
+          <img src={user.profilePicture} />
+          <small>{user.userName}</small>
         </button>
       </div>
     );
@@ -67,7 +70,7 @@ export const Navbar = () => {
           }}
         />
         {searchResults ? (
-          <div id="search-result-div" >
+          <div id="search-result-div">
             {searchResults.map((user) => {
               return createSearchCard(user);
             })}

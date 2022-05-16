@@ -74,7 +74,7 @@ const getUserByUserName = (req, res) => {
   const userName = req.params.name.toLowerCase().replaceAll(" ", "");
   userModel
     .find({ lowerCaseUserName: { $regex: new RegExp(userName) } })
-    .select("_id userName")
+    .select("_id userName profilePicture")
     .then((users) => {
       if (users) {
         res.status(200).json({
