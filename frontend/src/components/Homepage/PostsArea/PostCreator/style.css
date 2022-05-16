@@ -25,14 +25,21 @@
   border-radius: 50%;
   width: 100%;
 }
-#post-creator-first-div input {
+#post-creator-first-div button {
   flex: 1;
   height: fit-content;
+  text-align: start;
   padding: var(--input-padding);
   border: 1px solid rgba(0, 0, 0, 0.545);
-  text-emphasis-color: green;
   border-radius: 20px;
+  cursor: pointer;
+  background-color: var(--forth-color);
 }
+
+#post-creator-first-div button:hover {
+  background-color: rgba(160, 189, 245, 0.234);
+}
+
 .newPost-buttons-bar {
   flex: 1;
   display: flex;
@@ -48,7 +55,6 @@
   display: flex;
   align-items: stretch;
   width: 100%;
-  
 }
 #new-post-reactions-buttons div {
   flex: 1;
@@ -68,10 +74,76 @@
   flex: 1;
   border: 0;
   border-top: 0.5px solid rgba(0, 0, 0, 0.273);
-  background-color:rgba(0, 0, 0, 0.05);
+  background-color: rgba(0, 0, 0, 0.05);
   box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.562);
 }
 #new-post-reactions-buttons img {
   width: 2rem;
   height: 2rem;
+}
+
+#show-post-area {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.305);
+  z-index: 100;
+  position: fixed;
+  width: 100%;
+  min-height: 100vh;
+}
+
+#inner-show-post-area {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: stretch;
+  width: 60%;
+  max-width: 500px;
+  min-height: 400px;
+  padding: 10px;
+  border: 0px solid black;
+  border-radius: var(--border-radius);
+  background-color: var(--first-color);
+  box-shadow: 0px 0px 2px black;
+  max-width: 500px;
+}
+#inner-show-post-area textarea {
+  width: 100%;
+  height: 14em;
+  font-size: 1.2em;
+  resize: none;
+  padding: var(--input-padding);
+  border: 1px solid rgba(0, 0, 0, 0.353);
+  font-family: "Times New Roman", Times, serif;
+}
+#inner-show-post-area textarea:focus {
+  outline-color: rgba(195, 185, 185, 0.621);
+}
+
+#inner-show-post-area button {
+  width: 100%;
+  padding: var(--input-padding);
+  border-radius: var(--border-radius);
+  border: 0;
+
+  font-weight: bold;
+  background-color: green;
+  color: white;
+}
+#inner-show-post-area button:disabled {
+  background-color: rgb(85, 89, 85);
+}
+
+
+#post-exit-button button {
+  width: fit-content;
+  background-color: transparent;
+  color: red;
+  position: absolute;
+  top: 2%;
+  right: 2%;
+  font-size: 1.2em;
+  cursor: pointer;
 }
