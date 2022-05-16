@@ -1,11 +1,8 @@
-import { UserController } from "../../controllers/user";
 import React, { useState } from "react";
 import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { PostController } from "../../controllers/posts";
-import { Info } from "../../controllers/info";
 import { Navbar } from "../Navbar";
 import { SuggestionsFriend } from "../SuggestionsFriend";
+import { FriendRequest } from "./FriendRequest";
 import { PostsArea } from "./PostsArea";
 
 export const Homepage = () => {
@@ -14,15 +11,35 @@ export const Homepage = () => {
   const [updatePost, setUpdatePost] = useState("[]");
   const [newComment, setNewComment] = useState("");
   useEffect(() => {}, []);
-  const navigate = useNavigate();
   return (
     <div>
       <Navbar />
-      <div style={{ display: "flex" }}>
+      <div style={{ display: "flex" ,justifyContent:"space-between"}}>
+      {/* <FriendRequest/> */}
       <PostsArea />
-        <SuggestionsFriend />
-        
+      {/* <SuggestionsFriend /> */}
+     
       </div>
     </div>
   );
 };
+/* 
+ <div className="suggestions-class">
+            <h3>Friend Requests</h3>
+            {requests.map((friendRequest) => {
+              return friendCard({
+                onClick: [
+                  () => {
+                    acceptFriendRequest(friendRequest);
+                  },
+                  () => {
+                    deleteFriendRequest();
+                  },
+                ],
+                bntText: ["Accept", "Remove"],
+                user: friendRequest.sender,
+              });
+            })}
+         
+        </div>
+*/

@@ -15,5 +15,5 @@
   }
 
 html {
-    background-color: rgba(181, 176, 168, 0.481);
+    background-color: var(--forth-color);
 }

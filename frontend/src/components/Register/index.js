@@ -3,18 +3,18 @@ import "./style.css";
 import { Registration } from "../../controllers/registration";
 import { Gender } from "./GenderDiv";
 import { ErrorsDiv } from "./ErrorsDiv";
-import "./style.css"
+import "./style.css";
 import { registrationCox } from "../WelcomePage";
 export const Register = () => {
   // TODO: --> Birth Date section
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [age, setAge] = useState(0);
-  const [country, setCountry] = useState("");
+  const [gender, setGender] = useState(null);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   let [errors, setErrors] = useState([]);
-  const {setIsSignUp} = useContext(registrationCox)
+  const { setIsSignUp } = useContext(registrationCox);
   const createInput = ({ placeholder, setState, type = "text", key = "" }) => {
     return (
       <div>
@@ -43,21 +43,21 @@ export const Register = () => {
       UserName: `${firstName} ${lastName}`,
       Email: email,
       Password: password,
+      Gender: gender,
     };
 
     errors = Registration.checkFormErrors({
       isLoginForm: false,
       inputForm: inputForm,
     });
-    console.log(errors);
     if (errors.length === 0) {
       const serverError = await Registration.register({
         firstName,
-
         lastName,
         email,
         password,
       });
+      console.log(serverError);
       serverError === "Email already taken"
         ? setErrors([...errors, "Email already taken"])
         : setErrors(["SignUp Completed Successfully"]);
@@ -69,9 +69,15 @@ export const Register = () => {
     <div id="signup-form">
       <div id="signup-form-inner">
         <div id="signup--exit-button">
-        <button onClick={()=>{setIsSignUp(false)}}>X</button>
+          <button
+            onClick={() => {
+              setIsSignUp(false);
+            }}
+          >
+            X
+          </button>
         </div>
-       
+
         <h1>Sign Up</h1>
         <h4> it's quick and easy.</h4>
         <hr />
@@ -102,7 +108,7 @@ export const Register = () => {
           key: "Password",
           setState: setPassword,
         })}
-        <Gender />
+        <Gender setGender={setGender} errors={errors} setErrors={setErrors} />
         <ErrorsDiv errors={errors} />
         <div id="signup-button-div">
           <button onClick={signUp}>Sign Up</button>

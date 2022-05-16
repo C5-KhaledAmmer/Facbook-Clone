@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Info, LocalStorage } from "./info";
+import { Img, Info, LocalStorage } from "./info";
 
 export class Registration {
   static async login({ email, password }) {
@@ -16,12 +16,11 @@ export class Registration {
       Info.token = response.data.token;
       Info.userId = response.data.userId;
       Info.isLogin = true;
-      
+
       Info.userName = response.data.userInfo.userName;
       Info.userFriends = response.data.userInfo.friends;
       return response.data.message;
     } catch (error) {
-   
       return error.response.data.message;
     }
   }
@@ -33,6 +32,8 @@ export class Registration {
     birthDate = Date.now(),
     email,
     password,
+    profilePicture = Img.imagesUrl.defaultUserImage,
+    gender,
   }) {
     try {
       const user = {
@@ -42,7 +43,10 @@ export class Registration {
         country,
         email,
         password,
+        profilePicture,
+        gender,
       };
+      console.log(email);
       const response = await axios.post(`${Info.hostUrl}/users`, user);
       return response.data.message;
     } catch (error) {
@@ -80,13 +84,6 @@ export class Registration {
               errors.push("Invalid email");
             }
           }
-          /* else {
-            if (isUserExist(value)[0]) {
-              if (!errors.includes("This email was taken")) {
-                errors.push("This email was taken");
-              }
-            }
-          } */
         }
         if (key === "Password") {
           const value = inputForm[key];
@@ -105,6 +102,11 @@ export class Registration {
             }
           }
         }
+        if (key === "Gender" && inputForm[key] === null) {
+          if (!errors.includes("Choose Your Gender")) {
+            errors.push("Choose Your Gender");
+          }
+        }
       } else {
         if (key === "Email") {
           const value = inputForm[key];
@@ -113,19 +115,6 @@ export class Registration {
               errors.push("Invalid email");
             }
           }
-          /* else {
-            const [isExist, password] = isUserExist(value);
-            if (!isExist) {
-              if (!errors.includes("Please sign up first")) {
-                removeError("Wrong password");
-                errors.push("Please sign up first");
-              }
-            } else if (password !== inputForm["Password"]) {
-              if (!errors.includes("Wrong password")) {
-                errors.push("Wrong password");
-              }
-            }
-          } */
         }
       }
     }
@@ -133,7 +122,7 @@ export class Registration {
     return errors;
   }
 
-  static removeErrors({ isLoginForm, errors, key, value }) {
+  static removeErrors({ isLoginForm, errors=[], key, value }) {
     const removeError = (error) => {
       if (errors.includes(error)) {
         errors.splice(errors.indexOf(error), 1);
@@ -153,13 +142,16 @@ export class Registration {
         }
       }
 
+      if (key === "Gender") {
+        if(value !== null)
+        removeError("Choose Your Gender");
+      }
+
       if (key === "Email") {
         if (value.includes("@") && value.includes(".com")) {
           removeError("Invalid email");
         }
-        /* if (!isUserExist(value)[0]) {
-          removeError("This email was taken");
-        } */
+     
       }
 
       if (key === "Password") {

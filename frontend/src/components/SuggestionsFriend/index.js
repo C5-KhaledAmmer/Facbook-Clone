@@ -8,8 +8,7 @@ export const SuggestionsFriend = () => {
   const [users, setUsers] = useState([]);
   const [requests, setRequests] = useState([]);
   const [userFriends, setUserFriends] = useState([]);
-  const [searchUsers, setSearchUsers] = useState([]);
-  const [searchName, setSearchName] = useState("");
+  
   useEffect(() => {
     (async () => {
       setUsers(await UserController.getAllUsers());
@@ -22,9 +21,13 @@ export const SuggestionsFriend = () => {
     })();
   }, []);
   const friendCard = ({ bntText, onClick, user }) => {
+    
     return (
       <div key={user._id} id="friend-card">
-        <div>{user.userName}</div>
+       <div className="request-img-div">
+          <img src={user.profilePicture} />
+          <small>{user.userName}</small>
+        </div>
         <div className="friend-card-buttons">
           <button onClick={onClick[0]}>{bntText[0]}</button>
           <button onClick={onClick[1]}>{bntText[1]}</button>
@@ -40,57 +43,26 @@ export const SuggestionsFriend = () => {
       sender,
     });
   };
-  const acceptFriendRequest = async (friendRequest) => {
-    const receiver = friendRequest.receiver;
-    const sender = friendRequest.sender;
-    const requestId = friendRequest._id;
-    await UserController.acceptFriendRequest({
-      receiver,
-      sender,
-      requestId,
-    });
-  };
-  const deleteFriendRequest = async (friendRequest) => {
-    const receiver = friendRequest.receiver;
-    const requestId = friendRequest._id;
-    await UserController.deleteFriendRequest({
-      receiver,
-      requestId,
-    });
-  };
+ 
   return (
-    <div style={{ display: "flex" }}>
+    <div id="fiend-suggestions-main-div">
       <div style={{ flex: "1" }}>
-        <div style={{ flex: "1" }}>
-          <h3>Friend Requests</h3>
-          {requests.map((friendRequest) => {
+
+        <div className="suggestions-class">
+          <h3>Friend Suggestions</h3>
+          {users.map((user) => {
             return friendCard({
               onClick: [
                 () => {
-                  acceptFriendRequest(friendRequest);
+                  sendFriendRequest(user);
                 },
-                () => {
-                  deleteFriendRequest();
-                },
+                () => {},
               ],
-              bntText:["Accept","Remove"],
-              user:friendRequest.sender
-            })
+              bntText: ["Add Friend", "Remove"],
+              user,
+            });
           })}
         </div>
-        <h3>Friend Suggestions</h3>
-        {users.map((user) => {
-          return friendCard({
-            onClick: [
-              () => {
-                sendFriendRequest(user);
-              },
-              () => {},
-            ],
-            bntText: ["Add Friend", "Remove"],
-            user,
-          });
-        })}
       </div>
 
       {/* <div style={{ flex: "1" }}>

@@ -47,14 +47,15 @@ const getUserById = async (req, res) => {
       .deepPopulate(["friendRequests.sender", "friends"], {
         populate: {
           "friendRequests.sender": {
-            select: "userName",
+            select: "userName profilePicture"
           },
           friends: {
-            select: "userName",
+            select: "userName profilePicture"
           },
+          
         },
       })
-      .select("userName friendRequests friends posts");
+      .select("userName friendRequests friends posts ");
     res.status(200).json({
       message: "User is available",
       success: true,

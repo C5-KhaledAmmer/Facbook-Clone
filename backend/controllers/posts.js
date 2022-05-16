@@ -35,14 +35,24 @@ const getAllPosts = async (req, res) => {
     const userId = req.params.user_id;
     const currentUser = await userModel
       .findOne({ _id: userId })
-      .populate("posts");
+      .deepPopulate(["posts","posts.author"],{
+        populate:{
+          "posts":{select:"-_v"},
+          "posts.author":{select:"userName profilePicture"}
+        }
+      });
     const userFriends = currentUser.friends;
     let posts = currentUser.posts;
 
     for (let index in userFriends) {
       const friend = await userModel
         .findOne({ _id: userFriends[index]._id })
-        .populate("posts");
+        .deepPopulate(["posts","posts.author"],{
+          populate:{
+            "posts":{select:"-_v"},
+            "posts.author":{select:"userName profilePicture"}
+          }
+        });
       posts = [...posts, ...friend.posts];
     }
     res.status(200).json({

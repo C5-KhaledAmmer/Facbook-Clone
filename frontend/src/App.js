@@ -9,7 +9,10 @@ import { useEffect } from "react";
 function App() {
   const navigate = useNavigate();
   useEffect(() => {
-    Info.isUserLogin(navigate);
+    (async ()=>{
+      await Info.isUserLogin(navigate);
+    })()
+   
   }, []);
   return (
    
