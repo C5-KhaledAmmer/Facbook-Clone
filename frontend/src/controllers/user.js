@@ -5,9 +5,8 @@ export class UserController {
   static async getAllUsers() {
     try {
       const response = await axios.get(`${Info.hostUrl}/users`, {
-        headers: { authorization: `Bearer ${Info.token}` },
+        headers: { authorization: `Bearer ${Info.user.token}` },
       });
-
       return response.data.users;
     } catch (error) {
       return error.response.data.message;
@@ -16,8 +15,8 @@ export class UserController {
 
   static async getUserInformation() {
     try {
-      const response = await axios.get(`${Info.hostUrl}/users/${Info.userId}`, {
-        headers: { authorization: `Bearer ${Info.token}` },
+      const response = await axios.get(`${Info.hostUrl}/users/${Info.user.userId}`, {
+        headers: { authorization: `Bearer ${Info.user.token}` },
       });
       return response.data.user;
     } catch (error) {
@@ -30,7 +29,7 @@ export class UserController {
       const response = await axios.get(
         `${Info.hostUrl}/users/search_1/${name}`,
         {
-          headers: { authorization: `Bearer ${Info.token}` },
+          headers: { authorization: `Bearer ${Info.user.token}` },
         }
       );
 
@@ -46,7 +45,7 @@ export class UserController {
         `${Info.hostUrl}/users/friend/request`,
         { sender, receiver },
         {
-          headers: { authorization: `Bearer ${Info.token}` },
+          headers: { authorization: `Bearer ${Info.user.token}` },
         }
       );
 
@@ -61,7 +60,7 @@ export class UserController {
         `${Info.hostUrl}/users/friend/add`,
         { sender, receiver, requestId },
         {
-          headers: { authorization: `Bearer ${Info.token}` },
+          headers: { authorization: `Bearer ${Info.user.token}` },
         }
       );
 
@@ -75,7 +74,7 @@ export class UserController {
       const response = await axios.delete(
         `${Info.hostUrl}/users/friend/request/delete`,
         {
-          headers: { authorization: `Bearer ${Info.token}` },
+          headers: { authorization: `Bearer ${Info.user.token}` },
           data: {
             receiver,
             requestId,
@@ -93,7 +92,7 @@ export class UserController {
       const response = await axios.delete(
         `${Info.hostUrl}/users/friend/delete`,
         {
-          headers: { authorization: `Bearer ${Info.token}` },
+          headers: { authorization: `Bearer ${Info.user.token}` },
           data: {
             userId,
             friendId,

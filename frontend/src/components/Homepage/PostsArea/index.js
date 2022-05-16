@@ -6,19 +6,19 @@ import { PostCreator } from "./PostCreator";
 import "./style.css";
 
 export const PostsArea = () => {
-  const [isLoaded, setIsLoaded] = useState(false);
+  
   const [posts, setPosts] = useState([]);
   const navigate = useNavigate();
   useEffect(() => {
-    if (!isLoaded) {
+    
       (async () => {
         await Info.isUserLogin(navigate);
         const posts = await PostController.getAllPosts();
         setPosts(posts);
-        setIsLoaded(true)
+        
       })();
-    }
-  }, [isLoaded]);
+    
+  }, []);
 
   const createPostCard = (post) => {
     return (

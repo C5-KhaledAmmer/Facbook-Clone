@@ -2,31 +2,26 @@
   width: 100%;
   width:50vw;;
   max-width: 300px;
- 
+  font-size: 1em;
 }
 
 #friend-card {
   width: 100%;
   background-color: var(--first-color);
-  padding: var(--input-padding);
+  padding: var(--button-padding);
   border-top: 0.5px solid rgba(0, 0, 0, 0.744);
-}
-
-#friend-card img {
-  width: 100%;
-  background-color: var(--first-color);
-  padding: var(--input-padding);
   
 }
+
 
 .friend-card-buttons {
   width: 100%;
   display: flex;
-  margin-top: 15px;
+  margin-top: 1px;
+  gap: 2px;
 }
 .friend-card-buttons button {
   flex: 1;
-  margin-right: 2px;
   background-color: var(--forth-color);
   border: 0.5px solid rgba(0, 0, 0, 0.299);
   color: var(--third-color);

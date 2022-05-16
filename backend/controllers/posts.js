@@ -31,6 +31,7 @@ const createNewPost = (req, res) => {
     });
 };
 const getAllPosts = async (req, res) => {
+  console.log(req.params.user_id);
   try {
     const userId = req.params.user_id;
     const currentUser = await userModel
@@ -62,7 +63,7 @@ const getAllPosts = async (req, res) => {
     });
   } catch (err) {
     res.status(500).json({
-      message: "Server Error",
+      message: err.message,
       success: false,
     });
   }

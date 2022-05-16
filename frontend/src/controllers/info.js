@@ -1,22 +1,16 @@
 import search from "../assets/images/search.png"
+import { User } from "../models/user";
 
 export class Info {
-  static token = null;
-  static userId = null;
-  static userName =null;
-  static userFriends =[];
-  static isLogin = false;
+  static user = new User({});
   static hostUrl = "http://localhost:5000";
 
   static async isUserLogin(navigate) {
-    this.token = await LocalStorage.getItem({ key: "token" });
-    this.userId = await LocalStorage.getItem({ key: "userId" });
-    this.isLogin =  await LocalStorage.getItem({ key: "isLogin" });
-    this.userName = await LocalStorage.getItem({ key: "userName" });
-    this.userFriends = await LocalStorage.getItem({ key: "userFriends" });
-    if (this.token) {
-      navigate("/homepage");
-    }
+    this.user=await LocalStorage.getItem({ key: "user" });
+    
+    // if (this.token) {
+    //   navigate("/homepage");
+    // }
   }
 }
 

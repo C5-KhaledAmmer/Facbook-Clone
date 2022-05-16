@@ -23,6 +23,7 @@ export const SuggestionsFriend = () => {
       }
     })();
   }, []);
+  
   const friendCard = ({ bntText, onClick, user }) => {
    
     return (

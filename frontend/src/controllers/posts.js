@@ -2,14 +2,14 @@ import axios from "axios";
 import { Info } from "./info";
 export class PostController {
   static async createNewPost({ content }) {
-    const author = Info.userId;
+    const author = Info.user.userId;
 
     try {
       const response = await axios.post(
         `${Info.hostUrl}/posts`,
         { content, author },
         {
-          headers: { authorization: `Bearer ${Info.token}` },
+          headers: { authorization: `Bearer ${Info.user.token}` },
         }
       );
 
@@ -19,11 +19,10 @@ export class PostController {
     }
   }
   static async getAllPosts() {
-    const userId = Info.userId;
-
+    const userId = Info.user.userId;
     try {
       const response = await axios.get(`${Info.hostUrl}/posts/${userId}`, {
-        headers: { authorization: `Bearer ${Info.token}` },
+        headers: { authorization: `Bearer ${Info.user.token}` },
       });
 
       return response.data.posts;
@@ -38,7 +37,7 @@ export class PostController {
         `${Info.hostUrl}/posts/update?postId=${postId}&&content=${content}`,
         {},
         {
-          headers: { authorization: `Bearer ${Info.token}` },
+          headers: { authorization: `Bearer ${Info.user.token}` },
         }
       );
       return response.data.message;
@@ -48,13 +47,13 @@ export class PostController {
   }
 
   static async deletePost({ postId }) {
-    const userId = Info.userId;
+    const userId = Info.user.userId;
 
     try {
       const response = await axios.delete(
         `${Info.hostUrl}/posts/delete?postId=${postId}&&userId=${userId}`,
         {
-          headers: { authorization: `Bearer ${Info.token}` },
+          headers: { authorization: `Bearer ${Info.user.token}` },
         }
       );
       return response.data.message;
@@ -63,13 +62,13 @@ export class PostController {
     }
   }
   static async createNewComment({ comment, postId }) {
-    const commenter = Info.userId;
+    const commenter = Info.user.userId;
     try {
       const response = await axios.post(
         `${Info.hostUrl}/posts/${postId}/comment`,
         { commenter, comment },
         {
-          headers: { authorization: `Bearer ${Info.token}` },
+          headers: { authorization: `Bearer ${Info.user.token}` },
         }
       );
 
@@ -83,7 +82,7 @@ export class PostController {
       const response = await axios.delete(
         `${Info.hostUrl}/posts/comment/delete`,
         {
-          headers: { authorization: `Bearer ${Info.token}` },
+          headers: { authorization: `Bearer ${Info.user.token}` },
           data: { commentId, postId },
         }
       );
@@ -99,7 +98,7 @@ export class PostController {
         `${Info.hostUrl}/posts/comments/${commentId}`,
         { comment },
         {
-          headers: { authorization: `Bearer ${Info.token}` },
+          headers: { authorization: `Bearer ${Info.user.token}` },
         }
       );
 
@@ -109,13 +108,13 @@ export class PostController {
     }
   }
   static async createNewLike({ likeType, postId }) {
-    const fan = Info.userId;
+    const fan = Info.user.userId;
     try {
       const response = await axios.post(
         `${Info.hostUrl}/posts/${postId}/like`,
         { fan, likeType },
         {
-          headers: { authorization: `Bearer ${Info.token}` },
+          headers: { authorization: `Bearer ${Info.user.token}` },
         }
       );
 
@@ -127,7 +126,7 @@ export class PostController {
   static async deleteLike({ likeId, postId }) {
     try {
       const response = await axios.delete(`${Info.hostUrl}/posts/like/delete`, {
-        headers: { authorization: `Bearer ${Info.token}` },
+        headers: { authorization: `Bearer ${Info.user.token}` },
         data: { likeId, postId },
       });
 

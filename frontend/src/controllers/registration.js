@@ -1,24 +1,27 @@
 import axios from "axios";
+import { User } from "../models/user";
 import { Img, Info, LocalStorage } from "./info";
 
 export class Registration {
   static async login({ email, password }) {
-    const user = {
+    const body = {
       email,
       password,
     };
-
     try {
-      const response = await axios.post(`${Info.hostUrl}/login`, user);
+      const response = await axios.post(`${Info.hostUrl}/login`, body);
 
-      LocalStorage.setItem({ key: "token", value: response.data.token });
-      LocalStorage.setItem({ key: "userId", value: response.data.userId });
-      Info.token = response.data.token;
-      Info.userId = response.data.userId;
-      Info.isLogin = true;
-
-      Info.userName = response.data.userInfo.userName;
-      Info.userFriends = response.data.userInfo.friends;
+      const user = new User({
+        isLogin: true,
+        token: response.data.token,
+        userName : response.data.userInfo.userName,
+        profilePicture : response.data.userInfo.profilePicture,
+        friends : response.data.userInfo.friends,
+        userId : response.data.userInfo.userId
+      })
+      await LocalStorage.setItem({ key: "user", value: user });
+      Info.user = user;
+      
       return response.data.message;
     } catch (error) {
       return error.response.data.message;
@@ -122,7 +125,7 @@ export class Registration {
     return errors;
   }
 
-  static removeErrors({ isLoginForm, errors=[], key, value }) {
+  static removeErrors({ isLoginForm, errors = [], key, value }) {
     const removeError = (error) => {
       if (errors.includes(error)) {
         errors.splice(errors.indexOf(error), 1);
@@ -143,15 +146,13 @@ export class Registration {
       }
 
       if (key === "Gender") {
-        if(value !== null)
-        removeError("Choose Your Gender");
+        if (value !== null) removeError("Choose Your Gender");
       }
 
       if (key === "Email") {
         if (value.includes("@") && value.includes(".com")) {
           removeError("Invalid email");
         }
-     
       }
 
       if (key === "Password") {

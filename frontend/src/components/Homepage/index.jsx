@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { Info } from "../../controllers/info";
+import { PostController } from "../../controllers/posts";
 import { Navbar } from "../Navbar";
 import { SuggestionsFriend } from "../SuggestionsFriend";
 import { FriendRequest } from "./FriendRequest";
@@ -10,14 +13,19 @@ export const Homepage = () => {
   const [posts, setPosts] = useState([]);
   const [updatePost, setUpdatePost] = useState("[]");
   const [newComment, setNewComment] = useState("");
-  useEffect(() => {}, []);
+  const navigate =useNavigate();
+  useEffect(() => {
+    (async () => {
+      await Info.isUserLogin(navigate);
+    })();
+  }, []);
   return (
     <div>
-      <Navbar />
+      {/* <Navbar /> */}
       <div style={{ display: "flex" ,justifyContent:"space-between"}}>
-      <FriendRequest/>
+      {/* <FriendRequest/> */}
       <PostsArea />
-      <SuggestionsFriend />
+      {/* <SuggestionsFriend /> */}
      
       </div>
     </div>
