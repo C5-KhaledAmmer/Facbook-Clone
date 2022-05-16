@@ -31,8 +31,8 @@
 }
 #post-picture-div{
     display: flex;
-   
-    align-items: center; gap: 1em;
+    align-items: center; 
+    gap: 1em;
 }
 #post-menu-button{
     position: absolute;

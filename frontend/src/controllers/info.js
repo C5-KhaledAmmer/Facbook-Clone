@@ -36,7 +36,11 @@ export class Img{
     bell: "https://cdn-icons-png.flaticon.com/128/1827/1827349.png",
     home:"https://cdn-icons-png.flaticon.com/128/1946/1946436.png",
     menu :"https://cdn-icons-png.flaticon.com/128/56/56763.png",
-    defaultUserImage:"https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/User_icon_2.svg/1200px-User_icon_2.svg.png"
+    defaultUserImage:"https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/User_icon_2.svg/1200px-User_icon_2.svg.png",
+    live:"https://cdn-icons.flaticon.com/png/512/2326/premium/2326122.png?token=exp=1652692400~hmac=8006b073d9e99df906ba91580f6afc16",
+    album:"https://cdn-icons-png.flaticon.com/512/3342/3342207.png",
+    emoji : "https://cdn-icons-png.flaticon.com/128/725/725107.png"
+
 
   }
 }
