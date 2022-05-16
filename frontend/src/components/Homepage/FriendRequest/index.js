@@ -10,7 +10,8 @@ export const FriendRequest = () => {
     
     (async () => {
       await Info.isUserLogin(navigate);
-      const user = await UserController.getUserInformation();
+      const user = await UserController.getUserInformation(); 
+      
 
       if (user) {
         setRequests(user.friendRequests);
@@ -18,7 +19,6 @@ export const FriendRequest = () => {
     })();
   }, []);
   const friendCard = ({ bntText, onClick, user }) => {
-    console.log(user);
     return (
       <div key={user._id} id="friend-card">
         <div className="request-img-div">

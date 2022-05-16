@@ -62,6 +62,7 @@ export class PostController {
     }
   }
   static async createNewComment({ comment, postId }) {
+    console.log(comment, postId);
     const commenter = Info.user.userId;
     try {
       const response = await axios.post(

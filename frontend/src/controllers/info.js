@@ -8,9 +8,9 @@ export class Info {
   static async isUserLogin(navigate) {
     this.user=await LocalStorage.getItem({ key: "user" });
     
-    // if (this.token) {
-    //   navigate("/homepage");
-    // }
+    if (this.token) {
+      navigate(`/homepage/${Info.user.token}/${Info.user.userId}`);
+    }
   }
 }
 

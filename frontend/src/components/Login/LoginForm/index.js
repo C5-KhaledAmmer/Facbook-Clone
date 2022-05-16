@@ -4,6 +4,7 @@ import "./style.css"
 import { Registration } from "../../../controllers/registration";
 import { ErrorsDiv } from "../../Register/ErrorsDiv";
 import { registrationCox } from "../../WelcomePage";
+import { Info } from "../../../controllers/info";
 
 export const LoginForm = () => {
   let [email, setEmail] = useState("");
@@ -55,7 +56,7 @@ export const LoginForm = () => {
 
       serverError !== "Login Successful"
         ? setErrors([...errors, serverError])
-        : navigate("/homepage");
+        : navigate(`/homepage/${Info.user.token}/${Info.user.userId}`);
     } else {
       setErrors(errors);
     }

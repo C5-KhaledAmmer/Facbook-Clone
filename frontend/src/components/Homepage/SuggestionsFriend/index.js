@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Info } from "../../controllers/info";
+import { Info } from "../../../controllers/info";
 import "./style.css";
 
-const { UserController } = require("../../controllers/user");
+const { UserController } = require("../../../controllers/user");
 
 export const SuggestionsFriend = () => {
   const [users, setUsers] = useState([]);
@@ -41,7 +41,7 @@ export const SuggestionsFriend = () => {
   };
   const sendFriendRequest = async (user) => {
     const receiver = user._id;
-    const sender = Info.userId;
+    const sender = Info.user.userId;
     await UserController.sendFriendRequest({
       receiver,
       sender,

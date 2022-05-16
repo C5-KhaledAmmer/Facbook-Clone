@@ -1,0 +1,71 @@
+#comments-div {
+  display: flex;
+  justify-content: center;
+  top: 0;
+  background-color: rgba(255, 254, 254, 0.544);
+  position: fixed;
+  left: 0;
+  z-index: 10;
+  width: 100vw;  
+}
+#inner-comments-div {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 90vw;
+  padding: 2px;
+  max-height: 98vh;
+  min-height: 400px;
+  background-color: var(--second-color);
+  
+}
+
+#comment-card {
+  background-color: white;
+  display: flex;
+  gap: 10px;
+  padding: 10px;
+  
+}
+#comment-card-p{
+    display: flex;
+    width: 100%;
+    padding: 15px;
+    border: 0.5 solid black;
+    background-color: var(--forth-color);
+    border-radius: 10px;
+    
+  }
+
+#comment-card-img{
+  max-width: 40px;
+  max-height: 40px;
+  border: 0.5px solid rgba(169, 161, 161, 0.553);
+  border-radius: 50%;
+}
+#comment-card div img {
+  max-width: 40px;
+  max-height: 40px;
+  border-radius: 50%;
+}
+#comments-div textarea{
+padding: var(--input-padding);
+width: 80%;
+margin: 2px;
+border-radius: 20px;
+resize: none;
+}
+#comments-div textarea{
+    padding: var(--input-padding);
+    width: 80%;
+    margin: 5px;
+    border-radius: 20px;
+    resize: none;
+}
+#comments-div button{
+    padding: var(--input-padding);
+    width: 20%;
+    margin-top: 2px;
+    border-radius: 20px;
+    resize: none;
+}
