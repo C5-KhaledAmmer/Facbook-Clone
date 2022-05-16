@@ -2,7 +2,7 @@ import axios from "axios";
 import { Info } from "./info";
 export class PostController {
   static async createNewPost({ content }) {
-    const author =  Info.userId;
+    const author = Info.userId;
 
     try {
       const response = await axios.post(

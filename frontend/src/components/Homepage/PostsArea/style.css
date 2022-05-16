@@ -1,7 +1,6 @@
 #post-card {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     width: 50vw;
     max-width: 700px;
     margin: 5px;
@@ -10,6 +9,7 @@
     min-height: 20vh;
     border-radius: var(--input-padding);
     border: 2px solid black;
+    position: relative;
     
 }
 #post-content{
@@ -31,8 +31,23 @@
 }
 #post-picture-div{
     display: flex;
+   
     align-items: center; gap: 1em;
 }
-#post-picture-div img{
+#post-menu-button{
+    position: absolute;
+    top: 6%;
+    right: 1em;
+    cursor: pointer;
+ }
+
+#post-menu-button img{
+    max-width: 15px;
+    position: absolute;
+    top: 0;
+    right: 0;
+ }
+
+.postPicture{
     max-width: 60px;
 }

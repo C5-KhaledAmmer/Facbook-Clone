@@ -24,7 +24,7 @@ const register = (req, res) => {
 const getAllUsers = (req, res) => {
   userModel
     .find({})
-    .select("_id userName country")
+    .select("_id userName country profilePicture")
     .then((users) => {
       res.status(200).json({
         success: true,
@@ -41,9 +41,11 @@ const getAllUsers = (req, res) => {
 };
 const getUserById = async (req, res) => {
   try {
+   
     const userId = req.params.userId;
     const user = await userModel
       .findOne({ _id: userId })
+      .select("userName friendRequests friends posts profilePicture")
       .deepPopulate(["friendRequests.sender", "friends"], {
         populate: {
           "friendRequests.sender": {
@@ -55,7 +57,7 @@ const getUserById = async (req, res) => {
           
         },
       })
-      .select("userName friendRequests friends posts ");
+    
     res.status(200).json({
       message: "User is available",
       success: true,
@@ -65,7 +67,6 @@ const getUserById = async (req, res) => {
     res.status(500).json({
       message: "Sever Error ",
       success: true,
-      user: user,
     });
   }
 };

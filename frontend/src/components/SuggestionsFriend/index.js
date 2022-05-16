@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Info } from "../../controllers/info";
 import "./style.css";
 
@@ -8,9 +9,11 @@ export const SuggestionsFriend = () => {
   const [users, setUsers] = useState([]);
   const [requests, setRequests] = useState([]);
   const [userFriends, setUserFriends] = useState([]);
-  
+  const navigate = useNavigate()
   useEffect(() => {
+    
     (async () => {
+      await Info.isUserLogin(navigate);
       setUsers(await UserController.getAllUsers());
       const user = await UserController.getUserInformation();
 
@@ -21,7 +24,7 @@ export const SuggestionsFriend = () => {
     })();
   }, []);
   const friendCard = ({ bntText, onClick, user }) => {
-    
+   
     return (
       <div key={user._id} id="friend-card">
        <div className="request-img-div">

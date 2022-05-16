@@ -1,11 +1,15 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { Info } from "../../../controllers/info";
 import { UserController } from "../../../controllers/user";
 import "./style.css";
 export const FriendRequest = () => {
   const [requests, setRequests] = useState([]);
-
+  const navigate = useNavigate()
   useEffect(() => {
+    
     (async () => {
+      await Info.isUserLogin(navigate);
       const user = await UserController.getUserInformation();
 
       if (user) {

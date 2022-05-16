@@ -15,31 +15,11 @@ export const Homepage = () => {
     <div>
       <Navbar />
       <div style={{ display: "flex" ,justifyContent:"space-between"}}>
-      {/* <FriendRequest/> */}
+      <FriendRequest/>
       <PostsArea />
-      {/* <SuggestionsFriend /> */}
+      <SuggestionsFriend />
      
       </div>
     </div>
   );
 };
-/* 
- <div className="suggestions-class">
-            <h3>Friend Requests</h3>
-            {requests.map((friendRequest) => {
-              return friendCard({
-                onClick: [
-                  () => {
-                    acceptFriendRequest(friendRequest);
-                  },
-                  () => {
-                    deleteFriendRequest();
-                  },
-                ],
-                bntText: ["Accept", "Remove"],
-                user: friendRequest.sender,
-              });
-            })}
-         
-        </div>
-*/
