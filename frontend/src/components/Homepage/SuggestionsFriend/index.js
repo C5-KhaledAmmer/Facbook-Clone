@@ -14,9 +14,15 @@ export const SuggestionsFriend = () => {
     
     (async () => {
       await Info.isUserLogin(navigate);
-      setUsers(await UserController.getAllUsers());
-      const user = await UserController.getUserInformation();
 
+      let suggestionsFriend = await UserController.getAllUsers();
+      
+      suggestionsFriend = suggestionsFriend.filter((user=>{
+        return user._id !== Info.user.userId
+      }))
+      setUsers( suggestionsFriend);
+      const user = await UserController.getCurrentUserInformation();
+      
       if (user) {
         setRequests(user.friendRequests);
         setUserFriends(user.friends);

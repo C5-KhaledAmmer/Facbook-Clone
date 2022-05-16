@@ -13,7 +13,7 @@ export class UserController {
     }
   }
 
-  static async getUserInformation() {
+  static async getCurrentUserInformation() {
     try {
       const response = await axios.get(`${Info.hostUrl}/users/${Info.user.userId}`, {
         headers: { authorization: `Bearer ${Info.user.token}` },

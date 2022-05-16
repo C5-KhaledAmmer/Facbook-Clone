@@ -10,7 +10,7 @@ export const FriendRequest = () => {
     
     (async () => {
       await Info.isUserLogin(navigate);
-      const user = await UserController.getUserInformation(); 
+      const user = await UserController.getCurrentUserInformation(); 
       
 
       if (user) {

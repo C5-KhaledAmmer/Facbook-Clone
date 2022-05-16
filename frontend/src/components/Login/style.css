@@ -6,9 +6,9 @@
 }
 
 #login-form-inner {
-  align-items: center;
   width: 100%;
   min-height: 500px;
+  align-items: center;
   border: 0px solid black;
   border-radius: var(--border-radius);
   background-color: var(--forth-color);
