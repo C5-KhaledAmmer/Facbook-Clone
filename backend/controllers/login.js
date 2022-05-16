@@ -6,8 +6,10 @@ const jwt = require("jsonwebtoken");
 const login = async (req, res) => {
   try {
     const { email, password } = req.body;
-    const user = await userModel.findOne({ email: email });
-
+    const user = await userModel.findOne({ email: email }).deepPopulate(["friends"],{
+      populate:{"friends":{select :"userName profilePicture"}}
+    });
+    console.log(user);
     if (user) {
       const isPasswordMatch = await bcrypt.compare(password, user.password);
       if (isPasswordMatch) {
