@@ -75,14 +75,14 @@ export const PostsArea = () => {
           </button>
         </div>
         {showCommentPage && post._id === currentPost ? (
-          <Comments
-            comments={post.comments}
-            postId={post._id}
-            setShowComment={setShowCommentPage}
-          />
-        ) : (
-          <></>
-        )}
+            <Comments
+              comments={post.comments}
+              postId={post._id}
+              setShowComment={setShowCommentPage}
+            />
+          ) : (
+            <></>
+          )}
       </div>
     );
   };

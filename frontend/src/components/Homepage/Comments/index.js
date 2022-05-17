@@ -14,9 +14,8 @@ export const Comments = ({ setShowComment, comments, postId }) => {
         <div id="comment-card-p">
           <p>
             <strong>{comment.commenter.userName}</strong>
-            <br />
-            {comment.comment}
           </p>
+          <p >{comment.comment}</p>
         </div>
       </div>
     );
@@ -29,22 +28,30 @@ export const Comments = ({ setShowComment, comments, postId }) => {
     });
   };
   return (
-    <div id="comments-div" onClick={()=>{
-       /*  setShowComment(false) */}}>
-      <div id="inner-comments-div" >
-        <div style={{ flex: "1" ,overflow:"scroll"}}>
-          {comments.map((comment) => {
-            return createCommentCard(comment);
-          })}
-        </div>
-
+    <div
+      id="comments-div"
+      onClick={() => {
+        /*  setShowComment(false) */
+      }}
+    >
+      <div id="inner-comments-div">
+        <hr />
         <div style={{ display: "flex" }}>
           <textarea
+            placeholder="Add a comment"
             onChange={(e) => {
               setComment(e.target.value);
             }}
           ></textarea>
-          <button id ="add-comment-btn"onClick={postComment}> Post </button>
+          <button id="add-comment-btn" onClick={postComment}>
+            Add
+          </button>
+        </div>
+
+        <div id="comments-viewer">
+          {comments.map((comment) => {
+            return createCommentCard(comment);
+          })}
         </div>
       </div>
     </div>

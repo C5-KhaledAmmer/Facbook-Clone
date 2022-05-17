@@ -1,74 +1,65 @@
 #comments-div {
   display: flex;
   justify-content: center;
-  top: 0;
-  background-color: rgba(255, 254, 254, 0.544);
-  position: fixed;
-  left: 0;
-  z-index: 10;
-  width: 100vw;  
-  
+  background-color: rgba(255, 254, 254, 0.889);
+  width: 100%;
+  margin-top: 5px;
 }
 #inner-comments-div {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 90vw;
+  width: 100%;
   padding: 2px;
-  max-height: 98vh;
-  min-height: 98vh;
+}
+#comments-div img {
+  max-width: 40px;
+}
+
+#inner-comments-div textarea {
+  resize: none;
+  flex: 3;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  padding: var(--button-padding);
+  border: 0.5px solid rgb(112, 105, 105);
+  border-right: 0.5px solid black;
+  border-bottom-left-radius: 10px;
+  border-top-left-radius: 10px;
+}
+#add-comment-btn {
+  resize: none;
+  flex: 1;
+  margin-top: 5px;
+  background-color: var(--forth-color);
+  margin-bottom: 5px;
+  padding: var(--button-padding);
+  border: 0.5px solid rgb(112, 105, 105);
+  border-left: 0;
+  border-bottom-right-radius: 10px;
+  border-top-right-radius: 10px;
+  cursor: pointer;
+}
+
+#add-comment-btn:hover {
   background-color: var(--second-color);
+  color: var(--first-color);
 }
 
 #comment-card {
-  background-color: white;
   display: flex;
   gap: 10px;
   padding: 10px;
-  
+  border-bottom: 0.5px solid black;
 }
-#comment-card-p{
-    display: flex;
-    width: 100%;
-    padding: 15px;
-    border: 0.5 solid black;
-    background-color: var(--forth-color);
-    border-radius: 10px;
-    
-  }
-
-#comment-card-img{
-  max-width: 40px;
-  max-height: 40px;
-  border: 0.5px solid rgba(169, 161, 161, 0.553);
-  border-radius: 50%;
+#comments-viewer {
+  border-radius: 10px;
+  box-shadow: 0px 0px 2px 0px black;
 }
-#comment-card div img {
-  max-width: 40px;
-  max-height: 40px;
-  border-radius: 50%;
-}
-#comments-div textarea{
-padding: var(--input-padding);
-width: 80%;
-margin: 2px;
-border-radius: 20px;
-resize: none;
-}
-#comments-div textarea{
-    padding: var(--input-padding);
-    width: 80%;
-    margin: 5px;
-    border-radius: 20px;
-    resize: none;
-    background-color: var(--forth-color);
-}
-#comments-div button{
-    padding: var(--input-padding);
-    width: 20%;
-    margin-top: 2px;
-    border-radius: 20px;
-    background-color: green;
-    resize: none;
-    
+#comment-card-p {
+  background-color: rgb(205, 196, 196);
+  text-rendering: optimizeLegibility;
+  height: fit-content;
+  padding: 10px;
+  border-radius: 10px;
 }
