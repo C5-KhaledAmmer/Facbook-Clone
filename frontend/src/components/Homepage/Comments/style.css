@@ -57,9 +57,18 @@
   box-shadow: 0px 0px 2px 0px black;
 }
 #comment-card-p {
-  background-color: rgb(205, 196, 196);
-  text-rendering: optimizeLegibility;
-  height: fit-content;
+  background-color: rgba(108, 101, 101, 0.264);
+  overflow: hidden;
   padding: 10px;
   border-radius: 10px;
+}
+#comment-card-img{
+  height: 60px;
+  width: 60px;
+  border-radius: 50%;
+}
+#comment-card-img img{
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
 }
