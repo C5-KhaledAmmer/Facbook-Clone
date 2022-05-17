@@ -1,13 +1,14 @@
 import { Routes, Route, Link, useNavigate } from "react-router-dom";
 import { Homepage } from "./components/Homepage";
 import { WelcomePage } from "./components/WelcomePage";
-import { SuggestionsFriend } from "./components/Homepage/SuggestionsFriend";
 import "./App.css";
 import { Info } from "./controllers/info";
-import { useEffect } from "react";
+import { useEffect ,useContext, useState ,createContext} from "react";
 import { SearchResult } from "./components/SearchResult";
 
+export const mainProvider =createContext();
 function App() {
+  const [showAlert , setShowAlert] = useState(false);
   const navigate = useNavigate();
   useEffect(() => {
     (async ()=>{
@@ -16,12 +17,16 @@ function App() {
    
   }, []);
   return (
-   
+    
+    <mainProvider.Provider value={{setShowAlert}}>
     <Routes>
-      <Route path={`/homepage/:token/:user_id`} element={<Homepage />} />
+      
+      <Route path={`/homepage/:user_id/`} element={<Homepage />} />
       <Route path="/" element={<WelcomePage />} />
       <Route path="/searchResult/:user_id/:userName" element={<SearchResult/>}/>
+     
     </Routes>
+    </mainProvider.Provider>
   );
 }
 

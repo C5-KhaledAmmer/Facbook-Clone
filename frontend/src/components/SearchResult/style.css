@@ -25,3 +25,7 @@
      border: 2px solid black;
      margin-bottom: 15px;
  }
+ #search-card button:hover{
+    background-color: var(--second-color);
+    color: var(--first-color);
+}

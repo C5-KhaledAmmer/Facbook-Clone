@@ -27,8 +27,9 @@
 }
 #post-creator-first-div button {
   flex: 1;
-  height: fit-content;
+  height: 50px;
   text-align: start;
+  overflow: hidden;
   padding: var(--input-padding);
   border: 1px solid rgba(0, 0, 0, 0.545);
   border-radius: 20px;
@@ -87,9 +88,10 @@
   justify-content: center;
   align-items: center;
   background-color: rgba(255, 255, 255, 0.305);
-  z-index: 100;
-  position: absolute;
-  width: 100%;
+  
+  z-index: 10;
+  position: fixed;
+  width: 100vw;
   min-height: 100vh;
 }
 

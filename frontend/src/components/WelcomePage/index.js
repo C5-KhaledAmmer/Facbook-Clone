@@ -6,6 +6,7 @@ export const registrationCox= createContext()
 
 export const WelcomePage = () => {
   const [isSignUp, setIsSignUp] = useState(false);
+  
   return (
     <div>
       <registrationCox.Provider value={{setIsSignUp,isSignUp}}>

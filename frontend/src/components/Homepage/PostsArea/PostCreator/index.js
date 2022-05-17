@@ -33,11 +33,19 @@ export const PostCreator = () => {
           </div>
           <textarea
             placeholder={`What's in your mind, ${Info.user.userName}`}
+            value={content}
             onChange={(e) => {
               setContent(e.target.value);
             }}
           ></textarea>
-          <button onClick={createPost} disabled={content ? false : true}>
+          <button
+            onClick={() => {
+              createPost();
+              
+              setIsPostAreaShown(false)
+            }}
+            disabled={content ? false : true}
+          >
             Post
           </button>
           <div id="post-exit-button">

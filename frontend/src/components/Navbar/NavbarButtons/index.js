@@ -20,7 +20,7 @@ export const NavbarButtons = () => {
       {createButton({
         icon: Img.imagesUrl.home,
         onClick: () => {
-          navigate(`/homepage/${Info.user.token}/${Info.user.userId}`);
+          navigate(`/homepage/${Info.user.userId}`);
         },
       })}
       {createButton({ icon: Img.imagesUrl.messenger, onClick: showMessages })}

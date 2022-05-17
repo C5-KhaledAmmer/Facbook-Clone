@@ -9,7 +9,7 @@ export class Info {
     this.user=await LocalStorage.getItem({ key: "user" });
     
     if (this.token) {
-      navigate(`/homepage/${Info.user.token}/${Info.user.userId}`);
+      navigate(`/homepage/${Info.user.userId}`);
     }
   }
 }

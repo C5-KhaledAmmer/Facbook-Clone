@@ -30,8 +30,7 @@ export const Comments = ({ setShowComment, comments, postId }) => {
   };
   return (
     <div id="comments-div" onClick={()=>{
-        console.log("sadasd");
-        setShowComment(false)}}>
+       /*  setShowComment(false) */}}>
       <div id="inner-comments-div" >
         <div style={{ flex: "1" ,overflow:"scroll"}}>
           {comments.map((comment) => {

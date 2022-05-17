@@ -32,12 +32,16 @@
 #post-picture-div{
     display: flex;
     align-items: center; 
+    text-align: center;
     gap: 1em;
 }
 #post-picture-div div{
-    max-width: 60px;
-    max-height: 60px;
+    max-width: 70px;
+    max-height: 70px;
     border-radius: 50%;
+    padding: 1px;
+    display: flex;
+    align-items: center; 
     border: 1px solid rgba(0, 0, 0, 0.368);
 }
 #post-menu-button{
@@ -55,5 +59,7 @@
  }
 
 .postPicture{
-    max-width: 60px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
 }

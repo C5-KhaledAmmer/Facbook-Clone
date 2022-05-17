@@ -9,10 +9,6 @@ import { FriendRequest } from "./FriendRequest";
 import { PostsArea } from "./PostsArea";
 
 export const Homepage = () => {
-  const [postContent, setPostContent] = useState("");
-  const [posts, setPosts] = useState([]);
-  const [updatePost, setUpdatePost] = useState("[]");
-  const [newComment, setNewComment] = useState("");
   const navigate =useNavigate();
   useEffect(() => {
     (async () => {
@@ -25,6 +21,7 @@ export const Homepage = () => {
       <div style={{ display: "flex" ,justifyContent:"space-between"}}>
       <FriendRequest/> 
       <PostsArea />
+    
       <SuggestionsFriend />
       
      

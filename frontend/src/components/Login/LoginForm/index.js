@@ -56,7 +56,7 @@ export const LoginForm = () => {
 
       serverError !== "Login Successful"
         ? setErrors([...errors, serverError])
-        : navigate(`/homepage/${Info.user.token}/${Info.user.userId}`);
+        : navigate(`/homepage/${Info.user.userId}`);
     } else {
       setErrors(errors);
     }
