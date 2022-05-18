@@ -5,7 +5,7 @@ export class User {
     userName,
     userId,
     profilePicture,
-    friends,
+    friends=[],
   }) {
     this.token = token;
     this.isLogin = isLogin;

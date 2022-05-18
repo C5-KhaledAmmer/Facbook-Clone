@@ -27,13 +27,27 @@ export const PostsArea = () => {
       <div id="post-card" key={post._id}>
         <div>
           <button
-            onClick={()=>{showMenu(post._id)}}
+            onClick={() => {
+              showMenu(post._id);
+            }}
             id="post-menu-button"
             style={{ border: "0" }}
           >
-            <img src={Img.imagesUrl.menu} />
+            {post.author._id === Info.user.userId ? (
+              <img src={Img.imagesUrl.menu} />
+            ) : (
+              <></>
+            )}
           </button>
-          {isMenuShown && post._id === currentPost? <Menu list={["Edit", "Delete"] } post={post} setShowMenu={setIsMenuShown}/> : <></>}
+          {isMenuShown && post._id === currentPost ? (
+            <Menu
+              list={["Edit", "Delete"]}
+              post={post}
+              setShowMenu={setIsMenuShown}
+            />
+          ) : (
+            <></>
+          )}
         </div>
 
         <div id="post-picture-div">

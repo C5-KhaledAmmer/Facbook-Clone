@@ -9,32 +9,32 @@ export const SuggestionsFriend = () => {
   const [users, setUsers] = useState([]);
   const [requests, setRequests] = useState([]);
   const [userFriends, setUserFriends] = useState([]);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const [userFriendsId, setFriendsId] = useState([]);
   useEffect(() => {
-    
     (async () => {
       await Info.isUserLogin(navigate);
-
+      setFriendsId(Info.user.friends.map((friend) => friend._id));
+     
       let suggestionsFriend = await UserController.getAllUsers();
-      
-      suggestionsFriend = suggestionsFriend.filter((user=>{
-        return user._id !== Info.user.userId
-      }))
-      setUsers( suggestionsFriend);
+
+      suggestionsFriend = suggestionsFriend.filter((user) => {
+        return user._id !== Info.user.userId;
+      });
+      setUsers(suggestionsFriend);
       const user = await UserController.getCurrentUserInformation();
-      
+
       if (user) {
         setRequests(user.friendRequests);
         setUserFriends(user.friends);
       }
     })();
   }, []);
-  
+ 
   const friendCard = ({ bntText, onClick, user }) => {
-   
     return (
       <div key={user._id} id="friend-card">
-       <div className="request-img-div">
+        <div className="request-img-div">
           <img src={user.profilePicture} />
           <small>{user.userName}</small>
         </div>
@@ -53,14 +53,16 @@ export const SuggestionsFriend = () => {
       sender,
     });
   };
- 
+
   return (
     <div id="fiend-suggestions-main-div">
       <div style={{ flex: "1" }}>
-
         <div className="suggestions-class">
           <h3>Friend Suggestions</h3>
-          {users.map((user) => {
+          {users.filter(user => {
+            return user._id !== Info.user.userId &&
+            !userFriendsId.includes(user._id)
+          }).map((user) => {
             return friendCard({
               onClick: [
                 () => {
@@ -74,28 +76,6 @@ export const SuggestionsFriend = () => {
           })}
         </div>
       </div>
-
-      {/* <div style={{ flex: "1" }}>
-        Search for user
-        <br />
-        <input
-          onChange={(e) => {
-            setSearchName(e.target.value);
-          }}
-        />
-        <button
-          onClick={async () => {
-            setSearchUsers(
-              await UserController.getUserByUserName({ name: searchName })
-            );
-          }}
-        >
-          search
-        </button>
-        {searchUsers.length !== 0 ? searchUsers.map(user=>{
-          return <p key={user._id}>{user.userName}</p>
-        }):<></>}
-      </div> */}
     </div>
   );
 };
