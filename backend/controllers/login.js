@@ -9,7 +9,7 @@ const login = async (req, res) => {
     const user = await userModel.findOne({ email: email }).deepPopulate(["friends"],{
       populate:{"friends":{select :"userName profilePicture"}}
     });
-    console.log(user);
+
     if (user) {
       const isPasswordMatch = await bcrypt.compare(password, user.password);
       if (isPasswordMatch) {

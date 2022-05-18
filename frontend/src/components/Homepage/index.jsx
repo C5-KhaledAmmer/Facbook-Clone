@@ -10,14 +10,17 @@ import { PostsArea } from "./PostsArea";
 
 export const Homepage = () => {
   const navigate =useNavigate();
+  const [imgaa ,setImg]= useState("")
   useEffect(() => {
     (async () => {
       await Info.isUserLogin(navigate);
     })();
   }, []);
+  
   return (
     <div>
       <Navbar />
+      
       <div style={{ display: "flex" ,justifyContent:"space-between"}}>
       <FriendRequest/> 
       <PostsArea />

@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Img, Info } from "../../../controllers/info";
 import { PostController } from "../../../controllers/posts";
 import { Comments } from "../Comments";
+import { Menu } from "./Menu";
 import { PostCreator } from "./PostCreator";
 import "./style.css";
 
@@ -11,6 +12,7 @@ export const PostsArea = () => {
   const [currentPost, setCurrentPost] = useState([]);
   const [viewMoreText, setViewMoreText] = useState(false);
   const [showCommentPage, setShowCommentPage] = useState(false);
+  const [isMenuShown, setIsMenuShown] = useState(false);
   const navigate = useNavigate();
   useEffect(() => {
     (async () => {
@@ -23,13 +25,16 @@ export const PostsArea = () => {
   const createPostCard = (post) => {
     return (
       <div id="post-card" key={post._id}>
-        <button
-          onClick={showMenu}
-          id="post-menu-button"
-          style={{ border: "0" }}
-        >
-          <img src={Img.imagesUrl.menu} />
-        </button>
+        <div>
+          <button
+            onClick={()=>{showMenu(post._id)}}
+            id="post-menu-button"
+            style={{ border: "0" }}
+          >
+            <img src={Img.imagesUrl.menu} />
+          </button>
+          {isMenuShown && post._id === currentPost? <Menu list={["Edit", "Update"]} /> : <></>}
+        </div>
 
         <div id="post-picture-div">
           <div>
@@ -75,18 +80,21 @@ export const PostsArea = () => {
           </button>
         </div>
         {showCommentPage && post._id === currentPost ? (
-            <Comments
-              comments={post.comments}
-              postId={post._id}
-              setShowComment={setShowCommentPage}
-            />
-          ) : (
-            <></>
-          )}
+          <Comments
+            comments={post.comments}
+            postId={post._id}
+            setShowComment={setShowCommentPage}
+          />
+        ) : (
+          <></>
+        )}
       </div>
     );
   };
-  const showMenu = () => {};
+  const showMenu = (id) => {
+    setCurrentPost(id);
+    setIsMenuShown(!isMenuShown);
+  };
   return (
     <div>
       <PostCreator />
