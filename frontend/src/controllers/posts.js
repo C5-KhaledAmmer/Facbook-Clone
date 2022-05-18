@@ -32,6 +32,7 @@ export class PostController {
   }
 
   static async updatePost({ content, postId }) {
+    console.log({ content, postId });
     try {
       const response = await axios.put(
         `${Info.hostUrl}/posts/update?postId=${postId}&&content=${content}`,

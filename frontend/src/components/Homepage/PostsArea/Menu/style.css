@@ -17,7 +17,7 @@
     top: 35px;
     right: 10px;
 }
-#menu-div button{
+.menu-btn{
     display: block;
     width: 100px;
     background-color: var(--forth-color);
@@ -31,12 +31,14 @@
 }
 
 #menu-div button:hover{
-   
+
     background-color: #0975b8;
     color: var(--first-color)
 
 }
-#edit-post button{
+#edit-post-btn{
     text-align: center;
     cursor: pointer;
+    padding: var(--input-padding);
+    background-color: green;
 }

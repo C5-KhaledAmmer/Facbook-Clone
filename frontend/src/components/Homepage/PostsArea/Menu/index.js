@@ -1,19 +1,20 @@
 import { useState } from "react";
 import { Info } from "../../../../controllers/info";
+import { PostController } from "../../../../controllers/posts";
 import "./style.css";
-export const Menu = ({ list, post }) => {
+export const Menu = ({ list, post, setShowMenu }) => {
   const [content, setContent] = useState(post.content);
   const [isEditAreaShown, setIsEditAreaShown] = useState(false);
 
   const listItem = (item) => {
     return (
       <button
+        className="menu-btn"
         key={item}
         onClick={() => {
           switch (item.toLowerCase()) {
             case "edit":
               setIsEditAreaShown(true);
-
               break;
             case "delete":
               deletePost();
@@ -45,8 +46,11 @@ export const Menu = ({ list, post }) => {
             }}
           ></textarea>
           <button
+            id="edit-post-btn"
             onClick={() => {
               setIsEditAreaShown(true);
+              updatePost();
+              setShowMenu(false);
             }}
             disabled={content ? false : true}
           >
@@ -56,7 +60,7 @@ export const Menu = ({ list, post }) => {
             <button
               onClick={() => {
                 setIsEditAreaShown(false);
-                updatePost(content);
+                setShowMenu(false);
               }}
             >
               X
@@ -67,9 +71,14 @@ export const Menu = ({ list, post }) => {
     );
   };
 
-  const updatePost = () => {};
-  const deletePost = () => {
-    console.log("Hi i am in delete box");
+  const updatePost = async () => {
+    await PostController.updatePost(
+        { content, postId: post._id });
+    setShowMenu(false);
+  };
+  const deletePost = async () => {
+    await PostController.deletePost({ postId: post._id });
+    setShowMenu(false);
   };
 
   return (
