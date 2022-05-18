@@ -33,7 +33,7 @@ export const PostsArea = () => {
           >
             <img src={Img.imagesUrl.menu} />
           </button>
-          {isMenuShown && post._id === currentPost? <Menu list={["Edit", "Update"]} /> : <></>}
+          {isMenuShown && post._id === currentPost? <Menu list={["Edit", "Delete"] } post={post}/> : <></>}
         </div>
 
         <div id="post-picture-div">

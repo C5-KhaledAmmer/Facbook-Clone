@@ -1,3 +1,15 @@
+#edit-post{
+    position:fixed;
+    display:flex;
+    background-color: rgba(255, 255, 255, 0.495) ;
+    height: 100vh;
+    top: 0;
+    left: 0 ;
+    align-items: center;
+    justify-content: center;
+    width:100vw;
+    z-index: 25;
+}
 #menu-div{
     display: flex;
     flex-direction: column;
@@ -5,20 +17,26 @@
     top: 35px;
     right: 10px;
 }
-#menu-div strong{
+#menu-div button{
     display: block;
     width: 100px;
     background-color: var(--forth-color);
     z-index: 25;
+    border: 0;
     padding: var(--input-padding);
     box-shadow: 0px 0px 2px 0px black;
+    font-weight: bold;
+    text-align: start;
 
 }
 
-#menu-div strong:hover{
+#menu-div button:hover{
    
     background-color: #0975b8;
-    color: var(--first-color);
-    
+    color: var(--first-color)
 
+}
+#edit-post button{
+    text-align: center;
+    cursor: pointer;
 }
