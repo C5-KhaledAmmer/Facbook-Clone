@@ -5,7 +5,7 @@ import { NavbarButtons } from "./NavbarButtons";
 import "./style.css";
 export const Navbar = () => {
   let [searchResults, setSearchResults] = useState(false);
-  const [searchName,setSearchName] = useState("")
+  const [searchName, setSearchName] = useState("");
   const navigate = useNavigate();
 
   const search = (userName) => {
@@ -27,15 +27,15 @@ export const Navbar = () => {
       searchResults.push("Search more");
       setSearchResults(searchResults);
     }
-    setSearchName(userName)
+    setSearchName(userName);
   };
   const createSearchCard = (user) => {
     if (user === "Search more") {
       return (
-        <div key={"search"} id="search-card">
+        <div key={"search"} className="search-card1">
           <button
-            className="request-img-div"
             style={{ borderBottom: "0px" }}
+            className="request-img-div"
             onClick={() => {
               navigate(`/searchResult/${Info.user.userId}/${searchName}`);
             }}
@@ -47,7 +47,7 @@ export const Navbar = () => {
       );
     }
     return (
-      <div key={user._id + user.userName} id="search-card">
+      <div key={user._id + user.userName} className="search-card1">
         <button className="request-img-div">
           <img src={user.profilePicture} />
           <small>{user.userName}</small>
