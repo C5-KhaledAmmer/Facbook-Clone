@@ -32,7 +32,6 @@ export class PostController {
   }
 
   static async updatePost({ content, postId }) {
-    console.log({ content, postId });
     try {
       const response = await axios.put(
         `${Info.hostUrl}/posts/update?postId=${postId}&&content=${content}`,
@@ -95,15 +94,17 @@ export class PostController {
     }
   }
   static async updateComment({ commentId, comment }) {
-    try {
-      const response = await axios.delete(
+
+  
+   try {
+      const response = await axios.put(
         `${Info.hostUrl}/posts/comments/${commentId}`,
         { comment },
         {
           headers: { authorization: `Bearer ${Info.user.token}` },
         }
       );
-
+       
       return response.data.message;
     } catch (error) {
       return error;

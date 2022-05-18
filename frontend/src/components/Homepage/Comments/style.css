@@ -72,3 +72,14 @@
   width: 50px;
   border-radius: 50%;
 }
+#comment-menu-button{
+  position: absolute;
+  right: 16px;
+  background-color: transparent;
+  cursor: pointer;
+}
+#comment-menu-button img{
+  max-width: 20px;
+  background-color: transparent;
+  
+}

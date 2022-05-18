@@ -83,7 +83,7 @@ export const PostsArea = () => {
           <Comments
             comments={post.comments}
             postId={post._id}
-            setShowComment={setShowCommentPage}
+            authorId={post.author._id}
           />
         ) : (
           <></>
