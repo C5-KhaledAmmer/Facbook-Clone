@@ -2,8 +2,8 @@ const postModel = require("../models/posts");
 const userModel = require("../models/users");
 
 const createNewPost = (req, res) => {
-  const { content, author } = req.body;
-  const newPost = new postModel({ content, author });
+  const { content, author ,date } = req.body;
+  const newPost = new postModel({ content, author ,date});
   newPost
     .save()
     .then((post) => {
@@ -24,6 +24,7 @@ const createNewPost = (req, res) => {
         });
     })
     .catch((err) => {
+      console.log(err.message);
       res.status(500).json({
         message: `Server Error ${err.message}`,
         success: false,
@@ -48,13 +49,15 @@ const getAllPosts = async (req, res) => {
     for (let index in userFriends) {
       const friend = await userModel
         .findOne({ _id: userFriends[index]._id })
-        .deepPopulate(["posts","posts.author"],{
+        .deepPopulate(["posts","posts.author","posts.comments.commenter"],{
           populate:{
             "posts":{select:"-_v"},
-            "posts.author":{select:"userName profilePicture"}
+            "posts.author":{select:"userName profilePicture"},
+            "posts.comments.commenter":{select:"userName profilePicture"}
           }
         });
-      posts = [...posts, ...friend.posts];
+      posts = [...posts, ...friend.posts].sort((a,b)=>b.date-a.date);
+      
     }
     res.status(200).json({
       message: "All the post",

@@ -19,14 +19,14 @@ export const SearchResult = () => {
     })();
   }, []);
   const searchCard = ({ bntText, onClick, user }) => {
-      
     return (
       <div key={user._id} id="search-card">
-        <div className="request-img-div">
+        <div className="search-img-div">
           <img src={user.profilePicture} />
-          <small>{user.userName}</small>
         </div>
-        <div className="friend-card-buttons">
+        <small>{user.userName}</small>
+        <div className="search-card-buttons">
+          
           <button onClick={onClick[0]}>{bntText[0]}</button>
           <button onClick={onClick[1]}>{bntText[1]}</button>
         </div>
@@ -48,7 +48,7 @@ export const SearchResult = () => {
       <Navbar />
       <div id="search-page">
         <div id="inner-search-page">
-          {searchResults ? (
+          {searchResults.length ? (
             searchResults.map((user) => {
               return searchCard({
                 onClick: [
@@ -62,7 +62,7 @@ export const SearchResult = () => {
               });
             })
           ) : (
-            <></>
+            <p>No user has this user name : {userName}</p>
           )}
         </div>
       </div>

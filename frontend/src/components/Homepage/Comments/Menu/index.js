@@ -42,7 +42,6 @@ export const Menu = ({ list, comment, setShowMenu }) => {
             placeholder={`Update Your Comment`}
             value={content}
             onChange={(e) => {
-              console.log(content);
               setContent(e.target.value);
             }}
           ></textarea>

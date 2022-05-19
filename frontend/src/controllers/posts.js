@@ -3,11 +3,11 @@ import { Info } from "./info";
 export class PostController {
   static async createNewPost({ content }) {
     const author = Info.user.userId;
-
+    const date = new Date()
     try {
       const response = await axios.post(
         `${Info.hostUrl}/posts`,
-        { content, author },
+        { content, author, date },
         {
           headers: { authorization: `Bearer ${Info.user.token}` },
         }

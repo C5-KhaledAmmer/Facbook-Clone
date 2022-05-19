@@ -15,6 +15,7 @@ export const PostsArea = () => {
   const [isMenuShown, setIsMenuShown] = useState(false);
   const navigate = useNavigate();
   useEffect(() => {
+    
     (async () => {
       await Info.isUserLogin(navigate);
       const posts = await PostController.getAllPosts();
@@ -54,32 +55,41 @@ export const PostsArea = () => {
           <div>
             <img src={post.author.profilePicture} className="postPicture" />
           </div>
-
-          <h4>{post.author.userName}</h4>
+          <div style={{display:"block", border:"0",textAlign:"start", maxWidth:"100%"}}>
+            <h4>{post.author.userName}</h4>
+            <h6>{`🕚` + Info.formatDate(post.date)}</h6>
+          </div>
         </div>
+
         <div id="post-content">
-          {post.content.length > 560
-            ? post.content.slice(0, 560)
-            : post.content}
-          {post.content.length > 560 ? (
-            <span
-              style={
-                viewMoreText && currentPost === post._id
-                  ? {}
-                  : { fontWeight: "bold", fontSize: "1.1em", cursor: "pointer" }
-              }
-              onClick={() => {
-                setViewMoreText(true);
-                setCurrentPost(post._id);
-              }}
-            >
-              {viewMoreText && currentPost === post._id
-                ? post.content.slice(560)
-                : " view more ..."}
-            </span>
-          ) : (
-            <></>
-          )}
+          <p>
+            {post.content.length > 560
+              ? post.content.slice(0, 560)
+              : post.content}
+            {post.content.length > 560 ? (
+              <span
+                style={
+                  viewMoreText && currentPost === post._id
+                    ? {}
+                    : {
+                        fontWeight: "bold",
+                        fontSize: "1.1em",
+                        cursor: "pointer",
+                      }
+                }
+                onClick={() => {
+                  setViewMoreText(true);
+                  setCurrentPost(post._id);
+                }}
+              >
+                {viewMoreText && currentPost === post._id
+                  ? post.content.slice(560)
+                  : " view more ..."}
+              </span>
+            ) : (
+              <></>
+            )}
+          </p>
         </div>
         <div></div>
         <div id="post-reactions-buttons">

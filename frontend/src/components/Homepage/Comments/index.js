@@ -14,6 +14,7 @@ export const Comments = ({ comments, postId, authorId }) => {
     setIsMenuShown(!isMenuShown);
   };
   const createCommentCard = (comment) => {
+    console.log(comment);
     return (
       <div id="comment-card" key={comment._id}>
         <div id="comment-card-img">
@@ -63,9 +64,6 @@ export const Comments = ({ comments, postId, authorId }) => {
   return (
     <div
       id="comments-div"
-      onClick={() => {
-        /*  setShowComment(false) */
-      }}
     >
       <div id="inner-comments-div">
         <hr />

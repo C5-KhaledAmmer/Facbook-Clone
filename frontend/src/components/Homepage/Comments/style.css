@@ -11,6 +11,7 @@
   justify-content: space-between;
   width: 100%;
   padding: 2px;
+  overflow-wrap: anywhere;
 }
 #comments-div img {
   max-width: 40px;
@@ -58,9 +59,10 @@
 }
 #comment-card-p {
   background-color: rgba(108, 101, 101, 0.264);
-  overflow: hidden;
   padding: 10px;
   border-radius: 10px;
+  font-size: 0.8rem;
+  width: 60%;
 }
 #comment-card-img{
   height: 60px;

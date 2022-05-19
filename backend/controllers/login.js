@@ -6,7 +6,7 @@ const jwt = require("jsonwebtoken");
 const login = async (req, res) => {
   try {
     const { email, password } = req.body;
-    const user = await userModel.findOne({ email: email }).deepPopulate(["friends"],{
+    const user = await userModel.findOne({ email: email }).deepPopulate(["friends",],{
       populate:{"friends":{select :"userName profilePicture"}}
     });
 

@@ -14,8 +14,8 @@
     display: flex;
     flex-direction: column;
     position: relative;
-    left: 40px;
-    top: 10px;
+    left: 5px;
+    top: 20px;
 }
 .menu-btn1{
     display: block;

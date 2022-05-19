@@ -7,7 +7,7 @@
   background-color: var(--first-color);
   min-height: 20vh;
   border-radius: var(--input-padding);
-  border: 2px solid black;
+  box-shadow: 0px 0px 2px 0px black;
   padding: 5px;
   gap: 10px;
 }
@@ -47,8 +47,8 @@
   width: 100%;
   border: 0;
   border-top: 0.5px solid rgba(0, 0, 0, 0.389);
-
   height: 100%;
+
 }
 
 #new-post-reactions-buttons {
@@ -56,20 +56,24 @@
   display: flex;
   align-items: stretch;
   width: 100%;
+
+ 
 }
 #new-post-reactions-buttons div {
   flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
   width: 100%;
+  
+  gap: 2px;
 }
 #new-post-reactions-buttons button {
   flex: 1;
   border: 0;
   border-top: 0.5px solid rgba(0, 0, 0, 0.273);
   background-color: transparent;
+
 }
 #new-post-reactions-buttons button:hover {
   flex: 1;
@@ -79,8 +83,8 @@
   box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.562);
 }
 #new-post-reactions-buttons img {
-  width: 2rem;
-  height: 2rem;
+  width: 1.5rem;
+  height: 1.5rem;
 }
 
 #show-post-area {
