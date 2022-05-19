@@ -3,7 +3,7 @@ import { Info } from "./info";
 export class PostController {
   static async createNewPost({ content }) {
     const author = Info.user.userId;
-    const date = new Date()
+    const date = new Date();
     try {
       const response = await axios.post(
         `${Info.hostUrl}/posts`,
@@ -92,9 +92,7 @@ export class PostController {
     }
   }
   static async updateComment({ commentId, comment }) {
-
-  
-   try {
+    try {
       const response = await axios.put(
         `${Info.hostUrl}/posts/comments/${commentId}`,
         { comment },
@@ -102,7 +100,7 @@ export class PostController {
           headers: { authorization: `Bearer ${Info.user.token}` },
         }
       );
-       
+
       return response.data.message;
     } catch (error) {
       return error;

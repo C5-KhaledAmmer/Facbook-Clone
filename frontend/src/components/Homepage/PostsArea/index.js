@@ -15,11 +15,11 @@ export const PostsArea = () => {
   const [showCommentPage, setShowCommentPage] = useState(false);
   const [isMenuShown, setIsMenuShown] = useState(false);
   const navigate = useNavigate();
+
   useEffect(() => {
     (async () => {
       await Info.isUserLogin(navigate);
-      const posts = await PostController.getAllPosts();
-      setPosts(posts);
+      setPosts(await PostController.getAllPosts());
     })();
   }, []);
   const createPostCard = (post) => {
@@ -119,9 +119,7 @@ export const PostsArea = () => {
   };
 
   const setRemoveLike = (post) => {
-    
     const like = post.likes.filter((like) => {
-     
       return like.fan._id === Info.user.userId;
     });
     return like.toString() ? (
@@ -163,15 +161,14 @@ export const PostsArea = () => {
     setPosts([...posts]);
   };
   const addLike = async (postId, likeType = "like") => {
-    
-  for (let i = 0; i < posts.length; i++) {
+    for (let i = 0; i < posts.length; i++) {
       if (posts[i]._id === postId) {
         const likeId = await PostController.createNewLike({ postId, likeType });
         posts[i].likes.push({
           likeType,
           fan: {
-            _id:Info.user.userId,
-            profilePicture:Info.user.profilePicture,
+            _id: Info.user.userId,
+            profilePicture: Info.user.profilePicture,
             userName: Info.user.userName,
           },
           _id: likeId,
@@ -179,12 +176,12 @@ export const PostsArea = () => {
         break;
       }
     }
-    
+
     setPosts([...posts]);
   };
   return (
     <div>
-      <PostCreator />
+      <PostCreator setPosts={setPosts} posts={[...posts]} />
       {posts.length !== 0 ? (
         posts.map((post) => {
           return createPostCard(post);

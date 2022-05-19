@@ -3,11 +3,25 @@ import { Img, Info } from "../../../../controllers/info";
 import { PostController } from "../../../../controllers/posts";
 import "./style.css";
 
-export const PostCreator = () => {
+export const PostCreator = ({ setPosts, posts }) => {
   const [content, setContent] = useState("");
   const [isPostAreaShown, setIsPostAreaShown] = useState(false);
   const createPost = async () => {
-    await PostController.createNewPost({ content });
+    const { id } = await PostController.createNewPost({ content });
+    const post = {
+      _id: id,
+      date: new Date(),
+      author: {
+        _id: Info.user.userId,
+
+        profilePicture: Info.user.profilePicture,
+        userName: Info.user.userName,
+      },
+      content: content,
+      likes: [],
+      comments: [],
+    };
+    setPosts([post, ...posts]);
   };
   const createButton = ({ icon, text, onClick }) => {
     return (
@@ -41,8 +55,8 @@ export const PostCreator = () => {
           <button
             onClick={() => {
               createPost();
-              
-              setIsPostAreaShown(false)
+
+              setIsPostAreaShown(false);
             }}
             disabled={content ? false : true}
           >
