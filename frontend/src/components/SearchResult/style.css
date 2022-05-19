@@ -8,8 +8,7 @@
 #inner-search-page {
   display: grid;
   grid-template-columns: repeat(4, 25%);
-  align-items: stretch;
-  justify-content: center;
+  grid-template-rows: 1fr 1fr 1fr 1fr ;
   width: 100%;
   min-height: 100vh;
   max-width: 700px;
@@ -21,7 +20,7 @@
 #search-card {
   display: flex;
   flex-direction: column;
-  height: auto;
+  height: fit-content;
   border-radius: 10px;
   background-color: var(--first-color);
   box-shadow: 0px 0px 2px 0px black;
@@ -29,7 +28,7 @@
   gap: 5px;
 }
 #search-card small {
-  font-size: 16px;
+  font-size: 1em;
   font-weight: bold;
   height: 10%;
 }
