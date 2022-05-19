@@ -9,13 +9,12 @@ import "./style.css";
 
 export const PostsArea = () => {
   const [posts, setPosts] = useState([]);
-  const [currentPost, setCurrentPost] = useState([]);
+  const [currentPost, setCurrentPost] = useState("0");
   const [viewMoreText, setViewMoreText] = useState(false);
   const [showCommentPage, setShowCommentPage] = useState(false);
   const [isMenuShown, setIsMenuShown] = useState(false);
   const navigate = useNavigate();
   useEffect(() => {
-    
     (async () => {
       await Info.isUserLogin(navigate);
       const posts = await PostController.getAllPosts();
@@ -55,7 +54,14 @@ export const PostsArea = () => {
           <div>
             <img src={post.author.profilePicture} className="postPicture" />
           </div>
-          <div style={{display:"block", border:"0",textAlign:"start", maxWidth:"100%"}}>
+          <div
+            style={{
+              display: "block",
+              border: "0",
+              textAlign: "start",
+              maxWidth: "100%",
+            }}
+          >
             <h4>{post.author.userName}</h4>
             <h6>{`🕚` + Info.formatDate(post.date)}</h6>
           </div>
@@ -96,8 +102,14 @@ export const PostsArea = () => {
           <button>👍 Like</button>
           <button
             onClick={() => {
+              if (showCommentPage === true) {
+                if(currentPost === post._id){
+                  setShowCommentPage(!showCommentPage);
+                }
+              }else{
+                setShowCommentPage(!showCommentPage);
+              }
               setCurrentPost(post._id);
-              setShowCommentPage(true);
             }}
           >
             💬 Comment

@@ -15,6 +15,7 @@ const createNewComment = async (req, res) => {
     res.status(201).json({
       message: "Comment Added",
       success: true,
+      id: newComment._id
     });
   } catch (err) {
     res.status(500).json({

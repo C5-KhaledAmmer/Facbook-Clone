@@ -7,6 +7,8 @@ import "./style.css";
 
 export const Comments = ({ comments, postId, authorId }) => {
   const [comment, setComment] = useState("");
+  const [comments1, setComments] = useState(comments);
+
   const [currentComment, setCurrentComment] = useState();
   const [isMenuShown, setIsMenuShown] = useState(false);
   const showMenu = (id) => {
@@ -14,7 +16,6 @@ export const Comments = ({ comments, postId, authorId }) => {
     setIsMenuShown(!isMenuShown);
   };
   const createCommentCard = (comment) => {
-    console.log(comment);
     return (
       <div id="comment-card" key={comment._id}>
         <div id="comment-card-img">
@@ -56,15 +57,26 @@ export const Comments = ({ comments, postId, authorId }) => {
   };
 
   const postComment = async () => {
-    await PostController.createNewComment({
+    const commentId = await PostController.createNewComment({
       comment: comment,
       postId: postId,
     });
-  };
+    comments1.unshift({
+      _id: commentId,
+      comment: comment,
+      commenter: {
+        _id:Info.user.userId,
+        profilePicture: Info.user.profilePicture,
+        userName: Info.user.userName,
+      },
+    });
+    setTimeout(()=>{
+      setComments([...comments1]);
+    
+    },1000)
+  }
   return (
-    <div
-      id="comments-div"
-    >
+    <div id="comments-div">
       <div id="inner-comments-div">
         <hr />
         <div style={{ display: "flex" }}>
@@ -80,7 +92,7 @@ export const Comments = ({ comments, postId, authorId }) => {
         </div>
 
         <div id="comments-viewer">
-          {comments.map((comment) => {
+          {comments1.map((comment) => {
             return createCommentCard(comment);
           })}
         </div>

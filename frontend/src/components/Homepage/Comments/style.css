@@ -14,17 +14,28 @@
   overflow-wrap: anywhere;
 }
 #comments-div img {
-  max-width: 40px;
+  max-wid8th: 40px;
 }
 
 #inner-comments-div textarea {
   resize: none;
-  flex: 3;
+  flex: 5 ;
   margin-top: 5px;
   margin-bottom: 5px;
-  padding: var(--button-padding);
+  padding: 2px;
+  padding-left: 10px;
+  padding-top: 5px;
   border: 0.5px solid rgb(112, 105, 105);
   border-right: 0.5px solid black;
+  border-bottom-left-radius: 10px;
+  border-top-left-radius: 10px;
+  font-family: 'Times New Roman', Times, serif;
+}
+#inner-comments-div textarea:focus {
+  outline: 0.5px solid var(--second-color);
+  border: 0;
+  border-right: 0.5px solid var(--second-color);
+  
   border-bottom-left-radius: 10px;
   border-top-left-radius: 10px;
 }
@@ -34,7 +45,7 @@
   margin-top: 5px;
   background-color: var(--forth-color);
   margin-bottom: 5px;
-  padding: var(--button-padding);
+  
   border: 0.5px solid rgb(112, 105, 105);
   border-left: 0;
   border-bottom-right-radius: 10px;
