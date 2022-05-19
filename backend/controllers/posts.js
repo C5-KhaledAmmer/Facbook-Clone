@@ -2,8 +2,8 @@ const postModel = require("../models/posts");
 const userModel = require("../models/users");
 
 const createNewPost = (req, res) => {
-  const { content, author ,date } = req.body;
-  const newPost = new postModel({ content, author ,date});
+  const { content, author, date } = req.body;
+  const newPost = new postModel({ content, author, date });
   newPost
     .save()
     .then((post) => {
@@ -13,7 +13,7 @@ const createNewPost = (req, res) => {
           res.status(201).json({
             message: "Post Created Successfully",
             success: true,
-            post:{content:post.content,id:post._id}
+            post: { content: post.content, id: post._id },
           });
         })
         .catch((err) => {
@@ -36,28 +36,45 @@ const getAllPosts = async (req, res) => {
     const userId = req.params.user_id;
     const currentUser = await userModel
       .findOne({ _id: userId })
-      .deepPopulate(["posts","posts.author","posts.comments.commenter"],{
-        populate:{
-          "posts":{select:"-_v"},
-          "posts.author":{select:"userName profilePicture"},
-          "posts.comments.commenter":{select:"userName profilePicture"}
+      .deepPopulate(
+        [
+          "posts",
+          "posts.author",
+          "posts.comments.commenter",
+          "posts.likes.fan",
+        ],
+        {
+          populate: {
+            posts: { select: "-_v" },
+            "posts.author": { select: "userName profilePicture" },
+            "posts.comments.commenter": { select: "userName profilePicture" },
+            "posts.likes.fan": { select: "userName profilePicture" },
+          },
         }
-      });
+      );
     const userFriends = currentUser.friends;
     let posts = currentUser.posts;
 
     for (let index in userFriends) {
       const friend = await userModel
         .findOne({ _id: userFriends[index]._id })
-        .deepPopulate(["posts","posts.author","posts.comments.commenter"],{
-          populate:{
-            "posts":{select:"-_v"},
-            "posts.author":{select:"userName profilePicture"},
-            "posts.comments.commenter":{select:"userName profilePicture"}
+        .deepPopulate(
+          [
+            "posts",
+            "posts.author",
+            "posts.comments.commenter",
+            "posts.likes.fan",
+          ],
+          {
+            populate: {
+              posts: { select: "-_v" },
+              "posts.author": { select: "userName profilePicture" },
+              "posts.comments.commenter": { select: "userName profilePicture" },
+              "posts.likes.fan": { select: "userName profilePicture" },
+            },
           }
-        });
-      posts = [...posts, ...friend.posts].sort((a,b)=>b.date-a.date);
-      
+        );
+      posts = [...posts, ...friend.posts].sort((a, b) => b.date - a.date);
     }
     res.status(200).json({
       message: "All the post",

@@ -64,6 +64,7 @@ const deleteComment = async (req, res) => {
   }
 };
 const createNewLike = async (req, res) => {
+ 
   try {
     const postId = req.params.postId;
     const { likeType, fan } = req.body;
@@ -72,6 +73,7 @@ const createNewLike = async (req, res) => {
     res.status(201).json({
       message: "Like Added",
       success: true,
+      id:newLike._id
     });
   } catch (err) {
     res.status(500).json({
@@ -81,8 +83,10 @@ const createNewLike = async (req, res) => {
   }
 };
 const deleteLike = async (req, res) => {
+
   try {
     const { likeId, postId } = req.body;
+    
     await likeModel.deleteOne({ _id: likeId });
     await postModel.updateOne({ _id: postId }, { $pull: { likes: likeId } });
     res.status(200).json({

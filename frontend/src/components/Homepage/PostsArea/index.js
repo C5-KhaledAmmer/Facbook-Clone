@@ -68,7 +68,13 @@ export const PostsArea = () => {
         </div>
 
         <div id="post-content">
-          {setAllOrPartOfPost(post, viewMoreText, currentPost, setViewMoreText, setCurrentPost)}
+          {setAllOrPartOfPost(
+            post,
+            viewMoreText,
+            currentPost,
+            setViewMoreText,
+            setCurrentPost
+          )}
         </div>
         <div>
           <span style={{ fontSize: "14px" }}>
@@ -92,48 +98,85 @@ export const PostsArea = () => {
         )}
       </div>
     );
-
-   
   };
-  const commentButton= (post)=> {
-    return <button
-      onClick={() => {
-        if (showCommentPage === true) {
-          if (currentPost === post._id) {
+  const commentButton = (post) => {
+    return (
+      <button
+        onClick={() => {
+          if (showCommentPage === true) {
+            if (currentPost === post._id) {
+              setShowCommentPage(!showCommentPage);
+            }
+          } else {
             setShowCommentPage(!showCommentPage);
           }
-        } else {
-          setShowCommentPage(!showCommentPage);
-        }
-        setCurrentPost(post._id);
-      } }
-    >
-      💬 Comment
-    </button>;
-  }
-  
-  const  setRemoveLike = (post) => {
-    return post.likes.filter((like) => {
-      return like.liker._id === Info.user.userId;
-    }).length === 1 
-    ? (
-      <button onClick={removeLike}>
-        <AiFillLike style={{ fontSize: "2em", color: "blue" }} /> Liked
+          setCurrentPost(post._id);
+        }}
+      >
+        💬 Comment
+      </button>
+    );
+  };
+
+  const setRemoveLike = (post) => {
+    const like = post.likes.filter((like) => {
+      return like.fan._id === Info.user.userId;
+    });
+
+    return like.toString() ? (
+      <button
+        onClick={() => {
+          removeLike(post, like[0]._id);
+        }}
+      >
+        <AiFillLike style={{ fontSize: "1.5em", color: "blue" }} /> Liked
       </button>
     ) : (
-      <button onClick={addLike}><AiOutlineLike style={{ fontSize: "2em" }} /> Like</button>
+      <button
+        onClick={() => {
+          addLike(post._id);
+        }}
+      >
+        <AiOutlineLike style={{ fontSize: "1.5em" }} /> Like
+      </button>
     );
-  }
+  };
   const showMenu = (id) => {
     setCurrentPost(id);
     setIsMenuShown(!isMenuShown);
   };
-  const removeLike =()=>{
-    
-  }
-  const addLike = ()=>{
-
-  }
+  const removeLike = async (post, likeId) => {
+    //* removeLike from a post
+    firstLoop: for (let i = 0; i < posts.length; i++) {
+      if (posts[i]._id === post._id) {
+        const likes = posts[i].likes;
+        for (let index in likes) {
+          if (likes[index]._id === likeId) {
+            posts[i].likes.splice(index, 1);
+            break firstLoop;
+          }
+        }
+      }
+    }
+    await PostController.deleteLike({ postId: post._id, likeId });
+    setPosts([...posts]);
+  };
+  const addLike = async (postId, likeType = "like") => {
+    console.log(posts);
+  for (let i = 0; i < posts.length; i++) {
+      if (posts[i]._id === postId) {
+        const likeId = await PostController.createNewLike({ postId, likeType });
+        posts[i].likes.push({
+          likeType,
+          fan: Info.user.userId,
+          _id: likeId,
+        });
+        break;
+      }
+    }
+    console.log(posts);
+    setPosts([...posts]);
+  };
   return (
     <div>
       <PostCreator />
@@ -147,34 +190,39 @@ export const PostsArea = () => {
     </div>
   );
 };
-function setAllOrPartOfPost(post, viewMoreText, currentPost, setViewMoreText, setCurrentPost) {
-  return <p>
-    {post.content.length > 560
-      ? post.content.slice(0, 560)
-      : post.content}
-    {post.content.length > 560 ? (
-      <span
-        style={viewMoreText && currentPost === post._id
-          ? {}
-          : {
-            fontWeight: "bold",
-            fontSize: "1.1em",
-            cursor: "pointer",
+function setAllOrPartOfPost(
+  post,
+  viewMoreText,
+  currentPost,
+  setViewMoreText,
+  setCurrentPost
+) {
+  return (
+    <p>
+      {post.content.length > 560 ? post.content.slice(0, 560) : post.content}
+      {post.content.length > 560 ? (
+        <span
+          style={
+            viewMoreText && currentPost === post._id
+              ? {}
+              : {
+                  fontWeight: "bold",
+                  fontSize: "1.1em",
+                  cursor: "pointer",
+                }
+          }
+          onClick={() => {
+            setViewMoreText(true);
+            setCurrentPost(post._id);
           }}
-        onClick={() => {
-          setViewMoreText(true);
-          setCurrentPost(post._id);
-        } }
-      >
-        {viewMoreText && currentPost === post._id
-          ? post.content.slice(560)
-          : " view more ..."}
-      </span>
-    ) : (
-      <></>
-    )}
-  </p>;
+        >
+          {viewMoreText && currentPost === post._id
+            ? post.content.slice(560)
+            : " view more ..."}
+        </span>
+      ) : (
+        <></>
+      )}
+    </p>
+  );
 }
-
-
-

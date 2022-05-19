@@ -110,6 +110,7 @@ export class PostController {
   }
   static async createNewLike({ likeType, postId }) {
     const fan = Info.user.userId;
+    console.log(postId);
     try {
       const response = await axios.post(
         `${Info.hostUrl}/posts/${postId}/like`,
@@ -119,7 +120,7 @@ export class PostController {
         }
       );
 
-      return response.data.message;
+      return response.data.id;
     } catch (error) {
       return error;
     }
