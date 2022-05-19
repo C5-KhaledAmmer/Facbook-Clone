@@ -119,10 +119,11 @@ export const PostsArea = () => {
   };
 
   const setRemoveLike = (post) => {
+    
     const like = post.likes.filter((like) => {
+     
       return like.fan._id === Info.user.userId;
     });
-
     return like.toString() ? (
       <button
         onClick={() => {
@@ -162,19 +163,23 @@ export const PostsArea = () => {
     setPosts([...posts]);
   };
   const addLike = async (postId, likeType = "like") => {
-    console.log(posts);
+    
   for (let i = 0; i < posts.length; i++) {
       if (posts[i]._id === postId) {
         const likeId = await PostController.createNewLike({ postId, likeType });
         posts[i].likes.push({
           likeType,
-          fan: Info.user.userId,
+          fan: {
+            _id:Info.user.userId,
+            profilePicture:Info.user.profilePicture,
+            userName: Info.user.userName,
+          },
           _id: likeId,
         });
         break;
       }
     }
-    console.log(posts);
+    
     setPosts([...posts]);
   };
   return (
