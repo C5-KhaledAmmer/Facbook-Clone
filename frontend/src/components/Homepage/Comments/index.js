@@ -8,7 +8,7 @@ import "./style.css";
 export const Comments = ({ comments, postId, authorId }) => {
   const [comment, setComment] = useState("");
   const [comments1, setComments] = useState(comments);
-
+  const [showMoreComments, setShowMoreComments] = useState(false);
   const [currentComment, setCurrentComment] = useState();
   const [isMenuShown, setIsMenuShown] = useState(false);
   const showMenu = (id) => {
@@ -65,16 +65,15 @@ export const Comments = ({ comments, postId, authorId }) => {
       _id: commentId,
       comment: comment,
       commenter: {
-        _id:Info.user.userId,
+        _id: Info.user.userId,
         profilePicture: Info.user.profilePicture,
         userName: Info.user.userName,
       },
     });
-    setTimeout(()=>{
+    setTimeout(() => {
       setComments([...comments1]);
-    
-    },1000)
-  }
+    }, 1000);
+  };
   return (
     <div id="comments-div">
       <div id="inner-comments-div">
@@ -92,9 +91,26 @@ export const Comments = ({ comments, postId, authorId }) => {
         </div>
 
         <div id="comments-viewer">
-          {comments1.map((comment) => {
-            return createCommentCard(comment);
-          })}
+          {showMoreComments ? (
+             comments1.map((comment) => {
+              return createCommentCard(comment);
+            })
+          ) : (
+            <div>
+              {comments1.slice(0, 5).map((comment) => {
+                return createCommentCard(comment);
+              })}
+              {comments1.length<6
+              ?<></>
+              :<button
+                onClick={() => {
+                  setShowMoreComments(true);
+                }}
+              >
+                {"...View More Comments"}
+              </button>}
+            </div>
+          )}
         </div>
       </div>
     </div>
