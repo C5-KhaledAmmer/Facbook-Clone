@@ -25,3 +25,28 @@
   max-height: 20px;
 }
 
+#navbar-menu-div{
+  position: absolute;
+  font-size: 12px;
+  top: 44px;
+  right: 8px;
+  height: 40px;
+  width: 80px;
+  border: 0;
+  background-color: rgba(141, 138, 134, 0.234);
+ 
+  
+  
+}
+#navbar-menu-div button{
+  height: 40px;
+  width: 80px;
+  background-color: rgb(66, 95, 143);
+  color: white;
+  border-radius: 0;
+  
+}
+#navbar-menu-div button:hover{
+  background-color: rgb(177, 191, 213);
+  color: black;
+}

@@ -60,7 +60,8 @@ export const Register = () => {
 
   const signUp = async () => {
     const inputForm = {
-      UserName: `${firstName}  ${lastName}`,
+      FirstName: `${firstName} `,
+      LastName: ` ${lastName}`,
       Email: email,
       Password: password,
       Gender: gender,
@@ -72,7 +73,7 @@ export const Register = () => {
     });
     if (errors.length === 0) {
       const serverError = await Registration.register({
-        firstName,
+        firstName: firstName,
         lastName,
         email,
         password,
@@ -115,13 +116,13 @@ export const Register = () => {
           {createInput({
             placeholder: "First Name",
             type: "text",
-            key: "UserName",
+            key: "FirstName",
             setState: setFirstName,
           })}
           {createInput({
             placeholder: "Last Name",
             type: "text",
-            key: "UserName",
+            key: "LastName",
             setState: setLastName,
           })}
         </div>

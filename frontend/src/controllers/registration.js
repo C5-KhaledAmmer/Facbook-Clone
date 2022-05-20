@@ -59,26 +59,28 @@ export class Registration {
 
   static checkFormErrors({ inputForm, isLoginForm = false }) {
     let errors = [];
-
+    console.log(inputForm);
     for (let key in inputForm) {
       if (!isLoginForm) {
-        if (key === "UserName") {
+        if (key === "LastName") {
           const value = inputForm[key];
 
-          if (value === "") {
-            if (!errors.includes("Invalid user name")) {
-              errors.push("Invalid user name");
+          if (value === "" || value.length<2) {
+            if (!errors.includes("Invalid last name")) {
+              errors.push("Invalid last name");
             }
-          } else if (value.length > 15) {
-            if (!errors.includes("User name must be less than 16 Characters")) {
-              errors.push("User name must be less than 16 Characters");
-            }
-          } else if (value.length < 6) {
-            if (!errors.includes("User name must be more than 5 Characters")) {
-              errors.push("User name must be more than 5 Characters");
-            }
-          }
+          } 
         }
+        if (key === "FirstName" ) {
+          const value = inputForm[key];
+
+          if (value === "" || value.length<2) {
+            if (!errors.includes("Invalid first name")) {
+              errors.push("Invalid first name");
+            }
+          } 
+        }
+
 
         if (key === "Email") {
           const value = inputForm[key];
@@ -106,8 +108,8 @@ export class Registration {
           }
         }
         if (key === "Gender" && inputForm[key] === null) {
-          if (!errors.includes("Choose Your Gender")) {
-            errors.push("Choose Your Gender");
+          if (!errors.includes("Choose your gender")) {
+            errors.push("Choose your gender");
           }
         }
       } else {
@@ -131,22 +133,22 @@ export class Registration {
         errors.splice(errors.indexOf(error), 1);
       }
     };
-
+    console.log(key);
+    
     if (!isLoginForm) {
-      if (key === "UserName") {
+      if (key === "LastName") {
+        if (value !== "" || value.length>2) {
+          removeError("Invalid last name");
+        }
+      }
+      if (key === "FirstName"|| value.length>2) {
         if (value !== "") {
-          removeError("Invalid user name");
-        }
-        if (value.length >= 6) {
-          removeError("User name must be more than 5 Characters");
-        }
-        if (value.length <= 15) {
-          removeError("User name must be less than 16 Characters");
+          removeError("Invalid first name");
         }
       }
 
       if (key === "Gender") {
-        if (value !== null) removeError("Choose Your Gender");
+        if (value !== null) removeError("Choose your gender");
       }
 
       if (key === "Email") {

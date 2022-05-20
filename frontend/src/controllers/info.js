@@ -9,9 +9,9 @@ export class Info {
   static async isUserLogin(navigate, isHomePage = false) {
     this.user = await LocalStorage.getItem({ key: "user" });
 
-    // if (this.user.token && isHomePage) {
-    //   navigate(`/homepage/${Info.user.userId}`);
-    // }
+    if (this.user.token && isHomePage) {
+      navigate(`/homepage/${Info.user.userId}`);
+    }
   }
 
   static formatDate(date) {
