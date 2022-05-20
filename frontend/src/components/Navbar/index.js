@@ -35,7 +35,7 @@ export const Navbar = () => {
         <div key={"search"} className="search-card1">
           <button
             style={{ borderBottom: "0px" }}
-            className="request-img-div"
+            className="search-img-div1"
             onClick={() => {
               navigate(`/searchResult/${Info.user.userId}/${searchName}`);
             }}
@@ -48,7 +48,7 @@ export const Navbar = () => {
     }
     return (
       <div key={user._id + user.userName} className="search-card1">
-        <button className="request-img-div">
+        <button className="search-img-div1">
           <img src={user.profilePicture} />
           <small>{user.userName}</small>
         </button>
@@ -58,7 +58,7 @@ export const Navbar = () => {
   return (
     <div id="nav-bar">
       <div id="nav-bar-first-div">
-        <img src={Img.imagesUrl.facebook} />
+        <img src={Img.imagesUrl.facebook} id="logo-img"/>
         <h2>FACEBOOK</h2>
       </div>
       <div style={{ flex: "1", display: "flex", position: "relative" }}>

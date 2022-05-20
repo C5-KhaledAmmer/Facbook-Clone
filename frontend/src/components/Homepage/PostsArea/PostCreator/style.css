@@ -10,6 +10,7 @@
   box-shadow: 0px 0px 2px 0px black;
   padding: 5px;
   gap: 10px;
+  
 }
 
 #post-creator-first-div {
@@ -22,6 +23,7 @@
   max-width: 60px;
   max-height: 60px;
   text-align: center;
+ 
   border-radius: 50%;
   width: 100%;
 }
@@ -29,6 +31,7 @@
   flex: 1;
   height: 50px;
   text-align: start;
+  
   overflow: hidden;
   padding: var(--input-padding);
   border: 1px solid rgba(0, 0, 0, 0.545);
@@ -56,8 +59,6 @@
   display: flex;
   align-items: stretch;
   width: 100%;
-
- 
 }
 #new-post-reactions-buttons div {
   flex: 1;

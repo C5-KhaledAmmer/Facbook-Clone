@@ -14,7 +14,6 @@ export class Info {
   }
 
   static formatDate(date) {
-    // console.log(date);
     date = new Date(date)
     let hours = date.getHours();
     let minutes = date.getMinutes();

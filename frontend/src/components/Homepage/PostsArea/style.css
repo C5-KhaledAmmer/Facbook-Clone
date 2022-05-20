@@ -73,3 +73,27 @@
   height: 50px;
   border-radius: 50%;
 }
+
+@media all  and (max-width:550px) {
+  #post-card {
+    width: 100vw;
+    font-size: 0.8em;
+  }
+  #post-creator-div {
+    width: 100vw;
+    font-size: 0.8em;
+  }
+  #post-creator-first-div button {
+   font-size: 0.8em;
+  }
+
+  #new-post-reactions-buttons button{
+    font-size: 0.8em;
+  }
+  #inner-show-post-area {
+    width: 90%;
+    max-width: 500px;
+    min-height: 400px;
+   
+  }
+}

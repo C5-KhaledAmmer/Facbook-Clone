@@ -70,3 +70,14 @@
   background-color: var(--second-color);
   color: var(--first-color);
 }
+
+@media all  and (max-width:550px) {
+  #inner-search-page {
+    display: grid;
+    grid-template-columns: repeat(2, 50%);
+    grid-template-rows: 1fr 1fr ;
+   
+  }
+
+
+}

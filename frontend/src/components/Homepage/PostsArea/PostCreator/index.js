@@ -13,7 +13,6 @@ export const PostCreator = ({ setPosts, posts }) => {
       date: new Date(),
       author: {
         _id: Info.user.userId,
-
         profilePicture: Info.user.profilePicture,
         userName: Info.user.userName,
       },

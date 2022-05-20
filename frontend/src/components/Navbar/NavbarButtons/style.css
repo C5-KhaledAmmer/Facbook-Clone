@@ -17,9 +17,11 @@
 #nav-bar-first-div {
   display: flex;
   align-items: center;
-  gap: 10px;
+
 }
 #navbar-buttons-div img {
   display: flex;
+  height: 100%;
   max-height: 20px;
 }
+

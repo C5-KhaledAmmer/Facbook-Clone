@@ -5,12 +5,13 @@ import { Menu } from "./Menu";
 
 import "./style.css";
 
-export const Comments = ({ comments, postId, authorId }) => {
+export const Comments = ({ comments, postId, authorId , setCommentCounter,counter}) => {
   const [comment, setComment] = useState("");
   const [comments1, setComments] = useState(comments);
   const [showMoreComments, setShowMoreComments] = useState(false);
   const [currentComment, setCurrentComment] = useState();
   const [isMenuShown, setIsMenuShown] = useState(false);
+  
   const showMenu = (id) => {
     setCurrentComment(id);
     setIsMenuShown(!isMenuShown);
@@ -57,6 +58,7 @@ export const Comments = ({ comments, postId, authorId }) => {
   };
 
   const postComment = async () => {
+    setCommentCounter(++counter)
     const commentId = await PostController.createNewComment({
       comment: comment,
       postId: postId,

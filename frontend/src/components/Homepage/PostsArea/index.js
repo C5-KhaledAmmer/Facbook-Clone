@@ -14,6 +14,7 @@ export const PostsArea = () => {
   const [viewMoreText, setViewMoreText] = useState(false);
   const [showCommentPage, setShowCommentPage] = useState(false);
   const [isMenuShown, setIsMenuShown] = useState(false);
+  const [commentCounter,setCommentCounter] = useState(0);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -78,7 +79,7 @@ export const PostsArea = () => {
         </div>
         <div>
           <span style={{ fontSize: "14px" }}>
-            {post.likes.length + `👍` + "     " + post.comments.length + " "}
+            {post.likes.length + `👍` + "     " + `${post.comments.length+commentCounter}` + " "}
             <AiOutlineComment />
           </span>
         </div>
@@ -92,6 +93,8 @@ export const PostsArea = () => {
             comments={post.comments}
             postId={post._id}
             authorId={post.author._id}
+            setCommentCounter={setCommentCounter}
+            counter={commentCounter}
           />
         ) : (
           <></>
@@ -180,7 +183,7 @@ export const PostsArea = () => {
     setPosts([...posts]);
   };
   return (
-    <div>
+    <div id="post-show-area">
       <PostCreator setPosts={setPosts} posts={[...posts]} />
       {posts.length !== 0 ? (
         posts.map((post) => {
