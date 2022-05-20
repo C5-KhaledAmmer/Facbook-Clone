@@ -3,7 +3,7 @@ const friendRequest = require("../models/friendRequest");
 
 const register = (req, res) => {
   const user = req.body;
-  console.log( user.userName);
+  
   user.lowerCaseUserName = user.userName.toLowerCase().replaceAll(" ", "");
   const newUser = new userModel(user);
   newUser
@@ -15,7 +15,7 @@ const register = (req, res) => {
       });
     })
     .catch((err) => {
-      console.log(err.message);
+      
       res.status(500).json({
         message: `Email already taken`,
         success: false,

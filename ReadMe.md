@@ -1,17 +1,17 @@
-<p align="center">
+﻿<p align="center">
   <a href="" rel="noopener">
  <img width=200px height=200px src="https://i.imgur.com/6wj0hh6.jpg" alt="Project logo"></a>
 </p>
 
-<h3 align="center">Project Title</h3>
+<h3 align="center">Facebook</h3>
 
 ---
 
-<p align="center"> Few lines describing your project.
+<p align="center"> Facebook is a social media platform where you can connect with friends and the world around you on Facebook.
     <br> 
 </p>
 
-## 📝 Table of Contents
+## ًں“‌ Table of Contents
 
 - [About](#about)
 - [Getting Started](#getting_started)
@@ -19,11 +19,13 @@
 - [Built Using](#built_using)
 - [Guided By](#guided_by)
 
-## 🧐 About <a name = "about"></a>
+## ًں§گ About <a name = "about"></a>
 
-Write about 1-2 paragraphs describing the purpose of your project.
+Facebook is a social networking site that makes it easy for you to connect and share with family and friends online
+<strong>Why Facebook <br/></strong>
+Facebook allows you to send messages and post status updates to keep in touch with friends and family. You can also share different types of content, like photos,videos, texts and links
 
-## 🏁 Getting Started <a name = "getting_started"></a>
+## ًںڈپ Getting Started <a name = "getting_started"></a>
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
@@ -32,7 +34,10 @@ These instructions will get you a copy of the project up and running on your loc
 What things you need to install the software and how to install them.
 
 ```
-Give examples
+ - Node.js
+ - Express.js
+ - mongo DB
+ - react
 ```
 
 ### Installing
@@ -53,18 +58,18 @@ until finished
 
 End with an example of getting some data out of the system or using it for a little demo.
 
-## 🎈 Usage <a name="usage"></a>
+## ًںژˆ Usage <a name="usage"></a>
 
 Add notes about how to use the system.
 
-## ⛏️ Built Using <a name = "built_using"></a>
+## â›ڈï¸ڈ Built Using <a name = "built_using"></a>
 
 - [MongoDB](https://www.mongodb.com/) - Database
 - [Express JS](https://expressjs.com/) - Server Framework
 - [React JS](https://https://reactjs.org/) - Web Framework
 - [Node JS](https://nodejs.org/en/) - Server Environment
 
-## ⚠️ Guided By <a name = "guided_by"></a>
+## âڑ ï¸ڈ Guided By <a name = "guided_by"></a>
 
-This project is guided by ©️ **[MERAKI Academy](https://www.meraki-academy.org)**
+This project is guided by آ©ï¸ڈ **[MERAKI Academy](https://www.meraki-academy.org)**
 

@@ -31,7 +31,7 @@ const createNewPost = async (req, res) => {
         });
     })
     .catch((err) => {
-      console.log(err.message);
+     
       res.status(500).json({
         message: `Server Error ${err.message}`,
         success: false,

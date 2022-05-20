@@ -44,7 +44,7 @@ const login = async (req, res) => {
       });
     }
   } catch (error) {
-    console.log("dasdasd");
+    
     res.status(500).json({
       message: "Server Error",
       success: false,
