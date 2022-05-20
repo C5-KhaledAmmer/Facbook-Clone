@@ -8,6 +8,52 @@ export const PostCreator = ({ setPosts, posts }) => {
   const [isPostAreaShown, setIsPostAreaShown] = useState(false);
   const [url, setUrl] = useState("");
   const [img, setImage] = useState("");
+  const [video, setVideo] = useState("");
+
+  const createPost = async () => {
+    let post = {
+      date: new Date(),
+      author: {
+        _id: Info.user.userId,
+        profilePicture: Info.user.profilePicture,
+        userName: Info.user.userName,
+      },
+      content: content,
+      likes: [],
+      comments: [],
+    };
+
+    if (img) {
+      const { id } = await PostController.createNewPost({
+        content,
+        assetsType: "img",
+        assets: url,
+      });
+      post._id = id;
+      post.assets = url;
+      post.assetsType = "img";
+    } else if (video) {
+      const { id } = await PostController.createNewPost({
+        content,
+        assetsType: "video",
+        assets: url,
+      });
+      post._id = id;
+      post.assets = url;
+      post.assetsType = "video";
+    } else {
+      const { id } = await PostController.createNewPost({
+        content,
+        assetsType: "none",
+        assets: "none",
+      });
+      post._id = id;
+      post.assets = "none";
+      post.assetsType = "none";
+    }
+
+    setPosts([post, ...posts]);
+  };
 
   const uploadImage = async (img) => {
     const formData = new FormData();
@@ -24,52 +70,20 @@ export const PostCreator = ({ setPosts, posts }) => {
     const data = await result.json();
     setUrl(data.url);
   };
-  const createPost = async () => {
-    let post = {};
-    console.log(typeof url, url);
-    if (img) {
-      const { id } = await PostController.createNewPost({
-        content,
-        assetsType: "img",
-        assets: url,
-      });
-      post = {
-        _id: id,
-        date: new Date(),
-        assets: url,
-        assetsType: "img",
-        author: {
-          _id: Info.user.userId,
-          profilePicture: Info.user.profilePicture,
-          userName: Info.user.userName,
-        },
-        content: content,
-        likes: [],
-        comments: [],
-      };
-    } else {
-      const { id } = await PostController.createNewPost({
-        content,
-        assetsType: "none",
-        assets: "none",
-      });
-      post = {
-        _id: id,
-        date: new Date(),
-        assets: "none",
-        assetsType: "none",
-        author: {
-          _id: Info.user.userId,
-          profilePicture: Info.user.profilePicture,
-          userName: Info.user.userName,
-        },
-        content: content,
-        likes: [],
-        comments: [],
-      };
-    }
-
-    setPosts([post, ...posts]);
+  const uploadVideo = async (video) => {
+    const formData = new FormData();
+    formData.append("file", video);
+    formData.append("upload_preset", "hvkyb7uz");
+    formData.append("cloud_name", "dkldpbnkn/");
+    const result = await fetch(
+      "https://api.cloudinary.com/v1_1/dkldpbnkn/video/upload",
+      {
+        method: "post",
+        body: formData,
+      }
+    );
+    const data = await result.json();
+    setUrl(data.url);
   };
 
   const showImgAndText = () => {
@@ -82,7 +96,15 @@ export const PostCreator = ({ setPosts, posts }) => {
             setContent(e.target.value);
           }}
         />
-        <img src={url} />
+        {img || video ? (
+          img ? (
+            <img src={url} />
+          ) : (
+            <video controls src={url} style={{ width: "100%" }} />
+          )
+        ) : (
+          <></>
+        )}
       </div>
     );
   };
@@ -101,9 +123,17 @@ export const PostCreator = ({ setPosts, posts }) => {
               setImage("");
             }}
             onChange={(e) => {
-              setIsPostAreaShown(true);
-              setImage(e.target.files[0]);
-              uploadImage(e.target.files[0]);
+              console.log(e.target.files[0]);
+
+              if (e.target.files[0].type.includes("image")) {
+                setImage(e.target.files[0]);
+                uploadImage(e.target.files[0]);
+                setIsPostAreaShown(true);
+              } else {
+                setVideo(e.target.files[0]);
+                uploadVideo(e.target.files[0]);
+                setIsPostAreaShown(true);
+              }
             }}
           />
         </div>
@@ -122,7 +152,7 @@ export const PostCreator = ({ setPosts, posts }) => {
             />
             <small>{Info.user.userName}</small>
           </div>
-          {img ? (
+          {img || video ? (
             showImgAndText()
           ) : (
             <textarea

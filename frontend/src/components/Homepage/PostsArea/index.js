@@ -76,7 +76,12 @@ export const PostsArea = () => {
             setViewMoreText,
             setCurrentPost
           )}
-          {post.assetsType === "none"?<></>:<img src={post.assets}/>}
+          {post.assetsType === "none"
+          ?<></>
+          :(post.assetsType === "img"
+          ?<img src={post.assets}/>
+          :<video controls src={post.assets} style={{ width: "100%" }} />)
+          }
         </div>
         <div>
           <span style={{ fontSize: "14px" }}>
