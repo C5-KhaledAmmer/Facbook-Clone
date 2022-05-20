@@ -42,6 +42,14 @@ export const FriendRequest = () => {
       sender,
       requestId,
     });
+    for (let i = 0; i < requests.length; i++) {
+      if (friendRequest._id === requests[i]._id) {
+        requests.splice(i, 1);
+        setTimeout(()=>{setRequests([...requests])},500)
+        
+        break;
+      }
+    }
   };
   const deleteFriendRequest = async (friendRequest) => {
     const receiver = friendRequest.receiver;
@@ -50,6 +58,14 @@ export const FriendRequest = () => {
       receiver,
       requestId,
     });
+    for (let i = 0; i < requests.length; i++) {
+      if (friendRequest._id === requests[i]._id) {
+        requests.splice(i, 1);
+        setTimeout(()=>{setRequests([...requests])},500)
+        
+        break;
+      }
+    }
   };
   return (
     <div id="fiend-suggestions-main-div">

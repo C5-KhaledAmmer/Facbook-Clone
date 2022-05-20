@@ -13,8 +13,28 @@ export const Register = () => {
   const [gender, setGender] = useState(null);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isDialogShown, setIsDialogShown] = useState("");
   let [errors, setErrors] = useState([]);
   const { setIsSignUp } = useContext(registrationCox);
+
+  const buildAlertDialog = ({ bgColor, color, text ,text2}) => {
+    setTimeout(() => {
+      setIsDialogShown(false);
+      setIsSignUp(false);
+    }, 2500);
+
+    return (
+      <div id="Alert">
+        <div style={{ backgroundColor: `${bgColor}` }}>
+          <p>
+          <h2 style={{ color: `${color}` }}>{text}</h2>
+          <br/>
+          <h4 style={{ color: `${color}` }}>{text2}</h4>
+          </p>
+        </div>
+      </div>
+    );
+  };
   const createInput = ({ placeholder, setState, type = "text", key = "" }) => {
     return (
       <div>
@@ -40,7 +60,7 @@ export const Register = () => {
 
   const signUp = async () => {
     const inputForm = {
-      UserName: `${firstName} ${lastName}`,
+      UserName: `${firstName}  ${lastName}`,
       Email: email,
       Password: password,
       Gender: gender,
@@ -57,16 +77,26 @@ export const Register = () => {
         email,
         password,
       });
-      console.log(serverError);
+
       serverError === "Email already taken"
         ? setErrors([...errors, "Email already taken"])
-        : setErrors(["SignUp Completed Successfully"]);
+        : setIsDialogShown(true);
     } else {
       setErrors(errors);
     }
   };
   return (
     <div id="signup-form">
+      {isDialogShown ? (
+        buildAlertDialog({
+          bgColor: "green",
+          color: "white",
+          text: "SignUp Completed Successfully",
+          text2: `Welcome to our community ${firstName + " " + lastName}`,
+        })
+      ) : (
+        <></>
+      )}
       <div id="signup-form-inner">
         <div id="signup--exit-button">
           <button

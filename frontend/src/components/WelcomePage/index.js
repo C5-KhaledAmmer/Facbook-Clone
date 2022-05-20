@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Login } from "../Login";
 import { Register } from "../Register";
 import { createContext } from "react";
+import { AlertDialog } from "../../controllers/info";
 export const registrationCox= createContext()
 
 export const WelcomePage = () => {
@@ -9,6 +10,7 @@ export const WelcomePage = () => {
   
   return (
     <div>
+      
       <registrationCox.Provider value={{setIsSignUp,isSignUp}}>
       {isSignUp? <Register  /> : <></>}
       <Login  />

@@ -45,6 +45,8 @@ export const PostsArea = () => {
               list={["Edit", "Delete"]}
               post={post}
               setShowMenu={setIsMenuShown}
+              setPosts={setPosts}
+              posts={posts}
             />
           ) : (
             <></>

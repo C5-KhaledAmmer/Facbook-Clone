@@ -13,7 +13,7 @@ function App() {
   const navigate = useNavigate();
   useEffect(() => {
     (async () => {
-      await Info.isUserLogin(navigate);
+      await Info.isUserLogin(navigate,true);
     })();
   }, []);
   return (

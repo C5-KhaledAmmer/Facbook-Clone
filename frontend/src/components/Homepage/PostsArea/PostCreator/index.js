@@ -146,11 +146,11 @@ export const PostCreator = ({ setPosts, posts }) => {
       <div id="show-post-area">
         <div id="inner-show-post-area">
           <div id="post-picture-div">
-            <img
+            <img  className="postPicture"
               src={Info.user.profilePicture}
               style={{ width: "60px", display: "flex" }}
             />
-            <small>{Info.user.userName}</small>
+            <strong>{Info.user.userName}</strong>
           </div>
           {img || video ? (
             showImgAndText()

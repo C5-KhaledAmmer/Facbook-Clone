@@ -49,7 +49,7 @@ export class Registration {
         profilePicture,
         gender,
       };
-      console.log(email);
+      
       const response = await axios.post(`${Info.hostUrl}/users`, user);
       return response.data.message;
     } catch (error) {

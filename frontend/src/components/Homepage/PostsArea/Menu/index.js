@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Info } from "../../../../controllers/info";
 import { PostController } from "../../../../controllers/posts";
 import "./style.css";
-export const Menu = ({ list, post, setShowMenu }) => {
+export const Menu = ({ list, post, setShowMenu, setPosts, posts }) => {
   const [content, setContent] = useState(post.content);
   const [isEditAreaShown, setIsEditAreaShown] = useState(false);
 
@@ -72,12 +72,26 @@ export const Menu = ({ list, post, setShowMenu }) => {
   };
 
   const updatePost = async () => {
-    await PostController.updatePost(
-        { content, postId: post._id });
+    for (let i = 0; i < posts.length; i++) {
+      if (post._id === posts[i]._id) {
+        posts[i].content = content;
+        setPosts([...posts]);
+        break;
+      }
+    }
+    await PostController.updatePost({ content, postId: post._id });
     setShowMenu(false);
   };
   const deletePost = async () => {
     await PostController.deletePost({ postId: post._id });
+    for (let i = 0; i < posts.length; i++) {
+      if (post._id === posts[i]._id) {
+        posts.splice(i, 1);
+        setPosts([...posts]);
+        break;
+      }
+    }
+
     setShowMenu(false);
   };
 
