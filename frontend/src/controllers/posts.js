@@ -1,13 +1,18 @@
 import axios from "axios";
 import { Info } from "./info";
 export class PostController {
-  static async createNewPost({ content }) {
+  static async createNewPost({
+    content,
+    assetsType = "none",
+    assets="none",
+
+  }) {
     const author = Info.user.userId;
     const date = new Date();
     try {
       const response = await axios.post(
         `${Info.hostUrl}/posts`,
-        { content, author, date },
+        { content, author, date,assets,assetsType},
         {
           headers: { authorization: `Bearer ${Info.user.token}` },
         }

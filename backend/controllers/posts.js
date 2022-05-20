@@ -1,9 +1,16 @@
 const postModel = require("../models/posts");
 const userModel = require("../models/users");
 
-const createNewPost = (req, res) => {
-  const { content, author, date } = req.body;
-  const newPost = new postModel({ content, author, date });
+const createNewPost = async (req, res) => {
+  const { content, author, date, assetsType, assets } = req.body;
+  console.log(req.body);
+  const newPost = new postModel({
+    content,
+    author,
+    date,
+    assetsType,
+    assets,
+  });
   newPost
     .save()
     .then((post) => {

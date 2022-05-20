@@ -2,6 +2,8 @@ const mongoose = require("mongoose");
 const deepPopulate =require('mongoose-deep-populate')(mongoose)
 const postSchema = new mongoose.Schema({
   content: { type:  String , required: true },
+  assetsType:{type:String,required:true},
+  assets:{type:String},
   author: { type: mongoose.Schema.Types.ObjectId, ref: "User"  },
   date :{type : Date ,required:true},
   comments:[{ type: mongoose.Schema.Types.ObjectId, ref: "Comment" }],
