@@ -3,7 +3,7 @@ const userModel = require("../models/users");
 
 const createNewPost = async (req, res) => {
   const { content, author, date, assetsType, assets } = req.body;
-  console.log(req.body);
+ 
   const newPost = new postModel({
     content,
     author,

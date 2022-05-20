@@ -69,7 +69,7 @@ export const PostCreator = ({ setPosts, posts }) => {
       };
     }
 
-    // setPosts([post, ...posts]);
+    setPosts([post, ...posts]);
   };
 
   const showImgAndText = () => {

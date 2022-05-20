@@ -76,6 +76,7 @@ export const PostsArea = () => {
             setViewMoreText,
             setCurrentPost
           )}
+          {post.assetsType === "none"?<></>:<img src={post.assets}/>}
         </div>
         <div>
           <span style={{ fontSize: "14px" }}>
