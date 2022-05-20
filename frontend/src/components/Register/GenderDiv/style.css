@@ -19,4 +19,5 @@
 #radio-div input {
   flex: 1;
   text-align: end;
+  cursor: pointer;
 }

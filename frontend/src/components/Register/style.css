@@ -35,28 +35,28 @@
   width: 100%;
 }
 
- .input {
+.input {
   width: 100%;
   padding: var(--input-padding);
   border-radius: var(--border-radius);
   border: 0.1px solid rgba(0, 0, 0, 0.425);
 }
 
-#signup--exit-button{
-position: relative;
-width: 100%;
+#signup--exit-button {
+  position: relative;
+  width: 100%;
 }
-#signup--exit-button button{
+#signup--exit-button button {
   width: fit-content;
   position: absolute;
-  right:0;
+  right: 0;
   padding: var(--input-padding);
   border: 0;
   font-weight: bold;
   font-size: 20px;
   background-color: transparent;
   color: red;
-  /* max-width: 50%; */
+  cursor: pointer;
 }
 
 #signup-button-div button {
@@ -67,10 +67,25 @@ width: 100%;
   font-weight: bold;
   background-color: green;
   color: white;
-  /* max-width: 50%; */
+  cursor: pointer;
+}
+
+#signup-button-div button:hover {
+  opacity: 0.9;
 }
 
 #signup-button-div {
   width: 100%;
   text-align: center;
+}
+@media all and (max-width: 500px) {
+  #signup-form-inner {
+    width: 90%;
+  }
+  #signup-form h1 {
+    text-align: start;
+    color: var(--second-color);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.667);
+    font-size: 1.5em;
+  }
 }

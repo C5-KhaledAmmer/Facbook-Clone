@@ -6,6 +6,9 @@
 }
 
 #login-form-inner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 100%;
   min-height: 500px;
   align-items: center;
@@ -29,3 +32,17 @@
   height: 100%;
 }
 
+
+
+@media all  and (max-width:2000px) {
+  #login-form-inner2{
+  max-width: 700px;
+  }
+}
+
+@media all  and (max-width:500px) {
+  #login-form-inner2{
+  flex-direction: column;
+  min-height: fit-content;
+  }
+}
