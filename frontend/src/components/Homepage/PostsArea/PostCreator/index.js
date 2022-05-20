@@ -192,7 +192,7 @@ export const PostCreator = ({ setPosts, posts }) => {
       {isPostAreaShown ? showPostArea() : <></>}
       <div id="post-creator-div">
         <div id="post-creator-first-div">
-          <div>
+          <div >
             <img src={Info.user.profilePicture} className="postPicture" />
           </div>
           <button

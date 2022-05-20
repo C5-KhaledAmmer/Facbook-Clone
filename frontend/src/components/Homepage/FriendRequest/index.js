@@ -22,7 +22,7 @@ export const FriendRequest = () => {
     return (
       <div key={user._id} id="friend-card">
         <div className="request-img-div">
-          <img src={user.profilePicture} />
+         <div><img src={user.profilePicture} /></div> 
           <small>{user.userName}</small>
         </div>
         <div className="friend-card-buttons">

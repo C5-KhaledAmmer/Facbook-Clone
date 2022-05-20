@@ -10,7 +10,6 @@
   box-shadow: 0px 0px 2px 0px black;
   padding: 5px;
   gap: 10px;
-  
 }
 
 #post-creator-first-div {
@@ -19,19 +18,21 @@
   gap: 5px;
 }
 #post-creator-first-div div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border: 1px solid rgba(0, 0, 0, 0.545);
-  max-width: 60px;
-  max-height: 60px;
+  width: 55px;
+  height: 55px;
   text-align: center;
- 
+
   border-radius: 50%;
-  width: 100%;
 }
 #post-creator-first-div button {
   flex: 1;
   height: 50px;
   text-align: start;
-  
+
   overflow: hidden;
   padding: var(--input-padding);
   border: 1px solid rgba(0, 0, 0, 0.545);
@@ -51,12 +52,11 @@
   border: 0;
   border-top: 0.5px solid rgba(0, 0, 0, 0.389);
   height: 100%;
-
 }
-#mix-input-div{
+#mix-input-div {
   text-align: center;
 }
-#mix-input-div input{
+#mix-input-div input {
   width: 100%;
   margin-top: 6px;
   margin-bottom: 6px;
@@ -67,14 +67,13 @@
   border: 0px solid rgba(0, 0, 0, 0.353);
   font-family: "Times New Roman", Times, serif;
 }
-#mix-input-div input:focus{
- outline:0.5px solid rgba(0, 0, 0, 0.27);
+#mix-input-div input:focus {
+  outline: 0.5px solid rgba(0, 0, 0, 0.27);
 }
-#mix-input-div img{
+#mix-input-div img {
   width: 100%;
   height: 60%;
   max-height: 300px;
- 
 }
 #new-post-reactions-buttons {
   flex: 1;
@@ -88,7 +87,7 @@
   align-items: center;
   justify-content: center;
   width: 100%;
-  
+
   gap: 2px;
 }
 #new-post-reactions-buttons button {
@@ -96,7 +95,6 @@
   border: 0;
   border-top: 0.5px solid rgba(0, 0, 0, 0.273);
   background-color: transparent;
-
 }
 #new-post-reactions-buttons button:hover {
   flex: 1;
@@ -136,7 +134,6 @@
   border-radius: var(--border-radius);
   background-color: var(--first-color);
   box-shadow: 0px 0px 2px black;
- 
 }
 #inner-show-post-area textarea {
   width: 100%;
@@ -164,7 +161,6 @@
 #inner-show-post-area button:disabled {
   background-color: rgb(85, 89, 85);
 }
-
 
 #post-exit-button button {
   width: fit-content;

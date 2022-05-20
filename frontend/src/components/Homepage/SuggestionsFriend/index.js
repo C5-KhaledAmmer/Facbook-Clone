@@ -11,11 +11,12 @@ export const SuggestionsFriend = () => {
   const [userFriends, setUserFriends] = useState([]);
   const navigate = useNavigate();
   const [userFriendsId, setFriendsId] = useState([]);
+  const [currentUser, setCurrentUser] = useState("");
   useEffect(() => {
     (async () => {
       await Info.isUserLogin(navigate);
       setFriendsId(Info.user.friends.map((friend) => friend._id));
-     
+
       let suggestionsFriend = await UserController.getAllUsers();
 
       suggestionsFriend = suggestionsFriend.filter((user) => {
@@ -30,12 +31,12 @@ export const SuggestionsFriend = () => {
       }
     })();
   }, []);
- 
+
   const friendCard = ({ bntText, onClick, user }) => {
     return (
       <div key={user._id} id="friend-card">
         <div className="request-img-div">
-          <img src={user.profilePicture} />
+          <div><img src={user.profilePicture} /></div>
           <small>{user.userName}</small>
         </div>
         <div className="friend-card-buttons">
@@ -52,28 +53,51 @@ export const SuggestionsFriend = () => {
       receiver,
       sender,
     });
+    for (let i = 0; i < users.length; i++) {
+      if (user._id === users[i]._id) {
+        users.splice(i, 1);
+        setTimeout(()=>{setUsers([...users])},500)
+        
+        break;
+      }
+    }
+    
   };
+  const removeUser = ({user})=>{
+    for (let i = 0; i < users.length; i++) {
+      if (user._id === users[i]._id) {
+        users.splice(i, 1);
+        setTimeout(()=>{setUsers([...users])},500)
+        
+        break;
+      }
+    }
+  }
 
   return (
     <div id="fiend-suggestions-main-div">
       <div style={{ flex: "1" }}>
         <div className="suggestions-class">
           <h3>Friend Suggestions</h3>
-          {users.filter(user => {
-            return user._id !== Info.user.userId &&
-            !userFriendsId.includes(user._id)
-          }).map((user) => {
-            return friendCard({
-              onClick: [
-                () => {
-                  sendFriendRequest(user);
-                },
-                () => {},
-              ],
-              bntText: ["Add Friend", "Remove"],
-              user,
-            });
-          })}
+          {users
+            .filter((user) => {
+              return (
+                user._id !== Info.user.userId &&
+                !userFriendsId.includes(user._id)
+              );
+            })
+            .map((user) => {
+              return friendCard({
+                onClick: [
+                  () => {
+                    sendFriendRequest(user);
+                  },
+                  () => {removeUser({user})},
+                ],
+                bntText: ["Add Friend", "Remove"],
+                user,
+              });
+            })}
         </div>
       </div>
     </div>
