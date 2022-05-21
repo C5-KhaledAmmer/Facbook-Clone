@@ -1,6 +1,6 @@
-﻿<p align="center">
+<p align="center">
   <a href="" rel="noopener">
- <img width=200px height=200px src="https://i.imgur.com/6wj0hh6.jpg" alt="Project logo"></a>
+ <img width=200px height=200px src="https://cdn-icons-png.flaticon.com/128/5968/5968764.png" alt="Project logo"></a>
 </p>
 
 <h3 align="center">Facebook</h3>
@@ -11,7 +11,7 @@
     <br> 
 </p>
 
-## ًں“‌ Table of Contents
+## 📝 Table of Contents
 
 - [About](#about)
 - [Getting Started](#getting_started)
@@ -19,57 +19,72 @@
 - [Built Using](#built_using)
 - [Guided By](#guided_by)
 
-## ًں§گ About <a name = "about"></a>
+## 🧐 About <a name = "about"></a>
 
-Facebook is a social networking site that makes it easy for you to connect and share with family and friends online
-<strong>Why Facebook <br/></strong>
+Facebook is a social networking site that makes it easy for you to connect and share with family and friends online <br/>
+<strong>Why Facebook ? <br/></strong>
 Facebook allows you to send messages and post status updates to keep in touch with friends and family. You can also share different types of content, like photos,videos, texts and links
 
-## ًںڈپ Getting Started <a name = "getting_started"></a>
+## 🏁 Getting Started <a name = "getting_started"></a>
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
 ### Prerequisites
 
-What things you need to install the software and how to install them.
-
 ```
- - Node.js
- - Express.js
- - mongo DB
- - react
+
+- Vs code follow this <a scr = "https://code.visualstudio.com/download">Link</a> to install
+- Mongo DB follow this <a scr = "https://www.mongodb.com/docs/compass/current/install/">Link</a> to install
+- Node.js follow this <a scr = "">https://nodejs.org/en/download/</a> to install
+- Git Bash follow this <a scr = "https://git-scm.com/download/win">Link</a> to install
 ```
 
 ### Installing
 
-A step by step series of examples that tell you how to get a development env running.
-
-Say what the step will be
+1- <h4>Clone the repo using the following command</h4>
 
 ```
-Give the example
+git clone https://github.com/C5-KhaledAmmer/MERAKI_Academy_Project_4.git
 ```
 
-And repeat
+2- <h4>Install packages repeat this step for backend and frontend folders</h4>
 
 ```
-until finished
+npm i
 ```
 
-End with an example of getting some data out of the system or using it for a little demo.
+3- <h4>to run the severs use the following command</h4>
 
-## ًںژˆ Usage <a name="usage"></a>
+```
+npm run dev
+```
 
-Add notes about how to use the system.
+4- <h4>run the application use the following command</h4>
 
-## â›ڈï¸ڈ Built Using <a name = "built_using"></a>
+```
+npm run start
+```
+
+Now the app ready to use
+<img src="https://res.cloudinary.com/dkldpbnkn/image/upload/v1653121642/face_izgh8s.png"/>
+
+## 🎈 Usage <a name="usage"></a>
+
+<ul>
+  <li>To use the site you have to sign up first by clicking on <strong>Create New Account</strong> <li>
+  <li>After Create your email you can login to the site <li>
+  <li>The home page will contains all users available to add them as friend <strong>also</strong> in the middle of the post you can create your own post and shear it with your friend<li>
+<li>Navbar contains a search box you can use it to search for a user by writing the <strong>User Name</strong>of the user<li>
+
+<ul>
+
+## ⛏️ Built Using <a name = "built_using"></a>
 
 - [MongoDB](https://www.mongodb.com/) - Database
 - [Express JS](https://expressjs.com/) - Server Framework
 - [React JS](https://https://reactjs.org/) - Web Framework
 - [Node JS](https://nodejs.org/en/) - Server Environment
 
-## âڑ ï¸ڈ Guided By <a name = "guided_by"></a>
+## ⚠️ Guided By <a name = "guided_by"></a>
 
-This project is guided by آ©ï¸ڈ **[MERAKI Academy](https://www.meraki-academy.org)**
-
+This project is guided by ©️ **[MERAKI Academy](https://www.meraki-academy.org)**
