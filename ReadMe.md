@@ -7,7 +7,7 @@
 
 ---
 
-<p align="center"> Facebook is a social media platform where you can connect with friends and the world around you on Facebook.
+<p align="center"> Facebook is a social media platform where you can connect with friends and the world around you.
     <br> 
 </p>
 
