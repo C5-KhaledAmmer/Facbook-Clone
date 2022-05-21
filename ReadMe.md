@@ -71,11 +71,10 @@ Now the app ready to use
 ## 🎈 Usage <a name="usage"></a>
 
 <ul>
-  <li>To use the site you have to sign up first by clicking on <strong>Create New Account</strong> <li>
-  <li>After Create your email you can login to the site <li>
-  <li>The home page will contains all users available to add them as friend <strong>also</strong> in the middle of the post you can create your own post and shear it with your friend<li>
-<li>Navbar contains a search box you can use it to search for a user by writing the <strong>User Name</strong>of the user<li>
-
+  <li>To use the site you have to sign up first by clicking on <strong>Create New Account</strong> </li>
+<li>After Create your email you can login to the site </li>
+  <li>The home page will contains all users available to add them as friend <strong>also</strong> in the middle of the post you can create your own post and shear it with your friend</li>
+<li>Navbar contains a search box you can use it to search for a user by writing the <strong>User Name</strong>of the user</li>
 <ul>
 
 ## ⛏️ Built Using <a name = "built_using"></a>
