@@ -40,7 +40,7 @@ export class Registration {
   }) {
     try {
       const user = {
-        userName: firstName + lastName,
+        userName: firstName +" "+lastName,
         birthDate: birthDate,
         age,
         country,

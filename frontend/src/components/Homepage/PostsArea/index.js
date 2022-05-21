@@ -16,13 +16,14 @@ export const PostsArea = () => {
   const [isMenuShown, setIsMenuShown] = useState(false);
   const [commentCounter, setCommentCounter] = useState(0);
   const navigate = useNavigate();
-  
+
   useEffect(() => {
     (async () => {
       await Info.isUserLogin(navigate);
       setPosts(await PostController.getAllPosts());
     })();
   }, []);
+
   const createPostCard = (post) => {
     return (
       <div id="post-card" key={post._id}>
@@ -55,7 +56,14 @@ export const PostsArea = () => {
 
         <div id="post-picture-div">
           <div>
-            <img src={post.author.profilePicture} className="postPicture" />
+            <img
+              src={post.author.profilePicture}
+              onClick={() => {
+                navigate(`/${post.author._id}/profile`);
+              }}
+              style={{ cursor: "pointer" }}
+              className="postPicture"
+            />
           </div>
           <div
             style={{
@@ -78,19 +86,22 @@ export const PostsArea = () => {
             setViewMoreText,
             setCurrentPost
           )}
-          {post.assetsType === "none"
-          ?<></>
-          :(post.assetsType === "img"
-          ?<img src={post.assets}/>
-          :<video controls src={post.assets} style={{ width: "100%" }} />)
-          }
+          {post.assetsType === "none" ? (
+            <></>
+          ) : post.assetsType === "img" ? (
+            <img src={post.assets} />
+          ) : (
+            <video controls src={post.assets} style={{ width: "100%" }} />
+          )}
         </div>
         <div>
           <span style={{ fontSize: "14px" }}>
             {post.likes.length +
               `👍` +
               "     " +
-              `${post.comments.length + commentCounter}` +
+              (commentCounter && post._id === currentPost
+                ? `${post.comments.length + commentCounter}`
+                : `${post.comments.length}`) +
               " "}
             <AiOutlineComment />
           </span>
@@ -114,12 +125,13 @@ export const PostsArea = () => {
       </div>
     );
   };
-  
 
   const commentButton = (post) => {
+   
     return (
       <button
         onClick={() => {
+          setCommentCounter(0)
           if (showCommentPage === true) {
             if (currentPost === post._id) {
               setShowCommentPage(!showCommentPage);
@@ -198,7 +210,6 @@ export const PostsArea = () => {
   };
   return (
     <div id="post-show-area">
-      
       <PostCreator setPosts={setPosts} posts={[...posts]} />
       {posts.length !== 0 ? (
         posts.map((post) => {

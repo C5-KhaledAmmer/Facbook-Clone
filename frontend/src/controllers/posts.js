@@ -29,7 +29,6 @@ export class PostController {
       const response = await axios.get(`${Info.hostUrl}/posts/${userId}`, {
         headers: { authorization: `Bearer ${Info.user.token}` },
       });
-
       return response.data.posts;
     } catch (error) {
       return error.response.data.message;

@@ -39,6 +39,7 @@ const createNewPost = async (req, res) => {
     });
 };
 const getAllPosts = async (req, res) => {
+  
   try {
     const userId = req.params.user_id;
     const currentUser = await userModel
@@ -81,14 +82,20 @@ const getAllPosts = async (req, res) => {
             },
           }
         );
-      posts = [...posts, ...friend.posts].sort((a, b) => b.date - a.date);
+         
+        posts = [...posts, ...friend.posts]
     }
+    
+   posts.sort((a,b)=>{
+    return new Date(b.date).getTime()- new Date(a.date).getTime()
+  })
     res.status(200).json({
       message: "All the post",
       success: true,
       posts: posts,
     });
   } catch (err) {
+   
     res.status(500).json({
       message: err.message,
       success: false,

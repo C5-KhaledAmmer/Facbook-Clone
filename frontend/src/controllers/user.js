@@ -24,6 +24,18 @@ export class UserController {
     }
   }
 
+  static async getUserById({id}) {
+    try {
+      const response = await axios.get(`${Info.hostUrl}/users/${id}`, {
+        headers: { authorization: `Bearer ${Info.user.token}` },
+      });
+      return response.data.user;
+    } catch (error) {
+      return error.response.data.message;
+    }
+  }
+
+
   static async getUserByUserName({ name }) {
     try {
       const response = await axios.get(

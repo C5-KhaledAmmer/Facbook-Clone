@@ -53,6 +53,9 @@ export const PostCreator = ({ setPosts, posts }) => {
     }
 
     setPosts([post, ...posts]);
+    setImage(null)
+    setVideo(null)
+    setContent("")
   };
 
   const uploadImage = async (img) => {

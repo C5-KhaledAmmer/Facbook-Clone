@@ -1,0 +1,40 @@
+#cover-profile-img {
+  height: 500px;
+  width: 100%;
+  background-color: rgb(249, 253, 253);
+  position: relative;
+}
+
+#cover-img {
+  width: 100vw;
+}
+#cover-img img {
+  height: 300px;
+  width: 100vw;
+}
+
+#profile-img {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  width: 100vw;
+  height: 100px;
+  text-align: center;
+ 
+  top: 60%;
+}
+#img-inner-div {
+  padding: 2px;
+  background-color: rgb(251, 249, 247);
+  text-align: center;
+  position: relative;
+  border-radius: 50%;
+}
+#profile-img img {
+  height: 200px;
+  width: 200px;
+
+  border-radius: 50%;
+  border: 4px solid white;
+}

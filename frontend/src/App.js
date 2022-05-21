@@ -5,6 +5,7 @@ import "./App.css";
 import { Info } from "./controllers/info";
 import { useEffect, useContext, useState, createContext } from "react";
 import { SearchResult } from "./components/SearchResult";
+import { UserProfile } from "./components/UserProfile";
 
 
 export const mainProvider = createContext();
@@ -18,6 +19,7 @@ function App() {
   }, []);
   return (
     <Routes>
+      <Route path="/:userId/profile" element={<UserProfile/>}></Route>
       <Route path={`/homepage/:user_id/`} element={<Homepage />} />
       <Route path="/" element={<WelcomePage />} />
       <Route
